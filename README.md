@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="frontend/public/logo.webp" alt="iClora logo" width="96" />
+  <img src="Screenshot 2026-05-20 at 11.33.22 AM.webp" alt="iClora logo" width="96" />
 </p>
 
 <h1 align="center">iClora ☁️</h1>
