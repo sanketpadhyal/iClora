@@ -2,7 +2,7 @@
   <img src="Screenshot 2026-05-20 at 11.33.22 AM.webp" alt="iClora logo" width="96" />
 </p>
 
-<h1 align="center">iClora ☁️</h1>
+<h1 align="center">iClora</h1>
 
 <p align="center">
   A private full-stack personal cloud platform for photos, notes, contacts, account security, storage tracking, and AI-powered photo search.
