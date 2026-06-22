@@ -8,7 +8,8 @@
   A private full-stack personal cloud platform for photos, notes, contacts, account security, storage tracking, AI-powered photo search, and Android photo backup.
 </p>
 
->> NOTE : planning to change vision model
+> [!NOTE]
+> The vision model will be upgraded, paid plans are coming later, and the platform will continue to expand with new features and improved infrastructure.
 
 <p align="center">
   <a href="https://www.iclora.app">Live Website</a>
