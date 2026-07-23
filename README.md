@@ -469,7 +469,7 @@ Use `.env.example` as the public template and keep real credentials only in loca
 
 Developed by **Sanket Padhyal**.
 
-Personal website: [www.sanketpadhyal.world](https://www.sanketpadhyal.world)
+Personal website: [www.sanketpadhyal.in](https://www.sanketpadhyal.im)
 
 GitHub: [@sanketpadhyal](https://github.com/sanketpadhyal)
 
