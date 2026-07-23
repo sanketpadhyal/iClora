@@ -1,0 +1,80 @@
+.app {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  min-height: var(--iclora-app-height);
+  background: white;
+  padding-top: calc(64px + env(safe-area-inset-top, 0px));
+  overflow-x: hidden;
+  overflow-y: visible;
+  scroll-behavior: smooth;
+  overscroll-behavior: auto;
+  overscroll-behavior-x: auto;
+  overscroll-behavior-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.app--cloud {
+  padding-top: 0;
+  background: transparent;
+}
+
+.app--home {
+  background: #ffffff;
+}
+
+.app__content {
+  min-height: 100%;
+}
+
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.72), transparent);
+  animation: shimmer-slide 1.2s infinite;
+}
+
+@keyframes shimmer-slide {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (max-width: 900px) {
+  .app {
+    padding-top: calc(56px + env(safe-area-inset-top, 0px));
+    overscroll-behavior: auto;
+    overscroll-behavior-y: auto;
+    touch-action: pan-y pinch-zoom;
+  }
+
+  .app--cloud {
+    padding-top: 0;
+  }
+
+  .profile-photo-gate-skeleton {
+    min-height: calc(var(--iclora-app-height) - 56px - env(safe-area-inset-top, 0px));
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .app {
+    background: #1c1c1e;
+  }
+
+  .app--home {
+    background: #1c1c1e;
+  }
+
+  .app__content {
+    background: #1c1c1e;
+  }
+}

@@ -1,0 +1,384 @@
+.iclora-home {
+  width: 100%;
+  min-height: calc(var(--iclora-app-height) - 64px - env(safe-area-inset-top, 0px));
+  background: #fff;
+  color: #1d1d1f;
+  overflow-x: hidden;
+}
+
+.iclora-home--checking {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iclora-home__loading {
+  min-height: calc(var(--iclora-app-height) - 64px - env(safe-area-inset-top, 0px));
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.iclora-home__loading-spinner {
+  color: #111111;
+}
+
+.iclora-hero {
+  min-height: min(860px, calc(var(--iclora-app-height) - 64px - env(safe-area-inset-top, 0px)));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: flex-start;
+  padding: clamp(20px, 4vh, 48px) 24px clamp(52px, 8vh, 84px);
+  animation: iclora-page-focus 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.iclora-cloud-image {
+  width: clamp(190px, 22vw, 340px);
+  height: auto;
+  display: block;
+  margin: 0 auto clamp(22px, 3vh, 34px);
+  filter: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  pointer-events: none;
+  animation: iclora-rise-in 900ms 80ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.iclora-title {
+  margin: 0;
+  color: transparent;
+  font-size: clamp(3.9rem, 8.4vw, 8.4rem);
+  font-weight: 760;
+  line-height: 0.92;
+  letter-spacing: 0;
+  animation: iclora-rise-in 900ms 160ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  background: linear-gradient(90deg, #7dd3fc 0%, #60a5fa 34%, #6366f1 68%, #a855f7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.iclora-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: clamp(24px, 3vh, 38px);
+  animation: iclora-rise-in 900ms 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.iclora-signin,
+.iclora-about {
+  min-width: 146px;
+  min-height: 48px;
+  padding: 10px 26px;
+  border-radius: 999px;
+  color: #000;
+  font-size: 1.16rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+  transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.iclora-signin {
+  border: 0;
+  background-color: #FFD700;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.iclora-about {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  border: 1px solid #050505;
+  background-color: #fff;
+  color: #000;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+}
+
+.iclora-about img {
+  width: 23px;
+  height: 23px;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
+
+.iclora-signin:hover {
+  background-color: #FFC700;
+  transform: scale(1.05);
+}
+
+.iclora-about:hover {
+  background-color: #fff;
+  transform: scale(1.05);
+}
+
+.iclora-signin:active,
+.iclora-about:active {
+  transform: scale(0.98);
+}
+
+.iclora-tagline {
+  max-width: 580px;
+  margin: clamp(36px, 4.8vh, 58px) auto 0;
+  color: #6e6e73;
+  font-size: clamp(1.72rem, 3.15vw, 3.35rem);
+  font-weight: 760;
+  line-height: 1.08;
+  letter-spacing: 0;
+  animation: iclora-rise-in 900ms 340ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+@keyframes iclora-page-focus {
+  0%   { opacity: 0.001; transform: translate3d(0, 20px, 0) scale(1.055); }
+  60%  { opacity: 1; }
+  100% { opacity: 1;     transform: translate3d(0, 0,   0) scale(1);     }
+}
+
+@keyframes iclora-rise-in {
+  0%   { opacity: 0;     transform: translate3d(0, 26px, 0) scale(1.042); }
+  55%  { opacity: 1; }
+  100% { opacity: 1;     transform: translate3d(0, 0,   0) scale(1);     }
+}
+
+@media (min-width: 901px) {
+  .iclora-hero {
+    padding-top: 0;
+    margin-top: -16px;
+  }
+
+  .iclora-cloud-image {
+    width: clamp(172px, 18vw, 292px);
+    margin-bottom: clamp(10px, 1.45vh, 20px);
+  }
+
+  .iclora-title {
+    font-size: clamp(3.45rem, 6.8vw, 7.1rem);
+  }
+
+  .iclora-tagline {
+    max-width: 520px;
+    margin-top: clamp(30px, 4vh, 48px);
+    font-size: clamp(1.55rem, 2.65vw, 2.9rem);
+  }
+}
+
+@media (max-width: 900px) {
+  .iclora-home {
+    min-height: calc(var(--iclora-app-height) - 56px - env(safe-area-inset-top, 0px));
+  }
+
+  .iclora-home__loading {
+    min-height: calc(var(--iclora-app-height) - 56px - env(safe-area-inset-top, 0px));
+  }
+
+  .iclora-hero {
+    min-height: auto;
+    padding-top: 0;
+    margin-top: -8px;
+    padding-bottom: 36px;
+  }
+}
+
+@media (max-width: 560px) {
+  .iclora-cloud-image {
+    width: clamp(180px, 58vw, 252px);
+    margin-bottom: 18px;
+  }
+
+  .iclora-title {
+    font-size: clamp(3.8rem, 20vw, 5.6rem);
+  }
+
+  .iclora-actions {
+    gap: 10px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+  }
+
+  .iclora-signin,
+  .iclora-about {
+    min-width: 132px;
+    min-height: 44px;
+    padding: 9px 20px;
+    border-radius: 999px;
+    font-size: 1.06rem;
+  }
+
+  .iclora-about img {
+    width: 21px;
+    height: 21px;
+  }
+
+  .iclora-tagline {
+    max-width: 340px;
+    margin-top: 38px;
+    font-size: clamp(1.65rem, 8vw, 2.36rem);
+  }
+}
+
+@media (pointer: coarse) {
+  .iclora-signin:hover {
+    background-color: #FFD700;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    transform: none;
+  }
+
+  .iclora-about:hover {
+    background-color: #fff;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+    transform: none;
+  }
+
+  .iclora-signin:active {
+    background-color: #FFBF00;
+    box-shadow: 0 3px 12px rgba(255, 215, 0, 0.22);
+    transform: scale(0.96);
+  }
+
+  .iclora-about:active {
+    box-shadow: 0 3px 12px rgba(0, 113, 227, 0.16);
+    transform: scale(0.96);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .iclora-home {
+    background: #1c1c1e;
+    color: #f5f5f7;
+  }
+
+  .iclora-home__loading-spinner {
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .iclora-cloud-image {
+    width: clamp(220px, 25vw, 372px);
+  }
+
+  .iclora-signin {
+    background-color: #FFD700;
+    box-shadow: none;
+  }
+
+  .iclora-about {
+    border: 1px solid #050505;
+    background-color: #fff;
+    color: #000;
+    box-shadow: none;
+  }
+
+  .iclora-signin:hover {
+    background-color: #FFC700;
+    box-shadow: none;
+    transform: scale(1.05);
+  }
+
+  .iclora-about:hover {
+    background-color: #fff;
+    border-color: #050505;
+    box-shadow: none;
+    transform: scale(1.05);
+  }
+
+  .iclora-tagline {
+    max-width: 700px;
+    margin: clamp(48px, 6vh, 72px) auto 0;
+    color: rgba(255, 255, 255, 0.94);
+    font-size: clamp(1.9rem, 3.25vw, 3.6rem);
+    font-weight: 710;
+    line-height: 1.11;
+  }
+}
+
+@media (prefers-color-scheme: dark) and (min-width: 901px) {
+  .iclora-hero {
+    padding-top: clamp(14px, 3vh, 34px);
+  }
+
+  .iclora-cloud-image {
+    width: clamp(220px, 20vw, 336px);
+    margin-bottom: clamp(18px, 2.4vh, 28px);
+  }
+
+  .iclora-title {
+    font-size: clamp(4rem, 7.2vw, 7.8rem);
+  }
+
+  .iclora-tagline {
+    max-width: 760px;
+    margin-top: clamp(44px, 6vh, 62px);
+    font-size: clamp(2rem, 2.95vw, 3.3rem);
+  }
+}
+
+@media (prefers-color-scheme: dark) and (pointer: coarse) {
+  .iclora-signin:hover {
+    background-color: #FFD700;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .iclora-about:hover {
+    background-color: #fff;
+    border-color: #050505;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .iclora-signin:active {
+    background-color: #FFBF00;
+    box-shadow: none;
+    transform: scale(0.96);
+  }
+
+  .iclora-about:active {
+    background-color: #fff;
+    box-shadow: none;
+    transform: scale(0.96);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iclora-hero,
+  .iclora-cloud-image,
+  .iclora-title,
+  .iclora-actions,
+  .iclora-tagline {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+}

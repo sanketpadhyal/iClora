@@ -1,0 +1,403 @@
+.iclora-login {
+  min-height: calc(var(--iclora-app-height) - 64px - env(safe-area-inset-top, 0px));
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  display: grid;
+  place-items: center;
+  justify-items: center;
+  padding: clamp(24px, 6vh, 56px) 18px;
+  background: #fff;
+  color: #1d1d1f;
+  overflow-x: hidden;
+}
+
+.iclora-login__card {
+  width: min(640px, 100%);
+  max-width: calc(100vw - 36px);
+  min-width: 0;
+  justify-self: center;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 30px;
+  padding: clamp(26px, 3.6vw, 44px);
+  box-shadow:
+    0 40px 80px rgba(15, 23, 42, 0.12),
+    0 12px 24px rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  backdrop-filter: blur(10px);
+  animation: iclora-page-focus 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.iclora-login__image {
+  --iclora-login-art-size: clamp(176px, 28vw, 260px);
+  position: relative;
+  width: var(--iclora-login-art-size);
+  height: var(--iclora-login-art-size);
+  display: grid;
+  place-items: center;
+  margin: 0 auto clamp(18px, 3vw, 24px);
+  overflow: visible;
+}
+
+.iclora-login__image img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  opacity: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+  filter: drop-shadow(0 22px 36px rgba(15, 23, 42, 0.12));
+  transition: opacity 220ms ease;
+}
+
+.iclora-login__image.is-loaded img {
+  opacity: 1;
+}
+
+.iclora-login__image-skeleton {
+  position: absolute;
+  inset: 0;
+  border-radius: 32%;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(125, 211, 252, 0.2), transparent 46%),
+    linear-gradient(100deg, #eef2f7 0%, #ffffff 46%, #e5e7ef 100%);
+  background-size: 100% 100%, 220% 100%;
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.05);
+  animation: iclora-login-image-skeleton 1.25s ease-in-out infinite;
+  opacity: 1;
+  transition: opacity 180ms ease;
+}
+
+.iclora-login__image.is-loaded .iclora-login__image-skeleton {
+  opacity: 0;
+}
+
+@keyframes iclora-login-image-skeleton {
+  0% {
+    background-position: 50% 50%, 140% 0;
+  }
+  100% {
+    background-position: 50% 50%, -80% 0;
+  }
+}
+
+.iclora-login__title {
+  margin: 0 0 22px;
+  text-align: center;
+  font-size: clamp(2.2rem, 3.2vw, 3.1rem);
+  line-height: 1.08;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #1d1d1f;
+}
+
+.iclora-login__title .iclora-gradient {
+  color: transparent;
+  background: linear-gradient(90deg, #7dd3fc 0%, #60a5fa 34%, #6366f1 68%, #a855f7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.iclora-login__actions {
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+}
+
+.iclora-login__provider {
+  width: min(420px, 100%);
+  max-width: 100%;
+  min-width: 0;
+  min-height: 54px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 18px;
+  font-weight: 720;
+  font-size: 1.04rem;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.iclora-login__provider-icon {
+  width: 22px;
+  height: 22px;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 22px;
+}
+
+.iclora-login__provider-icon svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.iclora-login__passkey-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+  object-fit: contain;
+}
+
+.iclora-login__provider-spinner {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 2px solid rgba(17, 24, 39, 0.22);
+  border-top-color: rgba(17, 24, 39, 0.88);
+  animation: iclora-spin 700ms linear infinite;
+}
+
+.iclora-login__provider-spinner--light {
+  border-color: rgba(255, 255, 255, 0.36);
+  border-top-color: rgba(255, 255, 255, 0.95);
+}
+
+.iclora-login__provider--google {
+  background: #fff;
+  border: 1px solid rgba(15, 23, 42, 0.16);
+  color: #111827;
+}
+
+@media (hover: hover) {
+  .iclora-login__provider--google:hover {
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.11);
+    transform: scale(1.02);
+  }
+}
+
+.iclora-login__provider--google:disabled {
+  cursor: wait;
+  opacity: 0.88;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.12);
+  transform: none;
+}
+
+.iclora-login__provider--passkey {
+  background: #1d1d1f;
+  border: 1px solid rgba(29, 29, 31, 0.18);
+  color: #ffffff;
+}
+
+@media (hover: hover) {
+  .iclora-login__provider--passkey:hover {
+    background: #101012;
+    transform: scale(1.02);
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.16);
+  }
+}
+
+.iclora-login__provider--passkey:disabled {
+  cursor: wait;
+  opacity: 0.86;
+  transform: none;
+}
+
+.iclora-login__provider--facebook {
+  background: #1877F2;
+  border: 1px solid rgba(24, 119, 242, 0.22);
+  color: #fff;
+}
+
+@media (hover: hover) {
+  .iclora-login__provider--facebook:hover {
+    background: #1267d6;
+    transform: scale(1.02);
+    box-shadow: 0 4px 16px rgba(24, 119, 242, 0.22);
+  }
+}
+
+.iclora-login__provider--apple {
+  background: #111111;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  color: #fff;
+}
+
+@media (hover: hover) {
+  .iclora-login__provider--apple:hover {
+    background: #000;
+    transform: scale(1.02);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  }
+}
+
+.iclora-login__provider:active {
+  transform: scale(0.98);
+  box-shadow: none;
+}
+
+.iclora-login__note {
+  margin: 18px auto 0;
+  max-width: 46ch;
+  text-align: center;
+  color: #6e6e73;
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .iclora-login {
+    min-height: calc(var(--iclora-app-height) - 56px - env(safe-area-inset-top, 0px));
+  }
+
+  .iclora-login__image {
+    --iclora-login-art-size: clamp(154px, 42vw, 220px);
+  }
+
+  .iclora-login__card {
+    border-radius: 26px;
+  }
+}
+
+@media (max-width: 420px) {
+  .iclora-login {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .iclora-login__card {
+    width: min(100%, 382px);
+    max-width: calc(100vw - 24px);
+    padding: 28px 22px;
+  }
+
+  .iclora-login__image {
+    --iclora-login-art-size: clamp(132px, 48vw, 178px);
+    margin-bottom: 16px;
+  }
+
+  .iclora-login__title {
+    font-size: clamp(1.9rem, 10vw, 2.35rem);
+  }
+
+  .iclora-login__provider {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
+
+@keyframes iclora-page-focus {
+  0%   { opacity: 0.001; transform: translate3d(0, 22px, 0) scale(1.055); }
+  60%  { opacity: 1; }
+  100% { opacity: 1;     transform: translate3d(0, 0,   0) scale(1);     }
+}
+
+@keyframes iclora-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .iclora-login {
+    background: #1c1c1e;
+    color: #f5f5f7;
+  }
+
+  .iclora-login__card {
+    background: #202022;
+    border: 1px solid rgba(255, 255, 255, 0.045);
+    border-radius: 38px;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .iclora-login__image img {
+    filter: none;
+  }
+
+  .iclora-login__image-skeleton {
+    background: #2b2b2b;
+    box-shadow: none;
+    animation: none;
+  }
+
+  .iclora-login__title {
+    color: #f5f5f7;
+  }
+
+  .iclora-login__note {
+    color: rgba(255, 255, 255, 0.76);
+  }
+
+  .iclora-login__provider--google {
+    background: #2a2a2e;
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #f5f5f7;
+  }
+
+  .iclora-login__provider--google:disabled {
+    box-shadow: none;
+  }
+
+  @media (hover: hover) {
+    .iclora-login__provider--google:hover {
+      background: #303035;
+      box-shadow: none;
+    }
+  }
+
+  .iclora-login__provider--passkey {
+    background: #1f4f90;
+    border-color: rgba(102, 163, 255, 0.16);
+    color: #f5f5f7;
+  }
+
+  @media (hover: hover) {
+    .iclora-login__provider--passkey:hover {
+      background: #255ca7;
+      box-shadow: none;
+    }
+  }
+
+  .iclora-login__provider--facebook {
+    background: #2a2a2e;
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #f5f5f7;
+    box-shadow: none;
+  }
+
+  @media (hover: hover) {
+    .iclora-login__provider--facebook:hover {
+      background: #303035;
+      box-shadow: none;
+    }
+  }
+
+  .iclora-login__provider--apple {
+    background: #ffffff;
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #111214;
+  }
+
+  @media (hover: hover) {
+    .iclora-login__provider--apple:hover {
+      background: #f5f5f7;
+      box-shadow: none;
+    }
+  }
+
+  .iclora-login__provider-spinner {
+    border-color: rgba(255, 255, 255, 0.28);
+    border-top-color: rgba(255, 255, 255, 0.94);
+  }
+
+  .iclora-login__provider:active {
+    box-shadow: none;
+  }
+}

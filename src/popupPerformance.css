@@ -1,0 +1,499 @@
+
+:root {
+  --iclora-popup-safe-gap: max(12px, env(safe-area-inset-bottom, 0px));
+  --iclora-popup-surface: rgba(255, 255, 255, 0.98);
+  --iclora-popup-backdrop: rgba(246, 247, 249, 0.74);
+}
+
+.manage-account__modal-layer,
+.iclora-profile-photo__modal-layer,
+.iclora-profile-photo__crop-layer,
+.cloud-storage-details {
+  top: 0;
+  right: 0;
+  bottom: auto;
+  left: 0;
+  height: var(--iclora-app-height);
+  max-height: var(--iclora-app-height);
+  overflow: hidden;
+  overscroll-behavior: contain;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.manage-account__name-modal,
+.manage-account__crop-modal,
+.iclora-profile-photo__modal,
+.iclora-profile-photo__crop-modal,
+.cloud-storage-details__sheet,
+.dashboard-navbar__menu,
+.cloud-customize-color__panel,
+.iclora-contacts__birthday-popover,
+.iclora-notes__context-menu,
+.iclora-notes__folder-menu,
+.iclora-notes__apps-menu,
+.iclora-notes__move-picker-menu,
+.iclora-photos__toolbar-menu,
+.iclora-photos__tile-menu,
+.iclora-photos__viewer-menu,
+.iclora-photos__viewer-info-panel {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  contain: layout paint style;
+}
+
+.manage-account__name-modal,
+.manage-account__crop-modal,
+.iclora-profile-photo__modal,
+.iclora-profile-photo__crop-modal,
+.cloud-storage-details__sheet {
+  max-height: calc(var(--iclora-app-height) - 32px);
+  overflow: hidden auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+@supports (overflow: clip) {
+  .manage-account__modal-layer,
+  .iclora-profile-photo__modal-layer,
+  .iclora-profile-photo__crop-layer,
+  .cloud-storage-details {
+    overflow: clip;
+  }
+}
+
+@keyframes iclora-popup-backdrop-smooth {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes iclora-popup-flower-smooth {
+  0% {
+    opacity: 0;
+    border-radius: 999px;
+    transform: translate3d(0, 10px, 0) scale(0.62);
+  }
+
+  62% {
+    opacity: 1;
+    border-radius: 28px;
+    transform: translate3d(0, -1px, 0) scale(1.024);
+  }
+
+  100% {
+    opacity: 1;
+    border-radius: 22px;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes iclora-popup-flower-out-smooth {
+  0% {
+    opacity: 1;
+    border-radius: 22px;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    border-radius: 999px;
+    transform: translate3d(0, 8px, 0) scale(0.9);
+  }
+}
+
+@keyframes iclora-popup-sheet-up-smooth {
+  0% {
+    opacity: 0.98;
+    transform: translate3d(0, 100%, 0) scale(1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes iclora-popup-menu-spring-smooth {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -12px, 0) scale(0.74);
+  }
+
+  58% {
+    opacity: 1;
+    transform: translate3d(0, 1.5px, 0) scale(1.014);
+  }
+
+  78% {
+    transform: translate3d(0, -0.8px, 0) scale(0.997);
+  }
+
+  92% {
+    transform: translate3d(0, 0.2px, 0) scale(1.001);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@media (max-width: 900px), (pointer: coarse) {
+  .manage-account__modal-layer,
+  .iclora-profile-photo__modal-layer,
+  .iclora-profile-photo__crop-layer,
+  .cloud-storage-details {
+    padding: max(12px, env(safe-area-inset-top, 0px)) 12px var(--iclora-popup-safe-gap);
+    background: var(--iclora-popup-backdrop);
+    backdrop-filter: blur(8px) saturate(1.02);
+    -webkit-backdrop-filter: blur(8px) saturate(1.02);
+    animation: iclora-popup-backdrop-smooth 260ms ease both;
+  }
+
+  .manage-account__name-modal,
+  .iclora-profile-photo__modal,
+  .cloud-storage-details__sheet {
+    width: min(100%, 380px);
+    max-height: calc(var(--iclora-app-height) - 28px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    background: var(--iclora-popup-surface);
+    will-change: transform, opacity, border-radius;
+    filter: none !important;
+    animation: iclora-popup-flower-smooth 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .manage-account__crop-modal,
+  .iclora-profile-photo__crop-modal {
+    max-height: calc(var(--iclora-app-height) - 24px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    will-change: transform, opacity;
+    filter: none !important;
+    animation: iclora-popup-flower-smooth 460ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .cloud-storage-details__sheet.is-closing {
+    animation: iclora-popup-flower-out-smooth 260ms cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+
+  .cloud-storage-details {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0;
+    background: rgba(246, 247, 249, 0.66);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    animation: iclora-popup-backdrop-smooth 180ms ease-out both;
+  }
+
+  .cloud-storage-details.is-closing {
+    animation: cloud-storage-modal-backdrop-out 180ms ease-in both;
+  }
+
+  .cloud-storage-details__sheet {
+    width: min(100%, 520px);
+    max-height: calc(var(--iclora-app-height) - 72px - env(safe-area-inset-top, 0px));
+    margin: auto 0 0;
+    border-radius: 24px 24px 0 0;
+    transform-origin: bottom center;
+    will-change: transform, opacity;
+    animation: iclora-popup-sheet-up-smooth 260ms cubic-bezier(0.22, 1, 0.36, 1) both !important;
+  }
+
+  .cloud-storage-details__sheet.is-closing {
+    animation: cloud-storage-sheet-down 200ms cubic-bezier(0.4, 0, 1, 1) both !important;
+  }
+
+  .dashboard-navbar__menu--apps.is-open,
+  .dashboard-navbar__menu--account.is-open,
+  .dashboard-navbar__menu--storage-alert.is-open {
+    filter: none !important;
+    animation: iclora-popup-menu-spring-smooth 280ms cubic-bezier(0.2, 0.9, 0.2, 1) both;
+  }
+
+  .iclora-notes__context-menu,
+  .iclora-notes__folder-menu,
+  .iclora-notes__apps-menu,
+  .iclora-notes__move-picker-menu,
+  .iclora-contacts__birthday-popover,
+  .iclora-photos__toolbar-menu,
+  .iclora-photos__tile-menu,
+  .iclora-photos__viewer-menu,
+  .iclora-photos__viewer-info-panel,
+  .cloud-customize-color__panel {
+    max-height: calc(var(--iclora-app-height) - 24px);
+    overflow: hidden auto;
+    -webkit-overflow-scrolling: touch;
+    filter: none !important;
+    will-change: transform, opacity;
+  }
+
+  .iclora-photos__touch-backdrop,
+  .iclora-photos__viewer-info-panel,
+  .iclora-photos__tile-menu,
+  .iclora-photos__viewer-menu,
+  .iclora-notes__context-menu,
+  .iclora-contacts__birthday-popover {
+    backdrop-filter: blur(8px) saturate(1.04);
+    -webkit-backdrop-filter: blur(8px) saturate(1.04);
+  }
+
+  .iclora-notes__context-menu {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+body.iclora-performance-lite .manage-account__modal-layer,
+body.iclora-performance-lite .iclora-profile-photo__modal-layer,
+body.iclora-performance-lite .iclora-profile-photo__crop-layer,
+body.iclora-performance-lite .cloud-storage-details,
+body.iclora-android-device .manage-account__modal-layer,
+body.iclora-android-device .iclora-profile-photo__modal-layer,
+body.iclora-android-device .iclora-profile-photo__crop-layer,
+body.iclora-android-device .cloud-storage-details {
+  background: rgba(246, 247, 249, 0.82);
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body.iclora-performance-lite .manage-account__name-modal,
+body.iclora-performance-lite .manage-account__crop-modal,
+body.iclora-performance-lite .iclora-profile-photo__modal,
+body.iclora-performance-lite .iclora-profile-photo__crop-modal,
+body.iclora-android-device .manage-account__name-modal,
+body.iclora-android-device .manage-account__crop-modal,
+body.iclora-android-device .iclora-profile-photo__modal,
+body.iclora-android-device .iclora-profile-photo__crop-modal {
+  box-shadow: 0 18px 46px rgba(15, 23, 42, 0.16);
+  filter: none !important;
+  animation: iclora-popup-flower-smooth 420ms cubic-bezier(0.16, 1, 0.3, 1) both !important;
+}
+
+body.iclora-performance-lite .cloud-storage-details__sheet,
+body.iclora-android-device .cloud-storage-details__sheet,
+body.cloud-performance-lite .cloud-storage-details__sheet {
+  box-shadow: 0 -14px 34px rgba(15, 23, 42, 0.16);
+  filter: none !important;
+  animation: iclora-popup-sheet-up-smooth 220ms cubic-bezier(0.22, 1, 0.36, 1) both !important;
+}
+
+body.iclora-performance-lite .cloud-storage-details__sheet.is-closing,
+body.iclora-android-device .cloud-storage-details__sheet.is-closing,
+body.cloud-performance-lite .cloud-storage-details__sheet.is-closing {
+  animation: cloud-storage-sheet-down 180ms cubic-bezier(0.4, 0, 1, 1) both !important;
+}
+
+body.iclora-performance-lite .dashboard-navbar__menu.is-open,
+body.iclora-performance-lite .dashboard-navbar__menu--apps.is-open,
+body.iclora-performance-lite .dashboard-navbar__menu--account.is-open,
+body.iclora-performance-lite .dashboard-navbar__menu--storage-alert.is-open,
+body.iclora-android-device .dashboard-navbar__menu.is-open,
+body.iclora-android-device .dashboard-navbar__menu--apps.is-open,
+body.iclora-android-device .dashboard-navbar__menu--account.is-open,
+body.iclora-android-device .dashboard-navbar__menu--storage-alert.is-open {
+  filter: none !important;
+  animation: iclora-popup-menu-spring-smooth 240ms cubic-bezier(0.2, 0.9, 0.2, 1) both !important;
+}
+
+body.iclora-performance-lite .iclora-photos__touch-backdrop,
+body.iclora-performance-lite .iclora-photos__tile-menu,
+body.iclora-performance-lite .iclora-photos__viewer-menu,
+body.iclora-performance-lite .iclora-photos__viewer-info-panel,
+body.iclora-performance-lite .iclora-notes__context-menu,
+body.iclora-performance-lite .iclora-contacts__birthday-popover,
+body.iclora-performance-lite .cloud-customize-color__panel,
+body.iclora-android-device .iclora-photos__touch-backdrop,
+body.iclora-android-device .iclora-photos__tile-menu,
+body.iclora-android-device .iclora-photos__viewer-menu,
+body.iclora-android-device .iclora-photos__viewer-info-panel,
+body.iclora-android-device .iclora-notes__context-menu,
+body.iclora-android-device .iclora-contacts__birthday-popover,
+body.iclora-android-device .cloud-customize-color__panel {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  filter: none !important;
+}
+
+body.iclora-ios-device .manage-account__modal-layer,
+body.iclora-ios-device .iclora-profile-photo__modal-layer,
+body.iclora-ios-device .iclora-profile-photo__crop-layer,
+body.iclora-ios-device .cloud-storage-details {
+  align-items: center;
+  min-height: var(--iclora-app-height);
+}
+
+body.iclora-ios-device .manage-account__name-modal,
+body.iclora-ios-device .manage-account__crop-modal,
+body.iclora-ios-device .iclora-profile-photo__modal,
+body.iclora-ios-device .iclora-profile-photo__crop-modal,
+body.iclora-ios-device .cloud-storage-details__sheet {
+  max-height: calc(var(--iclora-app-height) - 28px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+}
+
+@media (max-width: 620px) {
+  .cloud-storage-details {
+    align-items: end;
+    padding-inline: 0;
+    padding-bottom: 0;
+  }
+
+  .cloud-storage-details__sheet {
+    width: 100%;
+    max-height: calc(var(--iclora-app-height) - 84px);
+    animation: iclora-popup-sheet-up-smooth 260ms cubic-bezier(0.22, 1, 0.36, 1) both !important;
+  }
+
+  .cloud-storage-details__sheet.is-closing {
+    animation: cloud-storage-sheet-down 200ms cubic-bezier(0.4, 0, 1, 1) both !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --iclora-popup-backdrop:
+      linear-gradient(rgba(14, 16, 20, 0.38), rgba(14, 16, 20, 0.38)),
+      rgba(14, 16, 20, 0.38);
+  }
+
+  body.manage-account-page .manage-account__modal-layer,
+  body.iclora-performance-lite.manage-account-page .manage-account__modal-layer,
+  body.iclora-android-device.manage-account-page .manage-account__modal-layer,
+  .iclora-profile-photo .iclora-profile-photo__modal-layer,
+  .iclora-profile-photo .iclora-profile-photo__crop-layer,
+  body.iclora-performance-lite .iclora-profile-photo .iclora-profile-photo__modal-layer,
+  body.iclora-performance-lite .iclora-profile-photo .iclora-profile-photo__crop-layer,
+  body.iclora-android-device .iclora-profile-photo .iclora-profile-photo__modal-layer,
+  body.iclora-android-device .iclora-profile-photo .iclora-profile-photo__crop-layer {
+    background:
+      linear-gradient(rgba(14, 16, 20, 0.38), rgba(14, 16, 20, 0.38)),
+      rgba(14, 16, 20, 0.38) !important;
+    backdrop-filter: blur(18px) saturate(0.9) brightness(0.8) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(0.9) brightness(0.8) !important;
+  }
+
+  .cloud-storage-details,
+  body.iclora-performance-lite .cloud-storage-details,
+  body.iclora-android-device .cloud-storage-details,
+  body.cloud-performance-lite .cloud-storage-details {
+    background: rgba(14, 16, 20, 0.62) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  body.manage-account-page .manage-account__name-modal,
+  body.manage-account-page .manage-account__crop-modal,
+  body.iclora-performance-lite.manage-account-page .manage-account__name-modal,
+  body.iclora-performance-lite.manage-account-page .manage-account__crop-modal,
+  body.iclora-android-device.manage-account-page .manage-account__name-modal,
+  body.iclora-android-device.manage-account-page .manage-account__crop-modal,
+  .iclora-profile-photo .iclora-profile-photo__modal,
+  .iclora-profile-photo .iclora-profile-photo__crop-modal,
+  body.iclora-performance-lite .iclora-profile-photo .iclora-profile-photo__modal,
+  body.iclora-performance-lite .iclora-profile-photo .iclora-profile-photo__crop-modal,
+  body.iclora-android-device .iclora-profile-photo .iclora-profile-photo__modal,
+  body.iclora-android-device .iclora-profile-photo .iclora-profile-photo__crop-modal {
+    background: #1f1f21 !important;
+    background-image: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: none !important;
+    filter: none !important;
+  }
+
+  .iclora-profile-photo .iclora-profile-photo__crop-head h2,
+  .iclora-profile-photo .iclora-profile-photo__modal h2,
+  .iclora-profile-photo .iclora-profile-photo__zoom-row,
+  .iclora-profile-photo .iclora-profile-photo__zoom-row span {
+    color: #f5f5f7 !important;
+  }
+
+  .iclora-profile-photo .iclora-profile-photo__crop-head p,
+  .iclora-profile-photo .iclora-profile-photo__modal p {
+    color: #b4b4bb !important;
+  }
+
+  .iclora-profile-photo .iclora-profile-photo__card,
+  .iclora-profile-photo .iclora-profile-photo__hero,
+  .iclora-profile-photo .iclora-profile-photo__avatar,
+  .iclora-profile-photo .iclora-profile-photo__avatar-button:hover .iclora-profile-photo__avatar,
+  .iclora-profile-photo .iclora-profile-photo__crop-button,
+  .iclora-profile-photo .iclora-profile-photo__crop-button:hover,
+  .iclora-profile-photo .iclora-profile-photo__button,
+  .iclora-profile-photo .iclora-profile-photo__button:hover,
+  .iclora-profile-photo .iclora-profile-photo__button:disabled,
+  .iclora-profile-photo .iclora-profile-photo__modal-button,
+  .iclora-profile-photo .iclora-profile-photo__modal-button:hover,
+  .iclora-profile-photo .iclora-profile-photo__crop-button-secondary,
+  .iclora-profile-photo .iclora-profile-photo__crop-button-secondary:hover,
+  .iclora-profile-photo .iclora-profile-photo__crop-button-primary,
+  .iclora-profile-photo .iclora-profile-photo__crop-button-primary:hover,
+  .iclora-profile-photo .iclora-profile-photo__crop-viewport,
+  .iclora-profile-photo .iclora-profile-photo__crop-close {
+    box-shadow: none !important;
+  }
+
+  .iclora-profile-photo .iclora-profile-photo__crop-close,
+  .iclora-profile-photo .iclora-profile-photo__crop-button {
+    background: #303033 !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    color: #f5f5f7 !important;
+  }
+
+  .iclora-profile-photo .iclora-profile-photo__abort {
+    background: transparent !important;
+    border: 0 !important;
+    color: inherit !important;
+  }
+
+  .iclora-profile-photo .iclora-profile-photo__modal-button,
+  .iclora-profile-photo .iclora-profile-photo__crop-button-secondary {
+    background: #3a3a3d !important;
+    color: #f5f5f7 !important;
+  }
+
+  .iclora-profile-photo .iclora-profile-photo__modal-button:hover,
+  .iclora-profile-photo .iclora-profile-photo__crop-button-secondary:hover {
+    background: #46464a !important;
+  }
+
+  .iclora-profile-photo .iclora-profile-photo__modal-button--danger,
+  .iclora-profile-photo .iclora-profile-photo__crop-button-primary {
+    background: #f5f5f7 !important;
+    background-image: none !important;
+    color: #111113 !important;
+  }
+
+  .iclora-profile-photo .iclora-profile-photo__modal-button--danger:hover,
+  .iclora-profile-photo .iclora-profile-photo__crop-button-primary:hover {
+    background: #ffffff !important;
+  }
+
+  .iclora-profile-photo .iclora-profile-photo__button,
+  .iclora-profile-photo .iclora-profile-photo__button:hover {
+    background: linear-gradient(135deg, #FFD700 0%, #FFC700 100%) !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+  }
+
+  .iclora-profile-photo .iclora-profile-photo__abort img {
+    filter: none !important;
+    opacity: 1 !important;
+  }
+
+  .iclora-profile-photo .iclora-profile-photo__crop-button img,
+  .iclora-profile-photo .iclora-profile-photo__modal-icon img {
+    filter: brightness(0) saturate(100%) invert(55%) sepia(88%) saturate(2401%) hue-rotate(188deg) brightness(103%) contrast(103%) !important;
+  }
+
+  .iclora-profile-photo .iclora-profile-photo__zoom-row input[type="range"] {
+    accent-color: #2997ff !important;
+  }
+}

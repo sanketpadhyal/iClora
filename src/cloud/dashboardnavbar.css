@@ -1,0 +1,1635 @@
+.dashboard-navbar {
+  --cloud-accent: #46a935;
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 9999;
+  height: calc(48px + env(safe-area-inset-top, 0px));
+  padding-top: env(safe-area-inset-top, 0px);
+  background: color-mix(in srgb, var(--cloud-accent), rgba(255, 255, 255, 0.56) 84%);
+  border-bottom: 0;
+  box-shadow: none;
+  backdrop-filter: blur(18px) saturate(145%);
+  -webkit-backdrop-filter: blur(18px) saturate(145%);
+  will-change: auto;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.dashboard-navbar--white {
+  background: rgba(255, 255, 255, 0.78);
+  border-bottom: 0;
+  box-shadow: none;
+  backdrop-filter: blur(18px) saturate(145%);
+  -webkit-backdrop-filter: blur(18px) saturate(145%);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .dashboard-navbar {
+    background: color-mix(in srgb, var(--cloud-accent), rgba(255, 255, 255, 0.68) 88%);
+  }
+
+  .dashboard-navbar--white {
+    background: rgba(255, 255, 255, 0.95);
+  }
+}
+
+.dashboard-navbar__container {
+  width: min(1360px, 100%);
+  margin: 0 auto;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 0 max(18px, env(safe-area-inset-right, 0px)) 0 max(18px, env(safe-area-inset-left, 0px));
+}
+
+.dashboard-navbar__logo-button {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #0a120c;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dashboard-navbar__back-button {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #0f172a;
+  cursor: pointer;
+  transition: opacity 140ms ease, transform 140ms ease;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: none;
+  margin-right: 8px;
+  padding: 0;
+}
+
+.dashboard-navbar__back-button:hover,
+.dashboard-navbar__back-button:focus-visible {
+  background: transparent;
+  outline: none;
+  opacity: 0.72;
+  transform: none;
+  box-shadow: none;
+}
+
+.dashboard-navbar__back-button:active {
+  background: transparent;
+  opacity: 0.55;
+  transform: scale(0.96);
+}
+
+.dashboard-navbar__back-icon-svg {
+  display: block;
+  color: #0f172a;
+  transition: transform 160ms ease;
+}
+
+.dashboard-navbar__back-button:hover .dashboard-navbar__back-icon-svg {
+  transform: none;
+}
+
+.dashboard-navbar__logo-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.dashboard-navbar__logo {
+  width: 22px;
+  height: 22px;
+  display: block;
+  border-radius: 7px;
+}
+
+.dashboard-navbar__logo-picture {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.dashboard-navbar__brand {
+  font-size: 1.28rem;
+  font-weight: 510;
+  line-height: 1;
+  letter-spacing: 0;
+  color: #000000;
+}
+
+.dashboard-navbar__app-label {
+  font-size: 1.28rem;
+  font-weight: 510;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.dashboard-navbar__app-sync {
+  position: relative;
+  width: 17px;
+  height: 17px;
+  display: inline-grid;
+  place-items: center;
+  margin-left: 2px;
+  cursor: help;
+}
+
+.dashboard-navbar__app-sync img {
+  width: 17px;
+  height: 17px;
+  display: block;
+  object-fit: contain;
+  animation: dashboard-navbar-sync-spin 0.85s linear infinite;
+}
+
+.dashboard-navbar__app-sync::before,
+.dashboard-navbar__app-sync::after {
+  position: absolute;
+  left: 50%;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 8px) scale(0.96);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.dashboard-navbar__app-sync::before {
+  content: "";
+  top: calc(100% + 6px);
+  width: 12px;
+  height: 12px;
+  z-index: 4;
+  background: #ffffff;
+  border-left: 1px solid rgba(86, 172, 255, 0.44);
+  border-top: 1px solid rgba(86, 172, 255, 0.44);
+  transform: translate(-50%, 8px) rotate(45deg) scale(0.96);
+}
+
+.dashboard-navbar__app-sync::after {
+  content: attr(data-tooltip);
+  top: calc(100% + 11px);
+  z-index: 3;
+  min-width: max-content;
+  padding: 9px 13px;
+  border-radius: 999px;
+  color: #0d3b66;
+  font-size: 0.72rem;
+  font-weight: 780;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  background: #ffffff;
+  border: 1px solid rgba(86, 172, 255, 0.44);
+  box-shadow: none;
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+}
+
+.dashboard-navbar__app-sync:hover::before,
+.dashboard-navbar__app-sync:hover::after,
+.dashboard-navbar__logo-button:focus-visible .dashboard-navbar__app-sync::before,
+.dashboard-navbar__logo-button:focus-visible .dashboard-navbar__app-sync::after {
+  opacity: 1;
+}
+
+.dashboard-navbar__app-sync:hover::before,
+.dashboard-navbar__logo-button:focus-visible .dashboard-navbar__app-sync::before {
+  transform: translate(-50%, 0) rotate(45deg) scale(1);
+}
+
+.dashboard-navbar__app-sync:hover::after,
+.dashboard-navbar__logo-button:focus-visible .dashboard-navbar__app-sync::after {
+  transform: translate(-50%, 0) scale(1);
+}
+
+.dashboard-navbar__actions {
+  position: relative;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+@keyframes dashboard-navbar-sync-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.dashboard-navbar__icon-button,
+.dashboard-navbar__avatar-button {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  color: #101713;
+  cursor: pointer;
+  transition: background 160ms ease;
+}
+
+.dashboard-navbar__icon-button:hover,
+.dashboard-navbar__icon-button.is-active,
+.dashboard-navbar__avatar-button:hover {
+  background: rgba(255, 255, 255, 0.38);
+}
+
+.dashboard-navbar__apps-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  opacity: 0.88;
+}
+
+.dashboard-navbar__apps-button.is-active .dashboard-navbar__apps-icon {
+  opacity: 1;
+  filter: brightness(0) invert(1);
+}
+
+.dashboard-navbar--white .dashboard-navbar__apps-button.is-active .dashboard-navbar__apps-icon {
+  filter: none;
+}
+
+.dashboard-navbar--white .dashboard-navbar__icon-button:hover,
+.dashboard-navbar--white .dashboard-navbar__icon-button.is-active,
+.dashboard-navbar--white .dashboard-navbar__avatar-button:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-navbar__alert-button {
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  background: transparent;
+}
+
+.dashboard-navbar__alert-button:hover:not(.is-active) {
+  background: transparent;
+}
+
+.dashboard-navbar__alert-badge {
+  width: 23px;
+  height: 23px;
+  border-radius: 999px;
+  background: #f69307;
+  color: #ffffff;
+  font-size: 0.92rem;
+  font-weight: 800;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+}
+
+.dashboard-navbar__profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.dashboard-navbar__avatar-button {
+  padding: 0;
+  overflow: hidden;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.32);
+}
+
+.dashboard-navbar__avatar-button img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.dashboard-navbar__avatar-initial {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  border-radius: inherit;
+  background: linear-gradient(145deg, #f7f7f8, #d9ead0);
+  color: #20572b;
+  font-weight: 800;
+}
+
+.dashboard-navbar__menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 12px);
+  background: #ffffff;
+  color: #1d1d1f;
+  border-radius: 16px;
+  box-shadow: 0 22px 58px rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  opacity: 0;
+  transform: translateY(-14px) scale(0.68);
+  pointer-events: none;
+  transition: opacity 140ms ease, transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.dashboard-navbar__menu.is-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.dashboard-navbar__menu--account {
+  width: min(300px, calc(100vw - 18px));
+  overflow: hidden;
+  transform-origin: calc(100% - 18px) -10px;
+}
+
+.dashboard-navbar__menu--account.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  animation: iclora-panel-spring 320ms cubic-bezier(0.2, 0.9, 0.2, 1) both;
+}
+
+.dashboard-navbar__menu--apps {
+  transform-origin: calc(100% - 20px) -10px;
+  transform: translateY(-14px) scale(0.62);
+  transition: opacity 140ms ease, transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dashboard-navbar__menu-user {
+  background: #f5f5f7;
+  padding: 15px 18px 13px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-navbar__menu-name {
+  font-size: 1.08rem;
+  font-weight: 800;
+  line-height: 1.08;
+  text-transform: none;
+  font-variant-caps: normal;
+  letter-spacing: 0;
+}
+
+.dashboard-navbar__menu-email {
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: rgba(29, 29, 31, 0.58);
+  overflow-wrap: anywhere;
+}
+
+.dashboard-navbar__menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard-navbar__menu li + li {
+  border-top: 0;
+}
+
+.dashboard-navbar__menu-item,
+.dashboard-navbar__more-item {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  min-height: 42px;
+  padding: 0 24px;
+  gap: 12px;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  color: #1d1d1f;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.dashboard-navbar__menu-item:hover {
+  background: rgba(16, 56, 33, 0.045);
+}
+
+.dashboard-navbar__more-item:hover {
+  background: rgba(16, 56, 33, 0.045);
+}
+
+.dashboard-navbar__menu-item--blue,
+.dashboard-navbar__more-item--blue {
+  color: #006dff;
+}
+
+.dashboard-navbar__menu-item--danger {
+  color: #e00000;
+  border-top: 0;
+  margin: 0;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.dashboard-navbar__menu--account .dashboard-navbar__menu-row--danger {
+  margin-top: 6px;
+  padding-top: 5px;
+  border-top: 1px solid rgba(0, 0, 0, 0.09);
+}
+
+.manage-account__modal-icon .manage-account__logout-icon-image {
+  width: 34px;
+  height: 34px;
+}
+
+.dashboard-navbar__logout-modal {
+  width: min(410px, 100%);
+  padding: 38px 28px 26px;
+}
+
+.cloud-app-setup-modal {
+  --setup-pending-overlay: rgba(255, 255, 255, 0.58);
+  --setup-pending-spinner-track: rgba(29, 29, 31, 0.16);
+  --setup-pending-spinner-arc: #1f77e6;
+  background: rgba(255, 255, 255, 0.98);
+  color: #1d1d1f;
+  border: 1px solid rgba(20, 24, 31, 0.08);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.cloud-app-setup-modal h2 {
+  color: #1d1d1f;
+}
+
+.cloud-app-setup-modal .manage-account__delete-copy {
+  color: #4f4f57;
+}
+
+.cloud-app-setup-modal .manage-account__modal-close {
+  color: #101013;
+}
+
+.cloud-app-setup-modal__icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  background: rgba(47, 120, 232, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(47, 120, 232, 0.06);
+}
+
+.cloud-app-setup-modal__icon picture,
+.cloud-app-setup-modal__icon img,
+.cloud-app-setup-modal .manage-account__logout-icon-image,
+.cloud-app-setup-modal .manage-account__setup-app-icon {
+  width: 50px;
+  height: 50px;
+  display: block;
+  object-fit: contain;
+  border-radius: 14px;
+  filter: none;
+}
+
+.cloud-app-setup-modal--activating {
+  pointer-events: none;
+}
+
+.cloud-app-setup-modal__actions--activating {
+  grid-template-columns: 1fr;
+}
+
+.cloud-app-setup-modal__pending-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  display: grid;
+  place-items: center;
+  border-radius: inherit;
+  background: var(--setup-pending-overlay);
+  backdrop-filter: blur(2px) saturate(1.04);
+  -webkit-backdrop-filter: blur(2px) saturate(1.04);
+  animation: cloud-setup-pending-in 160ms ease both;
+}
+
+.cloud-app-setup-modal__pending-spinner {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 4px solid var(--setup-pending-spinner-track);
+  border-top-color: var(--setup-pending-spinner-arc);
+  animation: cloud-setup-spinner 760ms linear infinite;
+}
+
+.cloud-app-setup-modal__activate {
+  background: #1f77e6;
+  color: #ffffff;
+  box-shadow:
+    0 10px 20px rgba(31, 119, 230, 0.2),
+    0 2px 6px rgba(31, 119, 230, 0.14);
+}
+
+.cloud-app-setup-modal__activate:hover {
+  background: #1668ce;
+}
+
+.cloud-app-setup-modal__activate:disabled {
+  background: #1f77e6 !important;
+  color: #ffffff !important;
+  opacity: 1 !important;
+  box-shadow:
+    0 10px 20px rgba(31, 119, 230, 0.2),
+    0 2px 6px rgba(31, 119, 230, 0.14) !important;
+  cursor: wait;
+}
+
+@keyframes cloud-setup-pending-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes cloud-setup-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 700px) {
+  .dashboard-navbar__logout-modal {
+    width: min(340px, 100%);
+    padding: 32px 18px 22px;
+  }
+
+  .cloud-app-setup-modal__icon picture,
+  .cloud-app-setup-modal__icon img,
+  .cloud-app-setup-modal .manage-account__logout-icon-image,
+  .cloud-app-setup-modal .manage-account__setup-app-icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .cloud-app-setup-modal__icon {
+    width: 54px;
+    height: 54px;
+  }
+}
+
+.dashboard-navbar__menu--account ul {
+  padding: 12px 14px 14px;
+}
+
+.dashboard-navbar__menu--account .dashboard-navbar__menu-item {
+  min-height: 35px;
+  padding: 0 10px;
+  border-radius: 11px;
+  font-size: 0.88rem;
+  gap: 9px;
+}
+
+.dashboard-navbar__menu--account .dashboard-navbar__menu-item--danger:hover,
+.dashboard-navbar__menu--account .dashboard-navbar__menu-item--danger:focus-visible {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.dashboard-navbar__menu-item--pill {
+  background: transparent;
+}
+
+.dashboard-navbar__menu-item--pill:hover,
+.dashboard-navbar__menu-item--pill:focus-visible {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.dashboard-navbar__menu-icon {
+  width: 17px;
+  height: 17px;
+  color: currentColor;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 17px;
+}
+
+.dashboard-navbar__menu-icon svg {
+  width: 17px;
+  height: 17px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.dashboard-navbar__logout-spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  border: 2px solid rgba(224, 0, 0, 0.18);
+  border-top-color: #e00000;
+  display: block;
+  animation: iclora-logout-spin 720ms linear infinite;
+}
+
+.dashboard-navbar__menu-icon--settings svg {
+  width: 15px;
+  height: 15px;
+}
+
+.dashboard-navbar__menu--apps {
+  width: min(360px, calc(100vw - 24px));
+  right: 42px;
+  padding: 15px 18px 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(12, 24, 18, 0.08);
+  background: #ffffff;
+  box-shadow: 0 28px 80px rgba(9, 26, 14, 0.2);
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dashboard-navbar__menu--storage-alert {
+  width: min(408px, calc(100vw - 24px));
+  right: 76px;
+  top: calc(100% + 10px);
+  padding: 22px 22px 20px;
+  border-radius: 18px;
+  background: #f5f5f7;
+  border: 1px solid rgba(17, 24, 39, 0.08);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.2);
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  transform-origin: calc(100% - 24px) -10px;
+}
+
+.dashboard-navbar__menu--storage-alert.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  animation: iclora-panel-spring 320ms cubic-bezier(0.2, 0.9, 0.2, 1) both;
+}
+
+.dashboard-navbar__storage-icon {
+  width: 112px;
+  height: 76px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+}
+
+.dashboard-navbar__storage-icon img {
+  width: 92px;
+  height: 92px;
+  display: block;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+}
+
+.dashboard-navbar__storage-title {
+  margin: 0;
+  color: #1d1d1f;
+  font-size: 1.04rem;
+  font-weight: 840;
+  line-height: 1.08;
+  text-align: center;
+}
+
+.dashboard-navbar__storage-meta-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: rgba(29, 29, 31, 0.56);
+  font-size: 0.76rem;
+  font-weight: 560;
+}
+
+.dashboard-navbar__storage-link {
+  border: 0;
+  background: transparent;
+  color: rgba(29, 29, 31, 0.56);
+  font-size: 0.76rem;
+  font-weight: 560;
+  padding: 0;
+  cursor: pointer;
+}
+
+.dashboard-navbar__storage-progress {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: #e5e5ea;
+  display: flex;
+  overflow: hidden;
+}
+
+.dashboard-navbar__storage-progress-fill {
+  height: 100%;
+  display: block;
+  background: #6b5cff;
+  transition: width 380ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dashboard-navbar__storage-copy {
+  margin: 0;
+  width: 100%;
+  color: rgba(29, 29, 31, 0.6);
+  font-size: 0.74rem;
+  line-height: 1.34;
+  font-weight: 520;
+}
+
+.dashboard-navbar__storage-upgrade {
+  width: 100%;
+  min-height: 44px;
+  border-radius: 12px;
+  border: 0;
+  background: #1f77e6;
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 560;
+  cursor: pointer;
+}
+
+.dashboard-navbar__menu--apps.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  animation: iclora-panel-spring 320ms cubic-bezier(0.2, 0.9, 0.2, 1) both;
+}
+
+.dashboard-navbar__menu--apps h2 {
+  margin: 0 0 10px;
+  color: #1a231d;
+  font-size: 1rem;
+  font-weight: 760;
+  letter-spacing: 0.01em;
+}
+
+.dashboard-navbar__apps-grid {
+  display: grid;
+  gap: 17px 12px;
+  margin-bottom: 18px;
+}
+
+.dashboard-navbar__apps-grid--images {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.dashboard-navbar__app {
+  border: 0;
+  background: transparent;
+  color: #212a23;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 0;
+  font-size: 0.86rem;
+  font-weight: 400;
+  line-height: 1.1;
+  border-radius: 16px;
+  border: 0;
+  box-shadow: none;
+  cursor: pointer;
+  position: relative;
+  overflow: visible;
+  isolation: isolate;
+  transform: translateY(0) scale(1);
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), color 220ms ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.dashboard-navbar__app::before {
+  content: "";
+  position: absolute;
+  inset: -6px -8px;
+  transform: scale(0.74);
+  border-radius: 16px;
+  background: rgba(29, 111, 216, 0.08);
+  opacity: 0;
+  transition: transform 360ms cubic-bezier(0.16, 1, 0.3, 1), opacity 260ms ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dashboard-navbar__app > * {
+  position: relative;
+  z-index: 1;
+}
+
+.dashboard-navbar__app--image {
+  align-items: center;
+}
+
+.dashboard-navbar__app-image {
+  width: auto;
+  height: auto;
+  max-width: 58px;
+  max-height: 58px;
+  display: block;
+  object-fit: contain;
+  border-radius: 0;
+  filter: drop-shadow(0 10px 14px rgba(7, 20, 12, 0.09));
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  -webkit-user-drag: none;
+  user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+}
+
+.dashboard-navbar__more-item {
+  width: fit-content;
+  min-height: 30px;
+  padding: 0 7px 0 4px;
+  gap: 9px;
+  border-radius: 9px;
+  font-size: 0.92rem;
+  font-weight: 400;
+}
+
+.dashboard-navbar__more-item--bordered {
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px 7px 0 4px;
+  border-top: 1px solid rgba(0, 0, 0, 0.09);
+  border-radius: 0;
+}
+
+.dashboard-navbar__more-icon {
+  width: 18px;
+  height: 18px;
+  color: #006dff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 18px;
+}
+
+.dashboard-navbar__more-icon--storage {
+  color: #006dff;
+}
+
+.dashboard-navbar__more-item--download {
+  color: #0f8f5f;
+}
+
+.dashboard-navbar__more-item--download:hover,
+.dashboard-navbar__more-item--download:focus-visible {
+  background: rgba(15, 143, 95, 0.08);
+  color: #08784e;
+  outline: none;
+}
+
+.dashboard-navbar__more-icon--download {
+  color: #0f8f5f;
+}
+
+.dashboard-navbar__more-icon svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.dashboard-navbar__app:focus-visible {
+  transform: none;
+  color: #111;
+}
+
+.dashboard-navbar__app:focus-visible::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.dashboard-navbar__app:focus-visible .dashboard-navbar__app-image {
+  transform: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dashboard-navbar__app:hover {
+    transform: none;
+    color: #111;
+  }
+
+  .dashboard-navbar__app:hover::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .dashboard-navbar__app:hover .dashboard-navbar__app-image {
+    transform: none;
+  }
+}
+
+@media (max-width: 700px) {
+
+  .dashboard-navbar__menu,
+  .dashboard-navbar__menu--apps {
+    background: #ffffff;
+  }
+
+  .dashboard-navbar {
+    height: calc(46px + env(safe-area-inset-top, 0px));
+  }
+
+  .dashboard-navbar__container {
+    height: 46px;
+    padding: 0 max(14px, env(safe-area-inset-right, 0px)) 0 max(14px, env(safe-area-inset-left, 0px));
+  }
+
+  .dashboard-navbar__brand {
+    font-size: 1.12rem;
+  }
+
+  .dashboard-navbar__app-label {
+    font-size: 1.12rem;
+  }
+
+  .dashboard-navbar__app-sync,
+  .dashboard-navbar__app-sync img {
+    width: 15px;
+    height: 15px;
+  }
+
+  .dashboard-navbar__actions {
+    gap: 14px;
+  }
+
+  .dashboard-navbar__icon-button,
+  .dashboard-navbar__avatar-button {
+    width: 30px;
+    height: 30px;
+  }
+
+  .dashboard-navbar__alert-button {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+  }
+
+  .dashboard-navbar__alert-badge {
+    width: 21px;
+    height: 21px;
+    font-size: 0.84rem;
+  }
+
+  .dashboard-navbar__menu--apps {
+    right: 0;
+    width: min(300px, calc(100vw - 18px));
+    padding: 14px 15px 13px;
+  }
+
+  .dashboard-navbar__menu--account {
+    right: 0;
+    width: min(300px, calc(100vw - 14px));
+  }
+
+  .dashboard-navbar__menu--storage-alert {
+    right: 0;
+    top: calc(100% + 10px);
+    width: min(330px, calc(100vw - 18px));
+    padding: 18px 16px 16px;
+    border-radius: 17px;
+    gap: 10px;
+    transform-origin: calc(100% - 72px) -10px;
+  }
+
+  .dashboard-navbar__storage-title {
+    max-width: 250px;
+    font-size: 1.08rem;
+    line-height: 1.08;
+  }
+
+  .dashboard-navbar__storage-meta-row,
+  .dashboard-navbar__storage-link {
+    font-size: 0.82rem;
+  }
+
+  .dashboard-navbar__storage-copy {
+    font-size: 0.84rem;
+    line-height: 1.3;
+  }
+
+  .dashboard-navbar__storage-upgrade {
+    min-height: 42px;
+    font-size: 0.92rem;
+  }
+
+  .dashboard-navbar__menu-user {
+    padding: 13px 16px 12px;
+  }
+
+  .dashboard-navbar__menu-name {
+    font-size: 0.96rem;
+  }
+
+  .dashboard-navbar__menu-email {
+    font-size: 0.82rem;
+  }
+
+  .dashboard-navbar__menu--account ul {
+    padding: 10px 11px 11px;
+  }
+
+  .dashboard-navbar__menu--account .dashboard-navbar__menu-item {
+    min-height: 32px;
+    font-size: 0.8rem;
+  }
+
+  .dashboard-navbar__apps-grid--images {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 15px 8px;
+  }
+
+  .dashboard-navbar__app-image {
+    max-width: 50px;
+    max-height: 50px;
+  }
+
+  .dashboard-navbar__app {
+    font-size: 0.76rem;
+    padding: 0;
+    gap: 8px;
+  }
+
+  .dashboard-navbar__app::before {
+    width: 56px;
+    height: 56px;
+    border-radius: 15px;
+    top: -4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-navbar__menu {
+    transition: none;
+    transform: none;
+  }
+
+  .dashboard-navbar__menu--apps.is-open {
+    animation: none;
+  }
+
+  .dashboard-navbar__menu--account.is-open {
+    animation: none;
+  }
+
+  .dashboard-navbar__menu--storage-alert.is-open {
+    animation: none;
+  }
+
+  .dashboard-navbar__app,
+  .dashboard-navbar__app-image,
+  .dashboard-navbar__app::before {
+    transition: none;
+    transform: none;
+  }
+}
+
+@keyframes iclora-panel-spring {
+  0% {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.74);
+    filter: blur(5px);
+  }
+
+  58% {
+    opacity: 1;
+    transform: translateY(1.5px) scale(1.014);
+    filter: blur(0);
+  }
+
+  78% {
+    transform: translateY(-0.8px) scale(0.997);
+  }
+
+  92% {
+    transform: translateY(0.2px) scale(1.001);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes iclora-logout-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 390px) {
+  .dashboard-navbar__container {
+    padding: 0 max(12px, env(safe-area-inset-right, 0px)) 0 max(12px, env(safe-area-inset-left, 0px));
+  }
+
+  .dashboard-navbar__actions {
+    gap: 7px;
+  }
+
+  .dashboard-navbar__brand {
+    font-size: 1.15rem;
+  }
+
+  .dashboard-navbar__logo {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-navbar {
+    will-change: auto;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .dashboard-navbar__container {
+    will-change: auto;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+}
+
+body.cloud-performance-lite .dashboard-navbar,
+body.cloud-performance-lite .dashboard-navbar__container,
+body.cloud-performance-lite .dashboard-navbar__menu,
+body.cloud-performance-lite .dashboard-navbar__app,
+body.cloud-performance-lite .dashboard-navbar__app-image,
+body.cloud-performance-lite .dashboard-navbar__app::before {
+  will-change: auto !important;
+}
+
+body.cloud-performance-lite .dashboard-navbar,
+body.cloud-performance-lite .dashboard-navbar__container {
+  transform: none;
+  -webkit-transform: none;
+}
+
+body.cloud-performance-lite .dashboard-navbar__menu {
+  box-shadow: 0 14px 36px rgba(9, 26, 14, 0.16);
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+
+body.cloud-performance-lite .dashboard-navbar__menu.is-open,
+body.cloud-performance-lite .dashboard-navbar__menu--apps.is-open,
+body.cloud-performance-lite .dashboard-navbar__menu--account.is-open,
+body.cloud-performance-lite .dashboard-navbar__menu--storage-alert.is-open {
+  animation: none !important;
+  filter: none !important;
+}
+
+body.cloud-performance-lite .dashboard-navbar__app,
+body.cloud-performance-lite .dashboard-navbar__app-image,
+body.cloud-performance-lite .dashboard-navbar__app::before,
+body.cloud-performance-lite .dashboard-navbar__storage-progress-fill {
+  transition-duration: 120ms;
+}
+
+body.cloud-performance-lite .dashboard-navbar__app-image {
+  filter: none;
+}
+
+body.cloud-performance-lite .dashboard-navbar__app-sync::after {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: 0 10px 24px rgba(58, 142, 214, 0.14);
+}
+
+@media (prefers-color-scheme: dark) {
+  .dashboard-navbar,
+  .dashboard-navbar--white {
+    background: color-mix(in srgb, var(--cloud-accent), rgba(31, 34, 42, 0.84) 78%);
+    border-bottom: 1px solid color-mix(in srgb, var(--cloud-accent), rgba(255, 255, 255, 0.1) 86%);
+    color: #f5f5f7;
+    backdrop-filter: blur(18px) saturate(135%);
+    -webkit-backdrop-filter: blur(18px) saturate(135%);
+  }
+
+  .dashboard-navbar__logo-button,
+  .dashboard-navbar__brand,
+  .dashboard-navbar__back-button,
+  .dashboard-navbar__back-icon-svg,
+  .dashboard-navbar__icon-button,
+  .dashboard-navbar__avatar-button {
+    color: #f5f5f7;
+  }
+
+  .dashboard-navbar__back-button,
+  .dashboard-navbar__back-button:hover,
+  .dashboard-navbar__back-button:focus-visible,
+  .dashboard-navbar__back-button:active {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  .dashboard-navbar__logo-panel {
+    background: color-mix(in srgb, var(--cloud-accent), rgba(255, 255, 255, 0.08) 86%);
+  }
+
+  .dashboard-navbar__icon-button:hover,
+  .dashboard-navbar__icon-button.is-active,
+  .dashboard-navbar__avatar-button:hover,
+  .dashboard-navbar--white .dashboard-navbar__icon-button:hover,
+  .dashboard-navbar--white .dashboard-navbar__icon-button.is-active,
+  .dashboard-navbar--white .dashboard-navbar__avatar-button:hover {
+    background: color-mix(in srgb, var(--cloud-accent), rgba(255, 255, 255, 0.14) 82%);
+  }
+
+  .dashboard-navbar__menu,
+  .dashboard-navbar__menu--apps,
+  .dashboard-navbar__menu--account,
+  .dashboard-navbar__menu--storage-alert {
+    background: #101113;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #f5f5f7;
+    box-shadow: 0 18px 46px rgba(0, 0, 0, 0.34);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .dashboard-navbar__menu--account {
+    background: #1f1f21;
+  }
+
+  .dashboard-navbar__menu-user {
+    background: #3a3a3d;
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .dashboard-navbar__menu-name,
+  .dashboard-navbar__menu--apps h2,
+  .dashboard-navbar__storage-title {
+    color: #f5f5f7;
+  }
+
+  .dashboard-navbar__menu-email,
+  .dashboard-navbar__storage-meta-row,
+  .dashboard-navbar__storage-link,
+  .dashboard-navbar__storage-copy {
+    color: rgba(245, 245, 247, 0.66);
+  }
+
+  .dashboard-navbar__menu-item,
+  .dashboard-navbar__more-item,
+  .dashboard-navbar__app {
+    color: rgba(245, 245, 247, 0.82);
+  }
+
+  .dashboard-navbar__menu-item:hover,
+  .dashboard-navbar__menu-item:focus-visible,
+  .dashboard-navbar__more-item:hover,
+  .dashboard-navbar__more-item:focus-visible {
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+    transform: none;
+    outline: none;
+  }
+
+  .dashboard-navbar__app:hover,
+  .dashboard-navbar__app:focus-visible {
+    color: #ffffff;
+    transform: none;
+    outline: none;
+  }
+
+  .dashboard-navbar__app::before {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .dashboard-navbar__app-image {
+    filter: none;
+  }
+
+  .dashboard-navbar__more-item--bordered,
+  .dashboard-navbar__menu--account .dashboard-navbar__menu-row--danger {
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .dashboard-navbar__menu-item--blue,
+  .dashboard-navbar__more-item--blue,
+  .dashboard-navbar__more-icon {
+    color: #2997ff;
+  }
+
+  .dashboard-navbar__more-item--download,
+  .dashboard-navbar__more-icon--download {
+    color: #30d158;
+  }
+
+  .dashboard-navbar__more-item--download:hover,
+  .dashboard-navbar__more-item--download:focus-visible {
+    background: rgba(48, 209, 88, 0.12);
+    color: #4ee66f;
+  }
+
+  .dashboard-navbar__menu-item--blue:hover,
+  .dashboard-navbar__menu-item--blue:focus-visible,
+  .dashboard-navbar__more-item--blue:hover,
+  .dashboard-navbar__more-item--blue:focus-visible {
+    color: #2997ff;
+  }
+
+  .dashboard-navbar__menu-item--danger {
+    color: #ff453a;
+  }
+
+  .dashboard-navbar__menu--account .dashboard-navbar__menu-item--danger:hover,
+  .dashboard-navbar__menu--account .dashboard-navbar__menu-item--danger:focus-visible {
+    color: #ff453a;
+  }
+
+  .dashboard-navbar__menu--account .dashboard-navbar__menu-item--danger:hover,
+  .dashboard-navbar__menu--account .dashboard-navbar__menu-item--danger:focus-visible,
+  .dashboard-navbar__menu-item--pill:hover,
+  .dashboard-navbar__menu-item--pill:focus-visible {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .dashboard-navbar__storage-progress {
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  .dashboard-navbar__apps-icon {
+    filter: brightness(0) invert(1);
+    opacity: 0.86;
+  }
+
+  .dashboard-navbar__apps-button.is-active .dashboard-navbar__apps-icon,
+  .dashboard-navbar--white .dashboard-navbar__apps-button.is-active .dashboard-navbar__apps-icon {
+    filter: brightness(0) invert(1);
+  }
+
+  .dashboard-navbar__modal-layer {
+    background:
+      linear-gradient(rgba(14, 16, 20, 0.34), rgba(14, 16, 20, 0.34)),
+      rgba(14, 16, 20, 0.34);
+    backdrop-filter: blur(18px) saturate(0.92) brightness(0.82);
+    -webkit-backdrop-filter: blur(18px) saturate(0.92) brightness(0.82);
+  }
+
+  .dashboard-navbar__logout-modal {
+    background: rgba(30, 30, 32, 0.98);
+    color: #f5f5f7;
+    box-shadow:
+      0 26px 70px rgba(0, 0, 0, 0.48),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  }
+
+  .dashboard-navbar__logout-modal .manage-account__modal-close {
+    color: #f5f5f7;
+  }
+
+  .dashboard-navbar__logout-modal .manage-account__modal-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .dashboard-navbar__logout-modal h2 {
+    color: #f5f5f7;
+  }
+
+  .dashboard-navbar__logout-modal .manage-account__delete-copy {
+    color: rgba(245, 245, 247, 0.62);
+  }
+
+  .cloud-app-setup-modal {
+    --setup-pending-overlay: rgba(30, 30, 32, 0.58);
+    --setup-pending-spinner-track: rgba(245, 245, 247, 0.2);
+    --setup-pending-spinner-arc: #f5f5f7;
+    background: #1f1f21;
+    color: #f5f5f7;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .cloud-app-setup-modal h2 {
+    color: #f5f5f7;
+  }
+
+  .cloud-app-setup-modal .manage-account__delete-copy {
+    color: #b4b4bb;
+  }
+
+  .cloud-app-setup-modal .manage-account__modal-close {
+    background: #303033;
+    color: #f5f5f7;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: none;
+  }
+
+  .cloud-app-setup-modal .manage-account__modal-close:hover {
+    background: #3a3a3d;
+  }
+
+  .cloud-app-setup-modal__icon {
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  }
+
+  .cloud-app-setup-modal__icon picture,
+  .cloud-app-setup-modal__icon img,
+  .cloud-app-setup-modal .manage-account__logout-icon-image,
+  .cloud-app-setup-modal .manage-account__setup-app-icon {
+    filter: none;
+  }
+
+  .dashboard-navbar__logout-modal .manage-account__delete-button--cancel {
+    background: rgba(255, 255, 255, 0.1);
+    color: #f5f5f7;
+  }
+
+  .dashboard-navbar__logout-modal .manage-account__delete-button--cancel:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .dashboard-navbar__logout-modal .manage-account__delete-button--logout {
+    background: #f5f5f7;
+    color: #111113;
+    box-shadow: none;
+  }
+
+  .dashboard-navbar__logout-modal .manage-account__delete-button--logout:hover {
+    background: #ffffff;
+    box-shadow: none;
+  }
+
+  .cloud-app-setup-modal__activate,
+  .cloud-app-setup-modal__activate:disabled,
+  .cloud-app-setup-modal__activate:hover,
+  .cloud-app-setup-modal__activate:focus-visible {
+    box-shadow: none !important;
+  }
+
+  body.cloud-performance-lite .dashboard-navbar__menu {
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.2);
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .dashboard-navbar__back-button:hover,
+  .dashboard-navbar__icon-button:hover:not(.is-active),
+  .dashboard-navbar__avatar-button:hover,
+  .dashboard-navbar--white .dashboard-navbar__icon-button:hover:not(.is-active),
+  .dashboard-navbar--white .dashboard-navbar__avatar-button:hover,
+  .dashboard-navbar__alert-button:hover:not(.is-active),
+  .dashboard-navbar__menu-item:hover,
+  .dashboard-navbar__more-item:hover,
+  .dashboard-navbar__menu-item--pill:hover,
+  .dashboard-navbar__logout-modal .manage-account__modal-close:hover,
+  .dashboard-navbar__logout-modal .manage-account__delete-button--cancel:hover,
+  .dashboard-navbar__logout-modal .manage-account__delete-button--logout:hover,
+  .cloud-app-setup-modal__activate:hover:not(:disabled) {
+    background: transparent !important;
+    box-shadow: none !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  .dashboard-navbar__app:hover {
+    color: inherit !important;
+    transform: none !important;
+  }
+
+  .dashboard-navbar__app:hover::before {
+    opacity: 0 !important;
+    transform: scale(0.96) !important;
+  }
+
+  .dashboard-navbar__app:hover .dashboard-navbar__app-image {
+    transform: none !important;
+  }
+
+  .dashboard-navbar__menu-item:hover,
+  .dashboard-navbar__more-item:hover,
+  .dashboard-navbar__menu--account .dashboard-navbar__menu-item--danger:hover,
+  .dashboard-navbar__menu-item--blue:hover,
+  .dashboard-navbar__more-item--blue:hover {
+    color: inherit !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body .dashboard-navbar__modal-layer.manage-account__modal-layer {
+    background:
+      linear-gradient(rgba(14, 16, 20, 0.38), rgba(14, 16, 20, 0.38)),
+      rgba(14, 16, 20, 0.38) !important;
+    backdrop-filter: blur(18px) saturate(0.9) brightness(0.8) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(0.9) brightness(0.8) !important;
+  }
+
+  body .dashboard-navbar__logout-modal.manage-account__name-modal.manage-account__delete-modal {
+    background: #1f1f21 !important;
+    color: #f5f5f7 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow:
+      0 28px 72px rgba(0, 0, 0, 0.48),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.04) !important;
+  }
+
+  body .dashboard-navbar__logout-modal .manage-account__modal-close {
+    background: #303033 !important;
+    color: #f5f5f7 !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: none !important;
+  }
+
+  body .dashboard-navbar__logout-modal .manage-account__modal-close:hover {
+    background: #3a3a3d !important;
+  }
+
+  body .dashboard-navbar__logout-modal .manage-account__modal-icon:not(.cloud-app-setup-modal__icon) {
+    background: transparent !important;
+    color: #2997ff !important;
+    box-shadow: none !important;
+  }
+
+  body .dashboard-navbar__logout-modal:not(.cloud-app-setup-modal) .manage-account__logout-icon-image {
+    filter: none !important;
+  }
+
+  body .dashboard-navbar__logout-modal.cloud-app-setup-modal {
+    background: #1f1f21 !important;
+    background-image: none !important;
+    color: #f5f5f7 !important;
+  }
+
+  body .dashboard-navbar__logout-modal.cloud-app-setup-modal h2 {
+    color: #f5f5f7 !important;
+  }
+
+  body .dashboard-navbar__logout-modal.cloud-app-setup-modal .manage-account__delete-copy {
+    color: #b4b4bb !important;
+  }
+
+  body .dashboard-navbar__logout-modal.cloud-app-setup-modal .manage-account__delete-button--cancel {
+    background: #3a3a3d !important;
+    color: #f5f5f7 !important;
+  }
+
+  body .dashboard-navbar__logout-modal.cloud-app-setup-modal .cloud-app-setup-modal__icon {
+    background: rgba(255, 255, 255, 0.07) !important;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06) !important;
+  }
+
+  body .dashboard-navbar__logout-modal.cloud-app-setup-modal .manage-account__logout-icon-image,
+  body .dashboard-navbar__logout-modal.cloud-app-setup-modal .manage-account__setup-app-icon {
+    filter: none !important;
+  }
+
+  body .dashboard-navbar__logout-modal h2 {
+    color: #f5f5f7 !important;
+  }
+
+  body .dashboard-navbar__logout-modal .manage-account__delete-copy {
+    color: #b4b4bb !important;
+  }
+
+  body .dashboard-navbar__logout-modal .manage-account__delete-button--cancel {
+    background: #3a3a3d !important;
+    color: #f5f5f7 !important;
+    box-shadow: none !important;
+  }
+
+  body .dashboard-navbar__logout-modal .manage-account__delete-button--cancel:hover {
+    background: #46464a !important;
+  }
+
+  body .dashboard-navbar__logout-modal .manage-account__delete-button--logout {
+    background: #f5f5f7 !important;
+    color: #111113 !important;
+    box-shadow: none !important;
+  }
+
+  body .dashboard-navbar__logout-modal .manage-account__delete-button--logout .manage-account__button-spinner {
+    border-color: rgba(17, 17, 19, 0.2) !important;
+    border-top-color: #111113 !important;
+  }
+
+  body .dashboard-navbar__logout-modal .manage-account__delete-button--logout:hover {
+    background: #ffffff !important;
+  }
+}

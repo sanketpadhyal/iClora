@@ -1,0 +1,109 @@
+.apple-loader {
+  --apple-loader-size: 54px;
+  width: var(--apple-loader-size);
+  height: var(--apple-loader-size);
+  position: relative;
+  display: inline-block;
+  color: #000000;
+  color-scheme: light dark;
+  flex: 0 0 auto;
+}
+
+.apple-loader__bar {
+  width: 6%;
+  height: 16%;
+  position: absolute;
+  left: 47%;
+  top: 42%;
+  background: currentColor;
+  border-radius: 999px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.18);
+  opacity: 0.25;
+  animation: apple-loader-fade 1s linear infinite;
+}
+
+.apple-loader__bar--1 {
+  transform: rotate(0deg) translate(0, -130%);
+  animation-delay: 0s;
+}
+
+.apple-loader__bar--2 {
+  transform: rotate(30deg) translate(0, -130%);
+  animation-delay: -0.9167s;
+}
+
+.apple-loader__bar--3 {
+  transform: rotate(60deg) translate(0, -130%);
+  animation-delay: -0.833s;
+}
+
+.apple-loader__bar--4 {
+  transform: rotate(90deg) translate(0, -130%);
+  animation-delay: -0.7497s;
+}
+
+.apple-loader__bar--5 {
+  transform: rotate(120deg) translate(0, -130%);
+  animation-delay: -0.667s;
+}
+
+.apple-loader__bar--6 {
+  transform: rotate(150deg) translate(0, -130%);
+  animation-delay: -0.5837s;
+}
+
+.apple-loader__bar--7 {
+  transform: rotate(180deg) translate(0, -130%);
+  animation-delay: -0.5s;
+}
+
+.apple-loader__bar--8 {
+  transform: rotate(210deg) translate(0, -130%);
+  animation-delay: -0.4167s;
+}
+
+.apple-loader__bar--9 {
+  transform: rotate(240deg) translate(0, -130%);
+  animation-delay: -0.333s;
+}
+
+.apple-loader__bar--10 {
+  transform: rotate(270deg) translate(0, -130%);
+  animation-delay: -0.2497s;
+}
+
+.apple-loader__bar--11 {
+  transform: rotate(300deg) translate(0, -130%);
+  animation-delay: -0.167s;
+}
+
+.apple-loader__bar--12 {
+  transform: rotate(330deg) translate(0, -130%);
+  animation-delay: -0.0833s;
+}
+
+@keyframes apple-loader-fade {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.25;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .apple-loader__bar {
+    animation: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .apple-loader {
+    color: #f5f5f7;
+  }
+
+  .apple-loader__bar {
+    box-shadow: 0 0 3px rgba(255, 255, 255, 0.12);
+  }
+}

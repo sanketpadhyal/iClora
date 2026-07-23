@@ -1,0 +1,3934 @@
+.manage-account {
+	min-height: var(--iclora-app-height);
+	padding: calc(98px + env(safe-area-inset-top, 0px)) max(34px, env(safe-area-inset-right, 0px)) calc(48px + env(safe-area-inset-bottom, 0px)) max(34px, env(safe-area-inset-left, 0px));
+	background: #ffffff;
+	color: #1d1d1f;
+	font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+}
+
+@media (prefers-color-scheme: dark) and (max-width: 900px) {
+	body.manage-account-page .manage-account__profile {
+		background: #1f1f21 !important;
+		border-color: rgba(255, 255, 255, 0.1) !important;
+		box-shadow: none !important;
+	}
+
+	body.manage-account-page .manage-account__profile-name-text {
+		background: none !important;
+		-webkit-background-clip: initial !important;
+		background-clip: initial !important;
+		color: #f5f5f7 !important;
+	}
+
+	body.manage-account-page .manage-account__profile-name-emoji {
+		color: inherit !important;
+	}
+
+	body.manage-account-page .manage-account__profile p {
+		color: #b4b4bb !important;
+	}
+
+	body.manage-account-page .manage-account__session-expiry {
+		color: #32d74b !important;
+	}
+
+	body.manage-account-page .manage-account__nav button {
+		background: #1f1f21 !important;
+		color: #f5f5f7 !important;
+		border: 1px solid rgba(255, 255, 255, 0.1) !important;
+	}
+
+	body.manage-account-page .manage-account__nav button.is-active {
+		background: rgba(41, 151, 255, 0.18) !important;
+		border-color: rgba(41, 151, 255, 0.32) !important;
+		color: #2997ff !important;
+	}
+
+	body.manage-account-page .manage-account__nav-badge {
+		background: rgba(41, 151, 255, 0.18) !important;
+		color: #8ecbff !important;
+	}
+}
+
+body.manage-account-page .dashboard-navbar {
+	background: #ffffff;
+	backdrop-filter: blur(24px) saturate(155%);
+	-webkit-backdrop-filter: blur(24px) saturate(155%);
+	box-shadow: 0 1px 0 rgba(33, 42, 51, 0.06);
+}
+
+body.manage-account-page .dashboard-navbar__apps-button {
+	display: none;
+}
+
+body.manage-account-page .dashboard-navbar__logo-button,
+body.manage-account-page .dashboard-navbar__back-button {
+	background: transparent;
+}
+
+body.manage-account-page .dashboard-navbar__logo-button:hover,
+body.manage-account-page .dashboard-navbar__logo-button:focus-visible,
+body.manage-account-page .dashboard-navbar__back-button:hover,
+body.manage-account-page .dashboard-navbar__back-button:focus-visible {
+	background: transparent;
+	outline: none;
+}
+
+body.manage-account-page .dashboard-navbar__logo-panel,
+body.manage-account-page .dashboard-navbar__logo-button:hover .dashboard-navbar__logo-panel,
+body.manage-account-page .dashboard-navbar__logo-button:focus-visible .dashboard-navbar__logo-panel {
+	background: transparent;
+	box-shadow: none;
+}
+
+.manage-account__layout {
+	display: grid;
+	grid-template-columns: 290px minmax(0, 1fr);
+	gap: 56px;
+	max-width: 1040px;
+	margin: 8px auto 0;
+}
+
+.manage-account__sidebar {
+	min-width: 0;
+}
+
+.manage-account__profile {
+	margin-bottom: 48px;
+}
+
+.manage-account__profile-body {
+	min-width: 0;
+	display: grid;
+	gap: 0;
+}
+
+.manage-account__avatar {
+	width: 90px;
+	height: 90px;
+	border-radius: 999px;
+	overflow: hidden;
+	background: #d8d8dc;
+	display: grid;
+	place-items: center;
+	color: #666;
+	font-size: 2.25rem;
+	font-weight: 800;
+}
+
+.manage-account__avatar img {
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: cover;
+}
+
+.manage-account__profile h2 {
+	margin: 20px 0 8px;
+	font-size: 1.12rem;
+	line-height: 1.06;
+	font-weight: 820;
+	font-variant-caps: normal;
+	text-transform: none;
+	letter-spacing: 0;
+}
+
+.manage-account__profile-name-text {
+	color: #1d1d1f;
+	background: linear-gradient(90deg, #f02c8f 0%, #f57f20 28%, #8bb92f 58%, #4aaeb0 100%);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+.manage-account__profile-name-emoji {
+	margin-left: 6px;
+	color: initial;
+	font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+
+.manage-account__profile p {
+	margin: 0;
+	color: #6e6e73;
+	font-size: 0.98rem;
+	line-height: 1.25;
+	overflow-wrap: anywhere;
+}
+
+.manage-account__session-expiry {
+	margin: 4px 0 0;
+	color: #2faa45;
+	font-size: 0.88rem;
+	line-height: 1.15;
+	font-weight: 520;
+}
+
+.manage-account__nav {
+	display: grid;
+	gap: 13px;
+}
+
+.manage-account__nav button {
+	width: fit-content;
+	border: 0;
+	padding: 0;
+	background: transparent;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	color: #1d1d1f;
+	font-size: 1.08rem;
+	line-height: 1.18;
+	font-weight: 470;
+	text-align: left;
+	cursor: pointer;
+}
+
+.manage-account__nav button.is-active {
+	color: #2f78e8;
+	font-weight: 720;
+}
+
+.manage-account__nav-badge {
+	min-width: 22px;
+	height: 22px;
+	padding: 0 7px;
+	border-radius: 999px;
+	background: #edf4ff;
+	color: #2f78e8;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 0.76rem;
+	line-height: 1;
+	font-weight: 760;
+}
+
+.manage-account__content {
+	min-width: 0;
+}
+
+.manage-account__section {
+	display: grid;
+	gap: 30px;
+}
+
+.manage-account__section--full {
+	animation: manage-section-rise 440ms cubic-bezier(0.16, 1, 0.3, 1) both;
+	will-change: transform, opacity;
+}
+
+.manage-account__section--lite {
+	animation: manage-section-rise-lite 300ms cubic-bezier(0.18, 1, 0.32, 1) both;
+	will-change: transform, opacity;
+}
+
+.manage-account__section--full .manage-account__hero {
+	animation: manage-hero-rise 460ms cubic-bezier(0.16, 1, 0.3, 1) both;
+	will-change: transform, opacity;
+}
+
+.manage-account__section--full .manage-account__cards {
+	animation: manage-cards-rise 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+	will-change: transform, opacity;
+}
+
+.manage-account__section--full .manage-account__card {
+	animation: manage-card-rise 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+	backface-visibility: hidden;
+	transform: translateZ(0);
+}
+
+.manage-account__section--full .manage-account__card:nth-child(1) {
+	animation-delay: 30ms;
+}
+
+.manage-account__section--full .manage-account__card:nth-child(2) {
+	animation-delay: 70ms;
+}
+
+.manage-account__section--full .manage-account__card:nth-child(3) {
+	animation-delay: 110ms;
+}
+
+.manage-account__section--full .manage-account__card:nth-child(4) {
+	animation-delay: 150ms;
+}
+
+.manage-account__section--full .manage-account__card:nth-child(5) {
+	animation-delay: 190ms;
+}
+
+.manage-account__section--full .manage-account__card:nth-child(6) {
+	animation-delay: 230ms;
+}
+
+.manage-account__section--lite .manage-account__hero,
+.manage-account__section--lite .manage-account__cards,
+.manage-account__section--lite .manage-account__card {
+	animation: none;
+}
+
+.manage-account__hero {
+	max-width: 660px;
+	margin-bottom: 30px;
+}
+
+.manage-account__hero h2 {
+	margin: 0;
+	font-size: clamp(1.48rem, 2.05vw, 1.9rem);
+	line-height: 1.05;
+	font-weight: 720;
+	letter-spacing: 0;
+	color: #1d1d1f;
+}
+
+.manage-account__hero-title-primary {
+	color: #1d1d1f;
+}
+
+.manage-account__hero-title-secondary {
+	color: #6e6e73;
+}
+
+.manage-account__hero p {
+	margin: 18px 0 0;
+	color: #56565b;
+	font-size: clamp(0.9rem, 1.05vw, 0.98rem);
+	line-height: 1.38;
+	font-weight: 450;
+}
+
+.manage-account__cards {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 18px;
+}
+
+.manage-account__card {
+	position: relative;
+	min-height: 118px;
+	border: 1px solid #dedee4;
+	border-radius: 14px;
+	background: #ffffff;
+	padding: 18px 50px 18px 20px;
+	display: flex;
+	text-align: left;
+	cursor: pointer;
+	box-shadow: 0 18px 42px rgba(20, 20, 30, 0.04);
+	transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.manage-account__card:hover {
+	border-color: rgba(47, 120, 232, 0.36);
+	box-shadow: 0 20px 48px rgba(47, 120, 232, 0.08);
+}
+
+.manage-account__card--read-only {
+	cursor: default;
+}
+
+.manage-account__card--read-only:hover {
+	border-color: #dedee4;
+	box-shadow: 0 18px 42px rgba(20, 20, 30, 0.04);
+}
+
+.manage-account__card-copy {
+	display: grid;
+	align-content: start;
+	gap: 4px;
+	min-width: 0;
+}
+
+.manage-account__card-copy strong {
+	color: #1d1d1f;
+	font-size: clamp(0.98rem, 1.18vw, 1.08rem);
+	line-height: 1.05;
+	font-weight: 680;
+	letter-spacing: 0;
+}
+
+.manage-account__card-copy span {
+	color: #78787d;
+	font-size: clamp(0.8rem, 0.98vw, 0.9rem);
+	line-height: 1.16;
+	font-weight: 450;
+	overflow-wrap: anywhere;
+}
+
+.manage-account__dob-age {
+	color: #2faa45;
+	font-weight: 620;
+}
+
+.manage-account__card-icon {
+	position: absolute;
+	top: 18px;
+	right: 18px;
+	width: 22px;
+	height: 22px;
+	color: #2f78e8;
+	display: grid;
+	place-items: center;
+}
+
+.manage-account__card-icon svg {
+	width: 100%;
+	height: 100%;
+	stroke-width: 1.8;
+}
+
+.manage-account__card-icon-image {
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: contain;
+}
+
+.manage-account__card-icon-image--blue {
+	filter: brightness(0) saturate(100%) invert(37%) sepia(83%) saturate(2144%) hue-rotate(205deg) brightness(94%) contrast(92%);
+}
+
+.manage-account__card-chevron {
+	display: none;
+}
+
+.manage-account__devices-panel {
+	max-width: 780px;
+	display: grid;
+	gap: 18px;
+}
+
+.manage-account__devices-summary {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 12px;
+}
+
+.manage-account__devices-summary div {
+	min-height: 74px;
+	border: 1px solid #dedee4;
+	border-radius: 14px;
+	background: #ffffff;
+	padding: 14px 16px;
+	display: grid;
+	align-content: center;
+	gap: 4px;
+	box-shadow: 0 18px 42px rgba(20, 20, 30, 0.04);
+}
+
+.manage-account__devices-summary strong {
+	color: #1d1d1f;
+	font-size: 1.44rem;
+	line-height: 1;
+	font-weight: 760;
+}
+
+.manage-account__devices-summary span {
+	color: #727278;
+	font-size: 0.88rem;
+	line-height: 1.2;
+	font-weight: 560;
+}
+
+.manage-account__device-group {
+	border: 1px solid #dedee4;
+	border-radius: 16px;
+	background: #ffffff;
+	padding: 16px;
+	display: grid;
+	gap: 12px;
+	box-shadow: 0 18px 42px rgba(20, 20, 30, 0.04);
+}
+
+.manage-account__device-group-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+.manage-account__device-group-head h3 {
+	margin: 0;
+	color: #1d1d1f;
+	font-size: 1rem;
+	line-height: 1.1;
+	font-weight: 720;
+}
+
+.manage-account__device-group-actions {
+	min-width: 0;
+	height: auto;
+	background: transparent;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.manage-account__device-group-tools {
+	min-width: 0;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.manage-account__device-count {
+	min-width: 28px;
+	height: 28px;
+	border-radius: 999px;
+	background: #edf4ff;
+	color: #2f78e8;
+	display: grid;
+	place-items: center;
+	font-size: 0.82rem;
+	font-weight: 760;
+}
+
+.manage-account__device-clear-row {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.manage-account__device-clear {
+	min-height: 34px;
+	border: 0;
+	border-radius: 999px;
+	background: #1d1d1f;
+	color: #ffffff;
+	padding: 0 16px;
+	font-size: 0.82rem;
+	font-weight: 700;
+	cursor: pointer;
+	box-shadow:
+		0 10px 20px rgba(29, 29, 31, 0.12),
+		0 2px 6px rgba(29, 29, 31, 0.08);
+}
+
+.manage-account__device-clear--inline {
+	min-height: 28px;
+	padding: 0 12px;
+	font-size: 0.78rem;
+	box-shadow: none;
+}
+
+.manage-account__device-clear:hover {
+	background: #111114;
+}
+
+.manage-account__device-clear:disabled {
+	opacity: 0.62;
+	cursor: not-allowed;
+}
+
+.manage-account__device-list {
+	display: grid;
+	gap: 10px;
+}
+
+.manage-account__device-item {
+	display: grid;
+	grid-template-columns: 42px minmax(0, 1fr) auto;
+	align-items: center;
+	gap: 12px;
+	padding: 12px;
+	border: 1px solid #ececf1;
+	border-radius: 13px;
+	background: #fbfcfe;
+}
+
+.manage-account__device-item--expired {
+	grid-template-columns: 42px minmax(0, 1fr) auto;
+	background: #f8f8fb;
+}
+
+.manage-account__device-icon {
+	width: 42px;
+	height: 42px;
+	border-radius: 12px;
+	background: rgba(47, 120, 232, 0.1);
+	color: #2f78e8;
+	display: grid;
+	place-items: center;
+}
+
+.manage-account__device-item--expired .manage-account__device-icon {
+	background: rgba(119, 119, 128, 0.12);
+	color: #777780;
+}
+
+.manage-account__device-icon svg {
+	width: 21px;
+	height: 21px;
+	stroke-width: 2;
+}
+
+.manage-account__device-copy {
+	min-width: 0;
+	display: grid;
+	gap: 3px;
+}
+
+.manage-account__device-copy strong {
+	color: #1d1d1f;
+	font-size: 0.98rem;
+	line-height: 1.15;
+	font-weight: 720;
+	overflow-wrap: anywhere;
+}
+
+.manage-account__device-copy span {
+	color: #74747a;
+	font-size: 0.82rem;
+	line-height: 1.22;
+	font-weight: 500;
+	overflow-wrap: anywhere;
+}
+
+.manage-account__device-copy .manage-account__device-status {
+	color: #2f78e8;
+	font-weight: 720;
+}
+
+.manage-account__device-item--expired .manage-account__device-status {
+	color: #d93025;
+}
+
+.manage-account__device-actions {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.manage-account__devices-empty {
+	min-height: 64px;
+	border: 1px dashed #dedee4;
+	border-radius: 13px;
+	background: #fbfcfe;
+	color: #777780;
+	display: grid;
+	place-items: center;
+	padding: 16px;
+	font-size: 0.9rem;
+	font-weight: 560;
+	text-align: center;
+}
+
+.manage-account__privacy-panel {
+	max-width: 720px;
+	display: grid;
+	gap: 14px;
+}
+
+.manage-account__privacy-overview {
+	display: grid;
+	gap: 14px;
+	border: 1px solid #dedee4;
+	border-radius: 16px;
+	background: #ffffff;
+	padding: 18px;
+	box-shadow:
+		0 18px 42px rgba(20, 20, 30, 0.04),
+		0 2px 10px rgba(20, 20, 30, 0.03);
+}
+
+.manage-account__privacy-header {
+	display: grid;
+	grid-template-columns: 50px minmax(0, 1fr);
+	align-items: start;
+	gap: 14px;
+}
+
+.manage-account__privacy-header-icon {
+	width: 50px;
+	height: 50px;
+	border-radius: 14px;
+	border: 1px solid #ececf1;
+	background: #ffffff;
+	color: #1d1d1f;
+	display: grid;
+	place-items: center;
+	box-shadow:
+		0 12px 24px rgba(29, 29, 31, 0.08),
+		0 2px 8px rgba(29, 29, 31, 0.04);
+}
+
+.manage-account__privacy-header-icon svg {
+	width: 24px;
+	height: 24px;
+	stroke-width: 2.1;
+}
+
+.manage-account__privacy-header-icon img {
+	width: 28px;
+	height: 28px;
+	display: block;
+	object-fit: contain;
+}
+
+.manage-account__privacy-header h3 {
+	margin: 0 0 5px;
+	color: #1d1d1f;
+	font-size: 1.12rem;
+	line-height: 1.15;
+	font-weight: 760;
+}
+
+.manage-account__privacy-header p {
+	max-width: 34rem;
+	margin: 0;
+	color: #68686f;
+	font-size: 0.92rem;
+	line-height: 1.38;
+	font-weight: 480;
+}
+
+.manage-account__cookie-list {
+	display: grid;
+	gap: 9px;
+}
+
+.manage-account__cookie-row {
+	display: grid;
+	grid-template-columns: minmax(155px, 0.56fr) minmax(0, 1fr) auto;
+	align-items: center;
+	gap: 14px;
+	padding: 13px 14px;
+	border-radius: 13px;
+	background: #f7f8fb;
+	border: 1px solid rgba(222, 222, 228, 0.72);
+}
+
+.manage-account__cookie-main {
+	min-width: 0;
+	display: grid;
+	gap: 4px;
+}
+
+.manage-account__cookie-main strong {
+	color: #1d1d1f;
+	font-size: 0.92rem;
+	line-height: 1.18;
+	font-weight: 740;
+}
+
+.manage-account__cookie-main span {
+	width: max-content;
+	max-width: 100%;
+	border-radius: 999px;
+	background: #ffffff;
+	color: #5f5f66;
+	padding: 4px 8px;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+	font-size: 0.72rem;
+	line-height: 1;
+	font-weight: 650;
+	overflow-wrap: anywhere;
+}
+
+.manage-account__cookie-row p {
+	margin: 0;
+	color: #68686f;
+	font-size: 0.84rem;
+	line-height: 1.34;
+	font-weight: 480;
+}
+
+.manage-account__cookie-badge {
+	min-width: 70px;
+	height: 30px;
+	border-radius: 999px;
+	background: #edf4ff;
+	color: #2f78e8;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 10px;
+	font-size: 0.76rem;
+	font-weight: 760;
+}
+
+.manage-account__privacy-note {
+	display: grid;
+	grid-template-columns: 24px minmax(0, 1fr);
+	gap: 10px;
+	align-items: start;
+	padding: 12px 14px;
+	border-radius: 13px;
+	background: #fbfcfe;
+	color: #1d1d1f;
+	border: 1px solid rgba(222, 222, 228, 0.72);
+}
+
+.manage-account__privacy-note svg {
+	width: 20px;
+	height: 20px;
+	color: #2f78e8;
+	stroke-width: 2.2;
+	margin-top: 1px;
+}
+
+.manage-account__privacy-note div {
+	display: grid;
+	gap: 3px;
+}
+
+.manage-account__privacy-note strong {
+	font-size: 0.9rem;
+	line-height: 1.18;
+	font-weight: 740;
+}
+
+.manage-account__privacy-note span {
+	color: #68686f;
+	font-size: 0.83rem;
+	line-height: 1.34;
+	font-weight: 480;
+}
+
+.manage-account__privacy-danger {
+	border: 1px solid rgba(255, 59, 48, 0.22);
+	border-radius: 16px;
+	background: linear-gradient(180deg, #ffffff 0%, #fffafa 100%);
+	padding: 18px;
+	display: grid;
+	grid-template-columns: 50px minmax(0, 1fr) auto;
+	align-items: center;
+	gap: 14px;
+	box-shadow:
+		0 18px 42px rgba(255, 59, 48, 0.06),
+		0 2px 10px rgba(20, 20, 30, 0.03);
+}
+
+.manage-account__privacy-danger-icon {
+	width: 50px;
+	height: 50px;
+	border-radius: 14px;
+	background: rgba(255, 59, 48, 0.1);
+	color: #d93025;
+	display: grid;
+	place-items: center;
+}
+
+.manage-account__privacy-danger-icon svg {
+	width: 23px;
+	height: 23px;
+	stroke-width: 2.1;
+}
+
+.manage-account__privacy-danger-copy {
+	min-width: 0;
+	display: grid;
+	gap: 5px;
+}
+
+.manage-account__privacy-danger-copy h3 {
+	margin: 0;
+	color: #1d1d1f;
+	font-size: 1.08rem;
+	line-height: 1.15;
+	font-weight: 760;
+}
+
+.manage-account__privacy-danger-copy p {
+	max-width: 31rem;
+	margin: 0;
+	color: #68686f;
+	font-size: 0.91rem;
+	line-height: 1.38;
+	font-weight: 480;
+}
+
+.manage-account__privacy-danger-button {
+	min-height: 42px;
+	border: 0;
+	border-radius: 12px;
+	background: #1d1d1f;
+	color: #ffffff;
+	padding: 0 16px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	font-size: 0.9rem;
+	font-weight: 720;
+	cursor: pointer;
+	box-shadow:
+		0 10px 20px rgba(29, 29, 31, 0.16),
+		0 2px 6px rgba(29, 29, 31, 0.1);
+}
+
+.manage-account__privacy-danger-button svg {
+	width: 17px;
+	height: 17px;
+	stroke-width: 2.2;
+}
+
+.manage-account__privacy-danger-button:hover {
+	background: #111114;
+}
+
+.manage-account__passkey-panel {
+	max-width: 720px;
+	border: 1px solid #dedee4;
+	border-radius: 18px;
+	background: #ffffff;
+	padding: 22px;
+	display: grid;
+	gap: 18px;
+	box-shadow: 0 18px 42px rgba(20, 20, 30, 0.04);
+}
+
+.manage-account__passkey-main {
+	display: grid;
+	grid-template-columns: 46px minmax(0, 1fr);
+	gap: 14px;
+	align-items: start;
+}
+
+.manage-account__passkey-icon {
+	width: 46px;
+	height: 46px;
+	border-radius: 14px;
+	background: rgba(47, 120, 232, 0.11);
+	color: #2f78e8;
+	display: grid;
+	place-items: center;
+}
+
+.manage-account__passkey-icon svg {
+	width: 24px;
+	height: 24px;
+	stroke-width: 1.9;
+}
+
+.manage-account__passkey-logo {
+	width: 25px;
+	height: 25px;
+	display: block;
+	object-fit: contain;
+}
+
+.manage-account__passkey-main h3 {
+	margin: 0;
+	color: #1d1d1f;
+	font-size: 1.18rem;
+	line-height: 1.12;
+	font-weight: 720;
+	letter-spacing: 0;
+}
+
+.manage-account__passkey-main p {
+	max-width: 34rem;
+	margin: 8px 0 0;
+	color: #6e6e73;
+	font-size: 0.96rem;
+	line-height: 1.35;
+	font-weight: 450;
+}
+
+.manage-account__passkey-meta {
+	display: grid;
+	gap: 5px;
+	padding: 14px 16px;
+	border-radius: 12px;
+	background: #f7f7f9;
+	color: #6e6e73;
+	font-size: 0.9rem;
+	line-height: 1.25;
+	font-weight: 500;
+}
+
+.manage-account__passkey-list {
+	display: grid;
+	gap: 10px;
+}
+
+.manage-account__passkey-item {
+	display: grid;
+	grid-template-columns: 42px minmax(0, 1fr) auto;
+	align-items: center;
+	gap: 13px;
+	padding: 13px;
+	border: 1px solid rgba(34, 42, 56, 0.08);
+	border-radius: 14px;
+	background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
+	box-shadow: 0 10px 24px rgba(24, 32, 44, 0.04);
+}
+
+.manage-account__passkey-item-icon {
+	width: 42px;
+	height: 42px;
+	border-radius: 13px;
+	background: rgba(47, 120, 232, 0.1);
+	display: grid;
+	place-items: center;
+}
+
+.manage-account__passkey-item-icon img {
+	width: 22px;
+	height: 22px;
+	display: block;
+	object-fit: contain;
+}
+
+.manage-account__passkey-item-copy {
+	min-width: 0;
+	display: grid;
+	gap: 3px;
+	color: #6e6e73;
+	font-size: 0.84rem;
+	line-height: 1.2;
+	font-weight: 500;
+}
+
+.manage-account__passkey-item-copy strong {
+	color: #1d1d1f;
+	font-size: 0.98rem;
+	line-height: 1.15;
+	font-weight: 720;
+}
+
+.manage-account__passkey-item-copy span {
+	overflow-wrap: anywhere;
+}
+
+.manage-account__passkey-actions {
+	display: inline-flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 8px;
+}
+
+.manage-account__passkey-info,
+.manage-account__passkey-delete {
+	min-height: 38px;
+	border: 0;
+	border-radius: 999px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 0.86rem;
+	line-height: 1;
+	font-weight: 700;
+	cursor: pointer;
+	transition: background-color 160ms ease, transform 160ms ease;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.manage-account__passkey-info {
+	width: 38px;
+	padding: 0;
+	background: rgba(47, 120, 232, 0.1);
+	color: #2f78e8;
+}
+
+.manage-account__passkey-delete {
+	background: rgba(255, 59, 48, 0.1);
+	color: #dc1f17;
+	padding: 0 13px;
+	gap: 7px;
+}
+
+.manage-account__passkey-info svg,
+.manage-account__passkey-delete svg {
+	width: 16px;
+	height: 16px;
+	stroke-width: 2.2;
+}
+
+.manage-account__passkey-info:hover {
+	background: rgba(47, 120, 232, 0.16);
+}
+
+.manage-account__passkey-delete:hover {
+	background: rgba(255, 59, 48, 0.16);
+}
+
+.manage-account__passkey-info:active,
+.manage-account__passkey-delete:active {
+	transform: scale(0.97);
+}
+
+.manage-account__passkey-info:disabled,
+.manage-account__passkey-delete:disabled {
+	cursor: not-allowed;
+	opacity: 0.58;
+	transform: none;
+}
+
+.manage-account__passkey-button {
+	width: fit-content;
+	min-height: 44px;
+	border: 0;
+	border-radius: 12px;
+	background: #2f78e8;
+	color: #ffffff;
+	padding: 0 18px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	font-size: 0.98rem;
+	font-weight: 700;
+	cursor: pointer;
+	box-shadow:
+		0 10px 20px rgba(47, 120, 232, 0.16),
+		0 2px 6px rgba(47, 120, 232, 0.1);
+}
+
+.manage-account__passkey-button svg {
+	width: 19px;
+	height: 19px;
+	stroke-width: 2;
+}
+
+.manage-account__passkey-button:disabled {
+	cursor: not-allowed;
+	opacity: 0.68;
+}
+
+.manage-account__delete-modal {
+	width: min(440px, 100%);
+	gap: 12px;
+	padding-bottom: 26px;
+}
+
+.manage-account__delete-icon {
+	width: 54px;
+	height: 54px;
+	border-radius: 18px;
+	background: linear-gradient(135deg, rgba(47, 120, 232, 0.13), rgba(47, 120, 232, 0.04));
+	display: grid;
+	place-items: center;
+	box-shadow: inset 0 0 0 1px rgba(47, 120, 232, 0.08);
+}
+
+.manage-account__delete-icon img {
+	width: 28px;
+	height: 28px;
+	display: block;
+	object-fit: contain;
+}
+
+.manage-account__delete-modal h2 {
+	margin-bottom: 2px;
+}
+
+.manage-account__delete-copy {
+	max-width: 25rem;
+	margin: 0;
+	color: #5f5f66;
+	font-size: 0.95rem;
+	line-height: 1.38;
+	font-weight: 460;
+}
+
+.manage-account__delete-copy--wide {
+	max-width: 29rem;
+}
+
+.manage-account__delete-actions {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+	margin-top: 8px;
+}
+
+.manage-account__delete-actions--single {
+	grid-template-columns: 1fr;
+}
+
+.manage-account__delete-button {
+	min-height: 42px;
+	border: 0;
+	border-radius: 12px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	font-size: 0.95rem;
+	font-weight: 720;
+	cursor: pointer;
+	transition: background-color 160ms ease, box-shadow 160ms ease;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.manage-account__delete-button svg {
+	width: 17px;
+	height: 17px;
+	stroke-width: 2.2;
+}
+
+.manage-account__delete-button--cancel {
+	background: #f1f1f4;
+	color: #1d1d1f;
+}
+
+.manage-account__delete-button--danger {
+	background: #ff3b30;
+	color: #ffffff;
+	box-shadow:
+		0 10px 20px rgba(255, 59, 48, 0.16),
+		0 2px 6px rgba(255, 59, 48, 0.12);
+}
+
+.manage-account__delete-button--cancel:hover {
+	background: #e7e7ec;
+}
+
+.manage-account__delete-button--danger:hover {
+	background: #ec3026;
+}
+
+.manage-account__delete-button--verified {
+	background: #2ea043;
+	color: #ffffff;
+	box-shadow:
+		0 10px 20px rgba(46, 160, 67, 0.18),
+		0 2px 6px rgba(46, 160, 67, 0.12);
+}
+
+.manage-account__delete-button--verified:hover {
+	background: #25893a;
+}
+
+.manage-account__delete-button--logout {
+	background: #1d1d1f;
+	box-shadow:
+		0 10px 20px rgba(29, 29, 31, 0.2),
+		0 2px 6px rgba(29, 29, 31, 0.14);
+}
+
+.manage-account__delete-button--logout:hover {
+	background: #111114;
+}
+
+.manage-account__logout-icon-image {
+	width: 17px;
+	height: 17px;
+	display: block;
+	object-fit: contain;
+}
+
+.manage-account__delete-button:disabled {
+	cursor: not-allowed;
+	opacity: 0.62;
+	transform: none;
+	box-shadow: none;
+}
+
+.manage-account__setup-modal {
+	width: min(460px, 100%);
+}
+
+.manage-account__info-modal {
+	width: min(430px, 100%);
+}
+
+.manage-account__info-list {
+	width: 100%;
+	display: grid;
+	gap: 9px;
+	margin: 4px 0 8px;
+}
+
+.manage-account__info-row {
+	display: grid;
+	grid-template-columns: minmax(90px, 0.62fr) minmax(0, 1fr);
+	gap: 12px;
+	align-items: start;
+	padding: 12px 14px;
+	border-radius: 13px;
+	background: #f7f8fb;
+	text-align: left;
+}
+
+.manage-account__info-row span {
+	color: #74747a;
+	font-size: 0.82rem;
+	line-height: 1.2;
+	font-weight: 560;
+}
+
+.manage-account__info-row strong {
+	min-width: 0;
+	color: #1d1d1f;
+	font-size: 0.92rem;
+	line-height: 1.22;
+	font-weight: 700;
+	overflow-wrap: anywhere;
+}
+
+.manage-account__setup-form {
+	width: 100%;
+	display: grid;
+	gap: 14px;
+	margin-top: 6px;
+}
+
+.manage-account__setup-field {
+	width: 100%;
+	min-height: 62px;
+	border: 1.5px solid #dedee4;
+	border-radius: 14px;
+	background: #ffffff;
+	display: grid;
+	align-content: center;
+	gap: 5px;
+	padding: 9px 15px;
+	text-align: left;
+	transition: border-color 170ms ease, box-shadow 170ms ease;
+}
+
+.manage-account__setup-field:focus-within {
+	border-color: #2f78e8;
+	box-shadow: 0 0 0 4px rgba(47, 120, 232, 0.12);
+}
+
+.manage-account__setup-field span {
+	color: #74747a;
+	font-size: 0.78rem;
+	line-height: 1.05;
+	font-weight: 500;
+}
+
+.manage-account__setup-field input {
+	width: 100%;
+	min-width: 0;
+	border: 0;
+	outline: 0;
+	background: transparent;
+	color: #1d1d1f;
+	font: inherit;
+	font-size: 1rem;
+	line-height: 1.15;
+	font-weight: 620;
+}
+
+.manage-account__setup-field input::placeholder {
+	color: #9a9aa0;
+	opacity: 1;
+}
+
+.manage-account__setup-button {
+	background: #2f78e8;
+	color: #ffffff;
+	box-shadow:
+		0 10px 20px rgba(47, 120, 232, 0.16),
+		0 2px 6px rgba(47, 120, 232, 0.12);
+}
+
+.manage-account__setup-button:hover {
+	background: #246dde;
+}
+
+.manage-account__setup-button img {
+	width: 18px;
+	height: 18px;
+	display: block;
+	object-fit: contain;
+	filter: brightness(0) invert(1);
+}
+
+.manage-account__account-delete-modal {
+	width: min(620px, 100%);
+	max-height: min(820px, calc(var(--iclora-app-height) - 32px));
+	align-content: start;
+	overflow-y: auto;
+	scrollbar-width: thin;
+	gap: 14px;
+}
+
+.manage-account__modal-icon--danger {
+	color: #d93025;
+}
+
+.manage-account__delete-success-icon {
+	position: relative;
+	width: 72px;
+	height: 72px;
+	border-radius: 50%;
+	background: #e9f9ef;
+	color: #24a148;
+	display: grid;
+	place-items: center;
+	box-shadow:
+		0 14px 30px rgba(36, 161, 72, 0.16),
+		inset 0 0 0 1px rgba(36, 161, 72, 0.16);
+	animation: manage-delete-success-pop 620ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.manage-account__delete-success-icon::before {
+	content: "";
+	position: absolute;
+	inset: -8px;
+	border-radius: inherit;
+	border: 2px solid rgba(36, 161, 72, 0.22);
+	animation: manage-delete-success-ring 820ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.manage-account__delete-success-icon svg {
+	width: 42px;
+	height: 42px;
+	stroke-width: 2.1;
+	animation: manage-delete-success-check 520ms 160ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.manage-account__delete-phrase {
+	margin-top: 4px;
+}
+
+.manage-account__delete-verify-grid {
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 10px;
+}
+
+.manage-account__delete-verify {
+	min-height: 46px;
+	border: 1.5px solid #e5e5ea;
+	border-radius: 13px;
+	background: #ffffff;
+	color: #1d1d1f;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 9px;
+	padding: 0 12px;
+	font-size: 0.92rem;
+	font-weight: 720;
+	cursor: pointer;
+	transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
+.manage-account__delete-verify img,
+.manage-account__delete-verify svg {
+	width: 18px;
+	height: 18px;
+	display: block;
+	object-fit: contain;
+}
+
+.manage-account__delete-verify svg {
+	color: #2f78e8;
+	stroke-width: 2.4;
+}
+
+.manage-account__delete-verify:hover {
+	border-color: rgba(47, 120, 232, 0.35);
+	box-shadow: 0 8px 18px rgba(47, 120, 232, 0.08);
+}
+
+.manage-account__delete-verify.is-active {
+	border-color: rgba(47, 120, 232, 0.42);
+	background: #edf4ff;
+	color: #2f78e8;
+}
+
+.manage-account__delete-verify:disabled {
+	cursor: not-allowed;
+	opacity: 0.64;
+	box-shadow: none;
+}
+
+.manage-account__delete-verify .manage-account__button-spinner {
+	width: 18px;
+	height: 18px;
+	border-width: 2.5px;
+	border-color: rgba(47, 120, 232, 0.22);
+	border-top-color: #2f78e8;
+}
+
+.manage-account__delete-status {
+	width: 100%;
+	min-height: 34px;
+	border-radius: 999px;
+	background: #ffeceb;
+	color: #bf271e;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 14px;
+	font-size: 0.84rem;
+	font-weight: 700;
+}
+
+.manage-account__delete-status.is-ready {
+	background: #eaf8ec;
+	color: #1f7a2f;
+}
+
+.manage-account__delete-feedback {
+	width: 100%;
+	display: grid;
+	gap: 12px;
+	padding: 14px;
+	border-radius: 16px;
+	background: #fbfcfe;
+	border: 1px solid #e6e7ec;
+	text-align: left;
+}
+
+.manage-account__delete-feedback-head {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+.manage-account__delete-feedback-head strong {
+	color: #1d1d1f;
+	font-size: 0.98rem;
+	line-height: 1.18;
+	font-weight: 760;
+}
+
+.manage-account__delete-feedback-head span {
+	color: #74747a;
+	font-size: 0.76rem;
+	line-height: 1.2;
+	font-weight: 660;
+	white-space: nowrap;
+}
+
+.manage-account__delete-reason-select {
+	position: relative;
+	width: 100%;
+	min-height: 62px;
+	border: 1.5px solid #dfe0e6;
+	border-radius: 14px;
+	background: #ffffff;
+	display: grid;
+	align-content: center;
+	gap: 5px;
+	padding: 9px 42px 9px 15px;
+	transition: border-color 170ms ease, box-shadow 170ms ease;
+}
+
+.manage-account__delete-reason-select::after {
+	content: "";
+	position: absolute;
+	right: 17px;
+	top: 50%;
+	width: 9px;
+	height: 9px;
+	border-right: 2px solid #5f6368;
+	border-bottom: 2px solid #5f6368;
+	transform: translateY(-65%) rotate(45deg);
+	pointer-events: none;
+}
+
+.manage-account__delete-reason-select:focus-within {
+	border-color: #2f78e8;
+	box-shadow: 0 0 0 4px rgba(47, 120, 232, 0.12);
+}
+
+.manage-account__delete-reason-select span {
+	color: #74747a;
+	font-size: 0.78rem;
+	line-height: 1.05;
+	font-weight: 660;
+}
+
+.manage-account__delete-reason-select select {
+	width: 100%;
+	min-width: 0;
+	border: 0;
+	outline: 0;
+	background: transparent;
+	color: #1d1d1f;
+	font: inherit;
+	font-size: 1rem;
+	line-height: 1.15;
+	font-weight: 680;
+	appearance: none;
+	-webkit-appearance: none;
+	cursor: pointer;
+}
+
+.manage-account__delete-reason-select select:disabled {
+	cursor: not-allowed;
+	opacity: 0.64;
+}
+
+.manage-account__delete-reason-hint {
+	margin: -4px 2px 0;
+	color: #74747a;
+	font-size: 0.82rem;
+	line-height: 1.32;
+	font-weight: 500;
+}
+
+.manage-account__delete-feedback-note {
+	display: grid;
+	gap: 7px;
+}
+
+.manage-account__delete-feedback-note span {
+	color: #74747a;
+	font-size: 0.78rem;
+	line-height: 1;
+	font-weight: 660;
+}
+
+.manage-account__delete-feedback-note textarea {
+	width: 100%;
+	min-height: 82px;
+	resize: none;
+	overflow-y: auto;
+	border: 1.5px solid #e4e5eb;
+	border-radius: 13px;
+	background: #ffffff;
+	color: #1d1d1f;
+	outline: 0;
+	padding: 12px;
+	font: inherit;
+	font-size: 0.9rem;
+	line-height: 1.35;
+	font-weight: 520;
+	transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.manage-account__delete-feedback-note textarea:focus {
+	border-color: #2f78e8;
+	box-shadow: 0 0 0 4px rgba(47, 120, 232, 0.12);
+}
+
+.manage-account__delete-feedback-note textarea::placeholder {
+	color: #9a9aa0;
+	opacity: 1;
+}
+
+.manage-account__delete-button--account {
+	width: 100%;
+	min-height: 46px;
+	margin-top: 0;
+}
+
+.manage-account__modal-layer {
+	position: fixed;
+	inset: 0;
+	z-index: 10040;
+	display: grid;
+	place-items: center;
+	padding: 22px;
+	background: rgba(246, 247, 249, 0.7);
+	backdrop-filter: blur(14px) saturate(1.08);
+	-webkit-backdrop-filter: blur(14px) saturate(1.08);
+	animation: manage-modal-backdrop 360ms ease both;
+}
+
+.manage-account__crop-layer {
+	z-index: 10050;
+	padding: 18px;
+	background: rgba(246, 247, 249, 0.74);
+	animation-duration: 260ms;
+}
+
+.manage-account__name-modal {
+	position: relative;
+	width: min(520px, 100%);
+	min-height: auto;
+	display: grid;
+	align-content: center;
+	justify-items: center;
+	gap: 16px;
+	padding: 44px 34px 30px;
+	border: 0;
+	border-radius: 22px;
+	background: rgba(255, 255, 255, 0.99);
+	box-shadow:
+		0 18px 44px rgba(28, 31, 36, 0.11),
+		0 4px 14px rgba(28, 31, 36, 0.06);
+	text-align: center;
+	transform-origin: center;
+	animation: manage-modal-flower 560ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.manage-account__modal-close {
+	position: absolute;
+	top: 18px;
+	left: 18px;
+	width: 34px;
+	height: 34px;
+	border: 0;
+	border-radius: 999px;
+	background: transparent;
+	color: #1d1d1f;
+	display: grid;
+	place-items: center;
+	cursor: pointer;
+	transition: background-color 160ms ease, transform 160ms ease;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.manage-account__modal-close:hover {
+	background: rgba(29, 29, 31, 0.06);
+}
+
+.manage-account__modal-close:active {
+	transform: scale(0.94);
+}
+
+.manage-account__modal-close svg {
+	width: 24px;
+	height: 24px;
+	stroke-width: 2.3;
+}
+
+.manage-account__modal-icon {
+	width: 42px;
+	height: 42px;
+	display: grid;
+	place-items: center;
+	color: #0a73e8;
+}
+
+.manage-account__modal-icon svg {
+	width: 100%;
+	height: 100%;
+	stroke-width: 1.9;
+}
+
+.manage-account__photo-modal-icon img {
+	width: 34px;
+	height: 34px;
+	display: block;
+	object-fit: contain;
+	filter: brightness(0) saturate(100%) invert(37%) sepia(83%) saturate(2144%) hue-rotate(205deg) brightness(94%) contrast(92%);
+}
+
+.manage-account__name-modal h2 {
+	margin: -6px 0 16px;
+	color: #1d1d1f;
+	font-size: 1.62rem;
+	line-height: 1.08;
+	font-weight: 760;
+	letter-spacing: 0;
+}
+
+.manage-account__dob-modal {
+	width: min(640px, 100%);
+}
+
+.manage-account__country-modal {
+	width: min(760px, 100%);
+	padding-bottom: 0;
+	overflow: hidden;
+}
+
+.manage-account__email-modal {
+	width: min(430px, 100%);
+}
+
+.manage-account__photo-modal {
+	width: min(470px, 100%);
+}
+
+.manage-account__photo-copy {
+	margin: 0 0 2px;
+	color: #505056;
+	font-size: 0.94rem;
+	line-height: 1.35;
+	font-weight: 430;
+}
+
+.manage-account__photo-drop-copy {
+	margin: -2px 0 2px;
+	color: #6e6e73;
+	font-size: 0.84rem;
+	line-height: 1.3;
+	font-weight: 520;
+}
+
+.manage-account__photo-preview-shell {
+	width: 100%;
+	display: grid;
+	place-items: center;
+	padding: 12px;
+	border-radius: 16px;
+	border: 1.5px dashed transparent;
+	background: rgba(247, 248, 251, 0.35);
+	transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
+.manage-account__photo-preview-shell.is-drop-active {
+	border-color: #2f78e8;
+	background: rgba(47, 120, 232, 0.08);
+	box-shadow: inset 0 0 0 1px rgba(47, 120, 232, 0.1);
+}
+
+.manage-account__photo-preview {
+	width: 124px;
+	height: 124px;
+	border-radius: 999px;
+	overflow: hidden;
+	display: grid;
+	place-items: center;
+	background: #f0f1f5;
+	color: #6e6e73;
+	font-size: 2rem;
+	font-weight: 760;
+	border: 1px solid rgba(33, 42, 51, 0.1);
+}
+
+.manage-account__photo-preview img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.manage-account__photo-file {
+	display: none;
+}
+
+.manage-account__photo-actions {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+	margin-top: 2px;
+}
+
+.manage-account__crop-modal {
+	position: relative;
+	width: min(520px, 100%);
+	display: grid;
+	align-content: start;
+	justify-items: stretch;
+	gap: 16px;
+	padding: 20px;
+	border-radius: 22px;
+	background: rgba(255, 255, 255, 0.98);
+	box-shadow: 0 26px 70px rgba(28, 31, 36, 0.16);
+	text-align: left;
+	transform-origin: center;
+	animation: manage-crop-pop 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.manage-account__crop-head {
+	width: 100%;
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+.manage-account__crop-head h2 {
+	margin: 0;
+	color: #1d1d1f;
+	font-size: 1.2rem;
+	line-height: 1.2;
+	font-weight: 760;
+}
+
+.manage-account__crop-head p {
+	margin: 4px 0 0;
+	color: #757575;
+	font-size: 0.92rem;
+	line-height: 1.3;
+}
+
+.manage-account__crop-close {
+	width: 34px;
+	height: 34px;
+	padding: 0;
+	border: 0;
+	border-radius: 999px;
+	background: #ececf3;
+	color: #1d1d1f;
+	font-size: 1.3rem;
+	line-height: 1;
+	cursor: pointer;
+	display: grid;
+	place-items: center;
+	transition: background-color 160ms ease, transform 160ms ease, opacity 160ms ease;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.manage-account__crop-close:hover {
+	background: #e4e4ec;
+	transform: scale(1.04);
+}
+
+.manage-account__crop-close:active {
+	transform: scale(0.94);
+}
+
+.manage-account__crop-close:focus-visible {
+	outline: 2px solid rgba(99, 102, 241, 0.42);
+	outline-offset: 3px;
+}
+
+.manage-account__crop-close:disabled {
+	cursor: not-allowed;
+	opacity: 0.62;
+	transform: none;
+}
+
+.manage-account__crop-viewport {
+	position: relative;
+	width: min(100%, 372px);
+	aspect-ratio: 1 / 1;
+	margin: 0 auto;
+	border-radius: 999px;
+	background: #f4f5fa;
+	border: 1px solid rgba(99, 102, 241, 0.12);
+	box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.68);
+	overflow: hidden;
+	touch-action: none;
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+.manage-account__crop-image {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: auto;
+	height: auto;
+	transform-origin: center;
+	will-change: transform;
+	max-width: none;
+	max-height: none;
+	pointer-events: none;
+	user-select: none;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
+}
+
+.manage-account__crop-frame {
+	position: absolute;
+	inset: 0;
+	border-radius: 999px;
+	box-shadow:
+		inset 0 0 0 1px rgba(255, 255, 255, 0.86),
+		inset 0 0 0 9999px rgba(255, 255, 255, 0.06);
+	pointer-events: none;
+}
+
+.manage-account__crop-zoom-row {
+	display: grid;
+	gap: 8px;
+	color: #1d1d1f;
+	font-size: 0.92rem;
+	font-weight: 600;
+}
+
+.manage-account__crop-zoom-row span {
+	color: #1d1d1f;
+	font-size: 0.92rem;
+	font-weight: 600;
+}
+
+.manage-account__crop-zoom-row input[type="range"] {
+	display: grid;
+	width: 100%;
+	accent-color: #111111;
+	cursor: pointer;
+}
+
+.manage-account__crop-zoom-row input[type="range"]:disabled {
+	cursor: not-allowed;
+	opacity: 0.68;
+}
+
+.manage-account__crop-actions {
+	display: flex;
+	gap: 10px;
+}
+
+.manage-account__crop-button-secondary,
+.manage-account__crop-button-primary {
+	flex: 1 1 0;
+	min-height: 44px;
+	border: 0;
+	border-radius: 12px;
+	font-size: 1rem;
+	font-weight: 650;
+	cursor: pointer;
+	transition: transform 150ms ease, box-shadow 150ms ease, opacity 150ms ease;
+}
+
+.manage-account__crop-button-secondary {
+	background: #ececf3;
+	color: #1d1d1f;
+}
+
+.manage-account__crop-button-primary {
+	background: linear-gradient(135deg, #111111 0%, #000000 100%);
+	color: #ffffff;
+}
+
+.manage-account__crop-button-secondary:hover,
+.manage-account__crop-button-primary:hover {
+	transform: scale(1.01);
+}
+
+.manage-account__crop-button-secondary:active,
+.manage-account__crop-button-primary:active {
+	transform: scale(0.98);
+}
+
+.manage-account__crop-button-secondary:disabled,
+.manage-account__crop-button-primary:disabled {
+	cursor: not-allowed;
+	opacity: 0.68;
+	transform: none;
+}
+
+.manage-account__crop-button-secondary:focus-visible,
+.manage-account__crop-button-primary:focus-visible {
+	outline: 2px solid rgba(99, 102, 241, 0.38);
+	outline-offset: 3px;
+}
+
+.manage-account__dob-modal h2 {
+	margin-bottom: 8px;
+}
+
+.manage-account__dob-copy {
+	max-width: 34em;
+	margin: -2px 0 18px;
+	color: #505056;
+	font-size: 0.96rem;
+	line-height: 1.35;
+	font-weight: 430;
+}
+
+.manage-account__country-modal h2 {
+	margin-bottom: 2px;
+}
+
+.manage-account__country-current {
+	margin: -4px 0 16px;
+	color: #1d1d1f;
+	font-size: 1.12rem;
+	line-height: 1.2;
+	font-weight: 430;
+}
+
+.manage-account__country-copy {
+	max-width: 36em;
+	margin: 0 0 22px;
+	color: #303035;
+	font-size: 1rem;
+	line-height: 1.45;
+	font-weight: 430;
+}
+
+.manage-account__email-value {
+	max-width: 100%;
+	margin: -4px 0 0;
+	color: #1d1d1f;
+	font-size: 1rem;
+	line-height: 1.25;
+	font-weight: 560;
+	overflow-wrap: anywhere;
+}
+
+.manage-account__email-copy {
+	max-width: 22em;
+	margin: 0;
+	color: #2faa45;
+	font-size: 0.94rem;
+	line-height: 1.35;
+	font-weight: 430;
+}
+
+.manage-account__email-done {
+	width: min(220px, 100%);
+	margin-top: 8px;
+}
+
+.manage-account__name-form {
+	width: min(390px, 100%);
+	display: grid;
+	gap: 12px;
+}
+
+.manage-account__name-field {
+	min-height: 58px;
+	border: 1.5px solid #8d8d93;
+	border-radius: 13px;
+	background: #ffffff;
+	display: grid;
+	align-content: center;
+	gap: 4px;
+	padding: 8px 15px;
+	text-align: left;
+	transition: border-color 170ms ease, box-shadow 170ms ease;
+}
+
+.manage-account__name-field:focus-within {
+	border-color: #2f78e8;
+	box-shadow: 0 0 0 4px rgba(47, 120, 232, 0.12);
+}
+
+.manage-account__name-field span {
+	color: #74747a;
+	font-size: 0.78rem;
+	line-height: 1.05;
+	font-weight: 430;
+}
+
+.manage-account__name-field input {
+	width: 100%;
+	min-width: 0;
+	border: 0;
+	outline: 0;
+	background: transparent;
+	color: #1d1d1f;
+	font: inherit;
+	font-size: 1rem;
+	line-height: 1.15;
+	font-variant-caps: normal;
+	text-transform: none;
+	letter-spacing: 0;
+}
+
+.manage-account__name-field input::placeholder {
+	color: #74747a;
+	opacity: 1;
+	font-variant-caps: normal;
+}
+
+.manage-account__name-field--single {
+	display: flex;
+	align-items: center;
+}
+
+.manage-account__name-field--single input {
+	font-variant-caps: normal;
+}
+
+.manage-account__name-save {
+	min-height: 42px;
+	border: 0;
+	border-radius: 12px;
+	background: #2f78e8;
+	color: #ffffff;
+	font-size: 1rem;
+	font-weight: 680;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	transition: background-color 160ms ease, box-shadow 160ms ease;
+	box-shadow:
+		0 10px 20px rgba(47, 120, 232, 0.16),
+		0 2px 6px rgba(47, 120, 232, 0.1);
+	-webkit-tap-highlight-color: transparent;
+}
+
+.manage-account__button-spinner {
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	border: 3px solid rgba(255, 255, 255, 0.35);
+	border-top-color: #ffffff;
+	animation: manage-button-spin 720ms linear infinite;
+}
+
+.manage-account__country-button .manage-account__button-spinner {
+	border-width: 2.5px;
+}
+
+.manage-account__name-save:disabled,
+.manage-account__country-button--continue:disabled {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+@keyframes manage-button-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes manage-delete-success-pop {
+	0% {
+		opacity: 0;
+		transform: scale(0.66);
+	}
+
+	68% {
+		opacity: 1;
+		transform: scale(1.08);
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes manage-delete-success-ring {
+	0% {
+		opacity: 0;
+		transform: scale(0.76);
+	}
+
+	45% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+		transform: scale(1.34);
+	}
+}
+
+@keyframes manage-delete-success-check {
+	0% {
+		opacity: 0;
+		transform: scale(0.72) rotate(-10deg);
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1) rotate(0deg);
+	}
+}
+
+.manage-account__name-save:hover {
+	background: #246dde;
+	box-shadow:
+		0 10px 22px rgba(47, 120, 232, 0.18),
+		0 2px 6px rgba(47, 120, 232, 0.12);
+}
+
+.manage-account__name-save:active {
+	background: #1f63ce;
+}
+
+.manage-account__name-save:disabled,
+.manage-account__country-button:disabled {
+	cursor: not-allowed;
+	opacity: 0.62;
+	box-shadow: none;
+}
+
+.manage-account__dob-form {
+	width: min(520px, 100%);
+	display: grid;
+	grid-template-columns: 1fr 1.45fr 1.1fr;
+	gap: 12px;
+}
+
+.manage-account__dob-field {
+	position: relative;
+	min-height: 62px;
+	border: 1.5px solid #8d8d93;
+	border-radius: 14px;
+	background: #ffffff;
+	display: grid;
+	align-content: center;
+	gap: 4px;
+	padding: 8px 38px 8px 15px;
+	text-align: left;
+	transition: border-color 170ms ease, box-shadow 170ms ease;
+}
+
+.manage-account__dob-field::after {
+	content: "";
+	position: absolute;
+	right: 17px;
+	top: 50%;
+	width: 9px;
+	height: 9px;
+	border-right: 2px solid #6d6d73;
+	border-bottom: 2px solid #6d6d73;
+	transform: translateY(-65%) rotate(45deg);
+	pointer-events: none;
+}
+
+.manage-account__dob-field:focus-within {
+	border-color: #2f78e8;
+	box-shadow: 0 0 0 4px rgba(47, 120, 232, 0.12);
+}
+
+.manage-account__dob-field span {
+	color: #74747a;
+	font-size: 0.78rem;
+	line-height: 1.05;
+	font-weight: 430;
+}
+
+.manage-account__dob-field select {
+	width: 100%;
+	min-width: 0;
+	border: 0;
+	outline: 0;
+	background: transparent;
+	color: #1d1d1f;
+	font: inherit;
+	font-size: 1rem;
+	line-height: 1.15;
+	letter-spacing: 0;
+	appearance: none;
+	-webkit-appearance: none;
+	cursor: pointer;
+}
+
+.manage-account__dob-form .manage-account__name-save {
+	grid-column: 1 / -1;
+}
+
+.manage-account__country-form {
+	width: 100%;
+	display: grid;
+	gap: 26px;
+}
+
+.manage-account__country-field {
+	width: min(560px, 100%);
+	justify-self: center;
+}
+
+.manage-account__country-actions {
+	width: calc(100% + 68px);
+	margin: 0 -34px;
+	padding: 22px 34px 24px;
+	border-top: 1px solid rgba(29, 29, 31, 0.12);
+	background: rgba(247, 247, 250, 0.92);
+	display: flex;
+	justify-content: space-between;
+	gap: 18px;
+}
+
+.manage-account__country-button {
+	width: min(190px, 42%);
+	min-height: 42px;
+	border-radius: 12px;
+	font-size: 1rem;
+	font-weight: 520;
+	cursor: pointer;
+	transition: background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.manage-account__country-button--cancel {
+	border: 1.5px solid #0a73e8;
+	background: #ffffff;
+	color: #0a73e8;
+}
+
+.manage-account__country-button--continue {
+	border: 0;
+	background: #2f78e8;
+	color: #ffffff;
+	box-shadow:
+		0 10px 20px rgba(47, 120, 232, 0.14),
+		0 2px 6px rgba(47, 120, 232, 0.08);
+}
+
+.manage-account__country-button:hover {
+	box-shadow: 0 8px 18px rgba(29, 29, 31, 0.08);
+}
+
+.manage-account__country-button--continue:hover {
+	background: #246dde;
+}
+
+@keyframes manage-section-rise {
+	0% {
+		opacity: 0.01;
+		transform: translate3d(0, 12px, 0);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes manage-section-rise-lite {
+	0% {
+		opacity: 0.01;
+		transform: translate3d(0, 8px, 0);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes manage-hero-rise {
+	0% {
+		opacity: 0.01;
+		transform: translate3d(0, 10px, 0);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes manage-cards-rise {
+	0% {
+		opacity: 0.01;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes manage-card-rise {
+	0% {
+		opacity: 0.01;
+		transform: translate3d(0, 12px, 0) scale(0.992);
+	}
+
+	68% {
+		opacity: 1;
+		transform: translate3d(0, -1px, 0) scale(1.004);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translate3d(0, 0, 0) scale(1);
+	}
+}
+
+@keyframes manage-modal-backdrop {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes manage-modal-flower {
+	0% {
+		opacity: 0;
+		filter: blur(16px);
+		border-radius: 999px;
+		transform: scale(0.58);
+	}
+
+	62% {
+		opacity: 1;
+		filter: blur(0);
+		border-radius: 28px;
+		transform: scale(1.025);
+	}
+
+	100% {
+		opacity: 1;
+		filter: blur(0);
+		border-radius: 22px;
+		transform: scale(1);
+	}
+}
+
+@keyframes manage-crop-pop {
+	0% {
+		opacity: 0;
+		transform: scale(0.92) translateY(10px);
+		filter: blur(12px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1) translateY(0);
+		filter: blur(0);
+	}
+}
+
+@media (max-width: 900px) {
+	.manage-account__section {
+		gap: 22px;
+	}
+
+	.manage-account__section--full {
+		animation-duration: 360ms;
+	}
+
+	.manage-account__section--full .manage-account__hero,
+	.manage-account__section--full .manage-account__cards,
+	.manage-account__section--full .manage-account__card {
+		animation-duration: 380ms;
+	}
+
+	.manage-account__section--full .manage-account__card:nth-child(1) {
+		animation-delay: 18ms;
+	}
+
+	.manage-account__section--full .manage-account__card:nth-child(2) {
+		animation-delay: 42ms;
+	}
+
+	.manage-account__section--full .manage-account__card:nth-child(3) {
+		animation-delay: 66ms;
+	}
+
+	.manage-account__section--full .manage-account__card:nth-child(4) {
+		animation-delay: 90ms;
+	}
+
+	.manage-account__section--full .manage-account__card:nth-child(5) {
+		animation-delay: 114ms;
+	}
+
+	.manage-account__section--full .manage-account__card:nth-child(6) {
+		animation-delay: 138ms;
+	}
+
+	.manage-account {
+		padding: calc(54px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) calc(30px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+	}
+
+	.manage-account__layout {
+		display: block;
+		margin-top: 12px;
+	}
+
+	.manage-account__profile {
+		display: grid;
+		grid-template-columns: 62px minmax(0, 1fr);
+		align-items: start;
+		column-gap: 13px;
+		margin-bottom: 18px;
+		padding: 14px;
+		border-radius: 18px;
+		background: #ffffff;
+		border: 1px solid rgba(33, 42, 51, 0.08);
+		box-shadow:
+			0 18px 36px rgba(15, 23, 42, 0.08),
+			0 2px 8px rgba(15, 23, 42, 0.06);
+	}
+
+	.manage-account__profile-body {
+		grid-column: 2;
+		display: grid;
+		align-content: start;
+		gap: 0;
+		margin-top: 8px;
+	}
+
+	.manage-account__avatar {
+		width: 62px;
+		height: 62px;
+		grid-row: span 2;
+		align-self: start;
+		font-size: 1.55rem;
+	}
+
+	.manage-account__profile h2 {
+		margin: 0 0 2px;
+		font-size: 1.02rem;
+		font-weight: 760;
+		font-variant-caps: normal;
+		text-transform: none;
+		letter-spacing: 0;
+	}
+
+	.manage-account__profile p {
+		margin-top: 0;
+		font-size: 0.86rem;
+		color: #6e6e73;
+	}
+
+	.manage-account__session-expiry {
+		margin-top: 6px;
+		font-size: 0.82rem;
+		color: #2faa45;
+		font-weight: 560;
+	}
+
+	.manage-account__nav {
+		display: flex;
+		gap: 8px;
+		overflow-x: auto;
+		padding: 0 0 8px;
+		margin: 0 -16px 14px;
+		scroll-padding: 16px;
+		scrollbar-width: none;
+		-webkit-overflow-scrolling: touch;
+		overscroll-behavior-x: contain;
+	}
+
+	.manage-account__nav::-webkit-scrollbar {
+		display: none;
+	}
+
+	.manage-account__nav button {
+		flex: 0 0 auto;
+		margin-left: 16px;
+		padding: 8px 11px;
+		border-radius: 999px;
+		background: #f4f4f6;
+		font-size: 0.8rem;
+		white-space: nowrap;
+	}
+
+	.manage-account__nav button:last-child {
+		margin-right: 16px;
+	}
+
+	.manage-account__nav button.is-active {
+		background: #e8f0ff;
+	}
+
+	.manage-account__hero {
+		margin-bottom: 18px;
+	}
+
+	.manage-account__hero h2 {
+		font-size: 1.4rem;
+	}
+
+	.manage-account__hero p {
+		margin-top: 10px;
+		font-size: 0.86rem;
+		line-height: 1.34;
+	}
+
+	.manage-account__cards {
+		grid-template-columns: 1fr;
+		gap: 10px;
+	}
+
+	.manage-account__card {
+		min-height: 88px;
+		border-radius: 10px;
+		padding: 15px 42px 15px 15px;
+		box-shadow: none;
+	}
+
+	.manage-account__card-copy {
+		gap: 5px;
+	}
+
+	.manage-account__card-copy strong {
+		font-size: 0.96rem;
+	}
+
+	.manage-account__card-copy span {
+		font-size: 0.82rem;
+		line-height: 1.2;
+	}
+
+	.manage-account__card-icon {
+		top: 15px;
+		right: 15px;
+		width: 20px;
+		height: 20px;
+	}
+
+	.manage-account__passkey-panel {
+		padding: 18px;
+		border-radius: 16px;
+	}
+
+	.manage-account__privacy-overview {
+		padding: 15px;
+		border-radius: 14px;
+	}
+
+	.manage-account__privacy-header {
+		grid-template-columns: 42px minmax(0, 1fr);
+		gap: 12px;
+	}
+
+	.manage-account__privacy-header-icon {
+		width: 42px;
+		height: 42px;
+		border-radius: 12px;
+	}
+
+	.manage-account__privacy-header h3 {
+		font-size: 1rem;
+	}
+
+	.manage-account__privacy-header p {
+		font-size: 0.83rem;
+	}
+
+	.manage-account__cookie-row {
+		grid-template-columns: 1fr;
+		gap: 9px;
+		padding: 12px;
+	}
+
+	.manage-account__cookie-badge {
+		justify-self: start;
+		height: 28px;
+	}
+
+	.manage-account__privacy-note {
+		padding: 12px;
+	}
+
+	.manage-account__privacy-danger {
+		grid-template-columns: 42px minmax(0, 1fr);
+		align-items: start;
+		padding: 15px;
+		border-radius: 14px;
+	}
+
+	.manage-account__privacy-danger-icon {
+		width: 42px;
+		height: 42px;
+		border-radius: 12px;
+	}
+
+	.manage-account__privacy-danger-copy h3 {
+		font-size: 1rem;
+	}
+
+	.manage-account__privacy-danger-copy p {
+		font-size: 0.84rem;
+	}
+
+	.manage-account__privacy-danger-button {
+		grid-column: 1 / -1;
+		width: 100%;
+	}
+
+	.manage-account__devices-panel {
+		gap: 14px;
+	}
+
+	.manage-account__devices-summary {
+		gap: 10px;
+	}
+
+	.manage-account__devices-summary div {
+		min-height: 66px;
+		border-radius: 12px;
+		padding: 12px;
+	}
+
+	.manage-account__device-group {
+		padding: 13px;
+		border-radius: 14px;
+	}
+
+	.manage-account__device-item {
+		grid-template-columns: 38px minmax(0, 1fr) auto;
+		gap: 10px;
+		padding: 11px;
+		align-items: center;
+	}
+
+	.manage-account__device-icon {
+		width: 38px;
+		height: 38px;
+		border-radius: 11px;
+	}
+
+	.manage-account__device-actions {
+		justify-self: end;
+		align-self: center;
+	}
+
+	.manage-account__passkey-main {
+		grid-template-columns: 40px minmax(0, 1fr);
+		gap: 12px;
+	}
+
+	.manage-account__passkey-icon {
+		width: 40px;
+		height: 40px;
+		border-radius: 12px;
+	}
+
+	.manage-account__passkey-main h3 {
+		font-size: 1rem;
+	}
+
+	.manage-account__passkey-main p,
+	.manage-account__passkey-meta {
+		font-size: 0.84rem;
+	}
+
+	.manage-account__passkey-list {
+		gap: 9px;
+	}
+
+	.manage-account__passkey-item {
+		grid-template-columns: 36px minmax(0, 1fr);
+		gap: 10px;
+		padding: 12px;
+	}
+
+	.manage-account__passkey-item-icon {
+		width: 36px;
+		height: 36px;
+		border-radius: 11px;
+	}
+
+	.manage-account__passkey-item-icon img {
+		width: 19px;
+		height: 19px;
+	}
+
+	.manage-account__passkey-actions {
+		grid-column: 1 / -1;
+		width: 100%;
+		display: grid;
+		grid-template-columns: 42px minmax(0, 1fr);
+	}
+
+	.manage-account__passkey-info {
+		width: 42px;
+		min-height: 36px;
+	}
+
+	.manage-account__passkey-delete {
+		min-height: 36px;
+	}
+
+	.manage-account__passkey-button {
+		width: 100%;
+	}
+
+	.manage-account__card-chevron {
+		position: absolute;
+		right: 14px;
+		bottom: 14px;
+		display: block;
+		width: 16px;
+		height: 16px;
+		color: #8a8a90;
+	}
+
+	.manage-account__modal-layer {
+		padding: 14px;
+	}
+
+	.manage-account__crop-layer {
+		padding: 12px;
+	}
+
+	.manage-account__name-modal {
+		width: min(100%, 360px);
+		min-height: auto;
+		gap: 16px;
+		padding: 56px 18px 24px;
+		border-radius: 20px;
+	}
+
+	.manage-account__delete-actions {
+		grid-template-columns: 1fr;
+	}
+
+	.manage-account__delete-verify-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.manage-account__delete-feedback {
+		padding: 12px;
+		border-radius: 14px;
+	}
+
+	.manage-account__delete-feedback-head {
+		display: grid;
+		gap: 3px;
+	}
+
+	.manage-account__delete-feedback-head span {
+		white-space: normal;
+	}
+
+	.manage-account__delete-reason-select {
+		min-height: 58px;
+		border-radius: 13px;
+	}
+
+	.manage-account__delete-reason-select select {
+		font-size: 0.96rem;
+	}
+
+	.manage-account__modal-close {
+		top: 16px;
+		left: 16px;
+		width: 34px;
+		height: 34px;
+		background: rgba(237, 237, 243, 0.78);
+	}
+
+	.manage-account__modal-icon {
+		width: 42px;
+		height: 42px;
+	}
+
+	.manage-account__name-modal h2 {
+		margin: -6px 0 14px;
+		font-size: 1.56rem;
+	}
+
+	.manage-account__dob-modal {
+		width: min(100%, 360px);
+	}
+
+	.manage-account__country-modal {
+		width: min(100%, 360px);
+	}
+
+	.manage-account__email-modal {
+		width: min(100%, 340px);
+	}
+
+	.manage-account__photo-modal {
+		width: min(100%, 360px);
+	}
+
+	.manage-account__crop-modal {
+		width: min(100%, 338px);
+		gap: 12px;
+		padding: 16px;
+		border-radius: 18px;
+	}
+
+	.manage-account__dob-copy {
+		margin: -4px 0 8px;
+		font-size: 0.86rem;
+	}
+
+	.manage-account__country-current {
+		margin-bottom: 10px;
+		font-size: 1rem;
+	}
+
+	.manage-account__country-copy {
+		margin-bottom: 10px;
+		font-size: 0.86rem;
+		line-height: 1.36;
+	}
+
+	.manage-account__email-value {
+		font-size: 0.92rem;
+	}
+
+	.manage-account__email-copy {
+		font-size: 0.86rem;
+	}
+
+	.manage-account__photo-preview {
+		width: 106px;
+		height: 106px;
+		font-size: 1.72rem;
+	}
+
+	.manage-account__photo-drop-copy {
+		font-size: 0.82rem;
+	}
+
+	.manage-account__crop-viewport {
+		width: min(100%, 274px);
+	}
+
+	.manage-account__crop-zoom-row {
+		width: 100%;
+	}
+
+	.manage-account__crop-head h2 {
+		font-size: 1.08rem;
+	}
+
+	.manage-account__crop-head p {
+		font-size: 0.86rem;
+	}
+
+	.manage-account__name-form {
+		gap: 12px;
+	}
+
+	.manage-account__dob-form {
+		width: 100%;
+		grid-template-columns: 1fr;
+		gap: 10px;
+	}
+
+	.manage-account__dob-field {
+		min-height: 56px;
+		border-radius: 13px;
+		padding: 8px 38px 8px 14px;
+	}
+
+	.manage-account__dob-field select {
+		font-size: 1rem;
+	}
+
+	.manage-account__country-form {
+		gap: 18px;
+	}
+
+	.manage-account__country-actions {
+		width: calc(100% + 36px);
+		margin: 0 -18px;
+		padding: 16px 18px 18px;
+		flex-direction: column-reverse;
+		gap: 10px;
+	}
+
+	.manage-account__country-button {
+		width: 100%;
+		min-height: 42px;
+	}
+
+	.manage-account__name-field {
+		min-height: 58px;
+		border-radius: 13px;
+		padding: 8px 14px;
+	}
+
+	.manage-account__name-field span {
+		font-size: 0.78rem;
+	}
+
+	.manage-account__name-field input {
+		font-size: 1rem;
+	}
+
+	.manage-account__photo-actions {
+		grid-template-columns: 1fr;
+	}
+
+	.manage-account__crop-actions {
+		flex-direction: column;
+	}
+}
+
+@media (min-width: 901px) {
+	.manage-account {
+		padding-top: calc(86px + env(safe-area-inset-top, 0px));
+	}
+
+	.manage-account__privacy-danger-button {
+		width: 38px;
+		min-width: 38px;
+		height: 38px;
+		min-height: 38px;
+		padding: 0;
+		border-radius: 11px;
+		gap: 0;
+	}
+
+	.manage-account__privacy-danger-button svg {
+		width: 18px;
+		height: 18px;
+	}
+
+	.manage-account__privacy-danger-button span {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+		white-space: nowrap;
+	}
+
+	.manage-account__crop-modal {
+		width: min(460px, 100%);
+		padding: 18px;
+		border-radius: 20px;
+	}
+
+	.manage-account__crop-viewport {
+		width: min(100%, 320px);
+	}
+
+	.manage-account__layout {
+		grid-template-columns: 316px minmax(0, 1fr);
+		gap: 62px;
+		margin-top: 16px;
+	}
+
+	.manage-account__profile {
+		margin-bottom: 52px;
+	}
+
+	.manage-account__avatar {
+		width: 96px;
+		height: 96px;
+		font-size: 2.38rem;
+	}
+
+	.manage-account__profile h2 {
+		margin-top: 22px;
+		font-size: 1.18rem;
+	}
+
+	.manage-account__profile p {
+		font-size: 1.02rem;
+	}
+
+	.manage-account__nav button {
+		font-size: 1.14rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.manage-account__section--full,
+	.manage-account__section--lite,
+	.manage-account__section--full .manage-account__hero,
+	.manage-account__section--full .manage-account__cards,
+	.manage-account__section--full .manage-account__card,
+	.manage-account__modal-layer,
+	.manage-account__name-modal,
+	.manage-account__crop-modal {
+		animation: none;
+		will-change: auto;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	.manage-account {
+		--manage-dark-page: #1c1c1e;
+		--manage-dark-panel: #1f1f21;
+		--manage-dark-panel-soft: #2f2f32;
+		--manage-dark-panel-softer: #3a3a3d;
+		--manage-dark-border: rgba(255, 255, 255, 0.1);
+		--manage-dark-border-strong: rgba(255, 255, 255, 0.16);
+		--manage-dark-text: #f5f5f7;
+		--manage-dark-muted: #b4b4bb;
+		--manage-dark-muted-strong: #d8d8de;
+		--manage-dark-blue: #2997ff;
+		--manage-dark-danger: #ff453a;
+		--manage-dark-success: #32d74b;
+		background: #1c1c1e;
+		color: #f5f5f7;
+		color-scheme: dark;
+	}
+
+	body.manage-account-page .dashboard-navbar {
+		background: rgba(29, 29, 31, 0.72);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	}
+
+	.manage-account__profile-name-text {
+		background: none;
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: var(--manage-dark-text);
+	}
+
+	.manage-account__profile p,
+	.manage-account__card-copy span,
+	.manage-account__devices-summary span,
+	.manage-account__device-copy span,
+	.manage-account__privacy-header p,
+	.manage-account__cookie-row p,
+	.manage-account__privacy-note span,
+	.manage-account__privacy-danger-copy p,
+	.manage-account__delete-copy,
+	.manage-account__dob-copy,
+	.manage-account__email-copy,
+	.manage-account__photo-copy,
+	.manage-account__country-copy,
+	.manage-account__hero p,
+	.manage-account__passkey-item-copy span,
+	.manage-account__setup-form p,
+	.manage-account__passkey-main p,
+	.manage-account__passkey-meta,
+	.manage-account__passkey-meta span,
+	.manage-account__delete-feedback-head span,
+	.manage-account__delete-reason-select span,
+	.manage-account__delete-feedback-note span,
+	.manage-account__delete-reason-hint,
+	.manage-account__crop-head p {
+		color: var(--manage-dark-muted);
+	}
+
+	.manage-account__nav button {
+		color: #f5f5f7;
+	}
+
+	.manage-account__nav button.is-active {
+		color: #2997ff;
+	}
+
+	.manage-account__nav-badge,
+	.manage-account__device-count,
+	.manage-account__cookie-badge {
+		background: rgba(41, 151, 255, 0.15);
+		color: #2997ff;
+	}
+
+	.manage-account__card,
+	.manage-account__devices-summary div,
+	.manage-account__device-group,
+	.manage-account__privacy-overview,
+	.manage-account__passkey-panel,
+	.manage-account__delete-feedback {
+		background: rgba(22, 22, 25, 0.92);
+		border-color: rgba(255, 255, 255, 0.1);
+		box-shadow:
+			0 18px 42px rgba(0, 0, 0, 0.28),
+			inset 0 1px 0 rgba(255, 255, 255, 0.04);
+	}
+
+	.manage-account__card:hover {
+		border-color: rgba(41, 151, 255, 0.4);
+		box-shadow: 0 20px 48px rgba(41, 151, 255, 0.1);
+	}
+
+	.manage-account__card--read-only:hover {
+		border-color: rgba(255, 255, 255, 0.08);
+		box-shadow: 0 18px 42px rgba(0, 0, 0, 0.2);
+	}
+
+	.manage-account__hero h2,
+	.manage-account__hero-title-primary,
+	.manage-account__card-copy strong,
+	.manage-account__device-group-head h3,
+	.manage-account__devices-summary strong,
+	.manage-account__device-copy strong,
+	.manage-account__privacy-header h3,
+	.manage-account__cookie-main strong,
+	.manage-account__privacy-note strong,
+	.manage-account__privacy-danger-copy h3,
+	.manage-account__name-modal h2,
+	.manage-account__delete-modal h2,
+	.manage-account__dob-modal h2,
+	.manage-account__email-modal h2,
+	.manage-account__photo-modal h2,
+	.manage-account__country-modal h2,
+	.manage-account__passkey-item-copy strong,
+	.manage-account__setup-modal h2,
+	.manage-account__email-value,
+	.manage-account__info-row strong,
+	.manage-account__passkey-main h3,
+	.manage-account__delete-feedback-head strong {
+		color: #f5f5f7;
+	}
+
+	.manage-account__avatar,
+	.manage-account__privacy-header-icon {
+		background: #1c1c1e;
+		border-color: rgba(255, 255, 255, 0.1);
+		color: #a1a1a6;
+	}
+
+	.manage-account__device-item,
+	.manage-account__cookie-row,
+	.manage-account__privacy-note,
+	.manage-account__passkey-item,
+	.manage-account__passkey-meta {
+		background: #1c1c1e;
+		border-color: rgba(255, 255, 255, 0.08);
+	}
+
+	.manage-account__device-item--expired {
+		background: #151517;
+	}
+
+	.manage-account__cookie-main span {
+		background: #3a3a3c;
+		color: #d1d1d6;
+	}
+
+	.manage-account__privacy-danger {
+		background: #261516;
+		border-color: rgba(255, 59, 48, 0.3);
+	}
+
+	.manage-account__privacy-danger-icon {
+		background: rgba(255, 59, 48, 0.15);
+	}
+
+	.manage-account__privacy-danger-button {
+		background: #f5f5f7;
+		color: #111113;
+	}
+
+	.manage-account__name-modal,
+	.manage-account__delete-modal,
+	.manage-account__dob-modal,
+	.manage-account__email-modal,
+	.manage-account__photo-modal,
+	.manage-account__country-modal,
+	.manage-account__crop-modal,
+	.manage-account__setup-modal,
+	.manage-account__info-modal {
+		background: var(--manage-dark-panel);
+		border: 1px solid var(--manage-dark-border);
+		box-shadow:
+			0 28px 72px rgba(0, 0, 0, 0.48),
+			inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+	}
+
+	.manage-account__name-field,
+	.manage-account__dob-field,
+	.manage-account__delete-phrase,
+	.manage-account__delete-reason-select,
+	.manage-account__country-field,
+	.manage-account__setup-field,
+	.manage-account__delete-feedback-note textarea {
+		background: var(--manage-dark-panel-soft);
+		border-color: var(--manage-dark-border-strong);
+		color: var(--manage-dark-text);
+		box-shadow: none;
+	}
+
+	.manage-account__name-field input,
+	.manage-account__dob-field select,
+	.manage-account__delete-phrase input,
+	.manage-account__country-field input,
+	.manage-account__country-field select,
+	.manage-account__setup-field input,
+	.manage-account__delete-reason-select select,
+	.manage-account__delete-feedback-note textarea {
+		color: var(--manage-dark-text);
+	}
+
+	.manage-account__name-field input::placeholder,
+	.manage-account__setup-field input::placeholder,
+	.manage-account__delete-phrase input::placeholder,
+	.manage-account__delete-feedback-note textarea::placeholder {
+		color: rgba(235, 235, 245, 0.44);
+	}
+
+	.manage-account__dob-field select option,
+	.manage-account__country-field select option,
+	.manage-account__delete-reason-select select option {
+		background: #1f1f23;
+		color: var(--manage-dark-text);
+	}
+
+	.manage-account__name-field span,
+	.manage-account__dob-field span,
+	.manage-account__setup-field span,
+	.manage-account__delete-reason-select span,
+	.manage-account__delete-feedback-note span {
+		color: rgba(235, 235, 245, 0.66);
+	}
+
+	.manage-account__name-field:focus-within,
+	.manage-account__dob-field:focus-within,
+	.manage-account__delete-phrase:focus-within,
+	.manage-account__delete-reason-select:focus-within,
+	.manage-account__country-field:focus-within,
+	.manage-account__setup-field:focus-within,
+	.manage-account__delete-feedback-note textarea:focus {
+		border-color: rgba(41, 151, 255, 0.78);
+		box-shadow:
+			0 0 0 4px rgba(41, 151, 255, 0.18),
+			inset 0 1px 0 rgba(255, 255, 255, 0.05);
+	}
+
+	.manage-account__dob-field::after,
+	.manage-account__delete-reason-select::after {
+		border-color: rgba(235, 235, 245, 0.72);
+	}
+
+	.manage-account__modal-close {
+		width: 44px;
+		height: 44px;
+		background: var(--manage-dark-panel-softer);
+		color: var(--manage-dark-text);
+		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+	}
+
+	.manage-account__modal-close:hover {
+		background: #454548;
+	}
+
+	.manage-account__name-save,
+	.manage-account__device-clear,
+	.manage-account__country-button--continue,
+	.manage-account__crop-button-primary,
+	.manage-account__setup-button,
+	.manage-account__passkey-button {
+		background: #f5f5f7;
+		color: #111113;
+		box-shadow:
+			0 14px 28px rgba(0, 0, 0, 0.26),
+			0 2px 6px rgba(0, 0, 0, 0.2);
+	}
+
+	.manage-account__delete-button--logout {
+		background: #f5f5f7;
+		color: #111113;
+		box-shadow:
+			0 14px 28px rgba(0, 0, 0, 0.26),
+			0 2px 6px rgba(0, 0, 0, 0.2);
+	}
+
+	.manage-account__name-save:hover,
+	.manage-account__device-clear:hover,
+	.manage-account__country-button--continue:hover,
+	.manage-account__crop-button-primary:hover,
+	.manage-account__setup-button:hover,
+	.manage-account__passkey-button:hover {
+		background: #ffffff;
+		box-shadow:
+			0 16px 30px rgba(0, 0, 0, 0.28),
+			0 2px 8px rgba(0, 0, 0, 0.2);
+	}
+
+	.manage-account__delete-button--logout:hover {
+		background: #ffffff;
+	}
+
+	.manage-account__name-save:active,
+	.manage-account__device-clear:active,
+	.manage-account__country-button--continue:active,
+	.manage-account__crop-button-primary:active,
+	.manage-account__setup-button:active,
+	.manage-account__passkey-button:active {
+		background: #e5e5ea;
+	}
+
+	.manage-account__delete-button--logout:active {
+		background: #e5e5ea;
+	}
+
+	.manage-account__delete-button--cancel,
+	.manage-account__country-button--cancel,
+	.manage-account__crop-button-secondary {
+		background: var(--manage-dark-panel-softer);
+		color: var(--manage-dark-text);
+	}
+
+	.manage-account__delete-button--cancel:hover,
+	.manage-account__country-button--cancel:hover,
+	.manage-account__crop-button-secondary:hover {
+		background: #454548;
+	}
+
+	.manage-account__delete-button--danger {
+		background: var(--manage-dark-danger);
+		color: #ffffff;
+		box-shadow:
+			0 14px 28px rgba(255, 69, 58, 0.2),
+			0 2px 8px rgba(255, 69, 58, 0.14);
+	}
+
+	.manage-account__delete-button--danger:hover {
+		background: #ff5e55;
+	}
+
+	.manage-account__delete-button--verified {
+		background: var(--manage-dark-success);
+		color: #07130a;
+		box-shadow:
+			0 14px 28px rgba(50, 215, 75, 0.18),
+			0 2px 8px rgba(50, 215, 75, 0.12);
+	}
+
+	.manage-account__delete-button--verified:hover {
+		background: #5de972;
+	}
+
+	.manage-account__name-modal .manage-account__delete-button,
+	.manage-account__delete-modal .manage-account__delete-button,
+	.manage-account__dob-modal .manage-account__delete-button,
+	.manage-account__email-modal .manage-account__delete-button,
+	.manage-account__photo-modal .manage-account__delete-button,
+	.manage-account__country-modal .manage-account__delete-button,
+	.manage-account__setup-modal .manage-account__delete-button,
+	.manage-account__info-modal .manage-account__delete-button,
+	.manage-account__name-modal .manage-account__name-save,
+	.manage-account__country-modal .manage-account__country-button,
+	.manage-account__photo-modal .manage-account__crop-button-primary,
+	.manage-account__photo-modal .manage-account__crop-button-secondary {
+		box-shadow: none !important;
+	}
+
+	.manage-account__modal-layer {
+		background:
+			linear-gradient(rgba(14, 16, 20, 0.38), rgba(14, 16, 20, 0.38)),
+			rgba(14, 16, 20, 0.38);
+		backdrop-filter: blur(18px) saturate(0.9) brightness(0.8);
+		-webkit-backdrop-filter: blur(18px) saturate(0.9) brightness(0.8);
+	}
+
+	.manage-account__card-icon {
+		color: #2997ff;
+	}
+
+	.manage-account__device-icon {
+		background: rgba(41, 151, 255, 0.15);
+		color: #2997ff;
+	}
+
+	.manage-account__device-item--expired .manage-account__device-icon {
+		background: rgba(255, 255, 255, 0.1);
+		color: #a1a1a6;
+	}
+
+	.manage-account__device-item--expired .manage-account__device-status {
+		color: #ff453a;
+	}
+
+	.manage-account__device-copy .manage-account__device-status {
+		color: #2997ff;
+	}
+
+	.manage-account__devices-empty,
+	.manage-account__photo-drop-copy,
+	.manage-account__passkey-item--empty {
+		background: #1c1c1e;
+		border-color: rgba(255, 255, 255, 0.15);
+		color: #a1a1a6;
+	}
+
+	.manage-account__info-row {
+		background: rgba(255, 255, 255, 0.07);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+	}
+
+	.manage-account__info-row span {
+		color: #a1a1a6;
+	}
+
+	.manage-account__photo-preview-shell {
+		background: rgba(255, 255, 255, 0.06);
+		border-color: rgba(255, 255, 255, 0.1);
+	}
+
+	.manage-account__photo-preview,
+	.manage-account__crop-viewport {
+		background: #101013;
+		border-color: rgba(255, 255, 255, 0.12);
+		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+	}
+
+	.manage-account__crop-head h2,
+	.manage-account__crop-zoom-row,
+	.manage-account__crop-zoom-row span {
+		color: var(--manage-dark-text);
+	}
+
+	.manage-account__crop-close {
+		background: rgba(255, 255, 255, 0.1);
+		color: var(--manage-dark-text);
+	}
+
+	.manage-account__crop-close:hover {
+		background: rgba(255, 255, 255, 0.16);
+	}
+
+	.manage-account__crop-zoom-row input[type="range"] {
+		accent-color: var(--manage-dark-blue);
+	}
+
+	.manage-account__crop-frame {
+		background: transparent;
+		box-shadow:
+			inset 0 0 0 1px rgba(255, 255, 255, 0.82),
+			inset 0 0 0 9999px rgba(0, 0, 0, 0.18);
+	}
+
+	.manage-account__crop-layer {
+		background:
+			linear-gradient(rgba(14, 16, 20, 0.38), rgba(14, 16, 20, 0.38)),
+			rgba(14, 16, 20, 0.38);
+		backdrop-filter: blur(18px) saturate(0.9) brightness(0.8);
+		-webkit-backdrop-filter: blur(18px) saturate(0.9) brightness(0.8);
+	}
+
+	.manage-account__delete-icon,
+	.manage-account__modal-icon,
+	.manage-account__passkey-item-icon {
+		border-radius: 14px;
+		background: transparent;
+		color: var(--manage-dark-blue);
+		box-shadow: none;
+	}
+
+	.manage-account__name-modal > .manage-account__modal-icon,
+	.manage-account__name-modal > .manage-account__delete-icon {
+		background: transparent;
+		box-shadow: none;
+	}
+
+	.manage-account__photo-modal .manage-account__photo-modal-icon {
+		width: 44px;
+		height: 44px;
+		background: transparent;
+		box-shadow: none;
+	}
+
+	.manage-account__photo-modal .manage-account__photo-modal-icon img {
+		width: 38px;
+		height: 38px;
+		filter: brightness(0) saturate(100%) invert(55%) sepia(88%) saturate(2401%) hue-rotate(188deg) brightness(103%) contrast(103%);
+	}
+
+	.manage-account__photo-modal .manage-account__photo-copy {
+		color: #d8d8de;
+	}
+
+	.manage-account__photo-modal .manage-account__photo-drop-copy {
+		background: transparent;
+		border: 0;
+		color: #b7b7c0;
+	}
+
+	.manage-account__photo-modal .manage-account__delete-button--cancel {
+		background: var(--manage-dark-panel-softer);
+		color: #f5f5f7;
+		box-shadow: none;
+	}
+
+	.manage-account__photo-modal .manage-account__delete-button--cancel:hover {
+		background: #454548;
+	}
+
+	.manage-account__photo-modal .manage-account__setup-button {
+		background: #f5f5f7;
+		color: #111113;
+	}
+
+	.manage-account__photo-modal .manage-account__setup-button:hover {
+		background: #ffffff;
+	}
+
+	.manage-account__modal-icon--danger {
+		background: transparent;
+		color: var(--manage-dark-blue);
+		box-shadow: none;
+	}
+
+	.manage-account__delete-verify {
+		background: rgba(255, 255, 255, 0.07);
+		border-color: rgba(255, 255, 255, 0.14);
+		color: var(--manage-dark-text);
+	}
+
+	.manage-account__delete-verify:hover {
+		border-color: rgba(41, 151, 255, 0.48);
+		background: rgba(41, 151, 255, 0.12);
+		box-shadow: 0 12px 28px rgba(41, 151, 255, 0.1);
+	}
+
+	.manage-account__delete-verify.is-active {
+		border-color: rgba(41, 151, 255, 0.7);
+		background: rgba(41, 151, 255, 0.18);
+		color: #8ecbff;
+	}
+
+	.manage-account__delete-status {
+		background: rgba(255, 69, 58, 0.14);
+		color: #ffb4ae;
+	}
+
+	.manage-account__delete-status.is-ready {
+		background: rgba(50, 215, 75, 0.14);
+		color: #a6f2b2;
+	}
+
+	.manage-account__country-current {
+		color: var(--manage-dark-text);
+	}
+
+	.manage-account__country-actions {
+		background: rgba(17, 17, 20, 0.94);
+		border-top-color: rgba(255, 255, 255, 0.1);
+	}
+
+	.manage-account__delete-success-icon {
+		background: rgba(50, 215, 75, 0.14);
+		color: var(--manage-dark-success);
+		box-shadow:
+			0 16px 38px rgba(50, 215, 75, 0.13),
+			inset 0 0 0 1px rgba(50, 215, 75, 0.22);
+	}
+
+	.manage-account__delete-success-icon::before {
+		border-color: rgba(50, 215, 75, 0.24);
+	}
+
+	.manage-account__account-delete-modal {
+		scrollbar-color: rgba(255, 255, 255, 0.28) rgba(255, 255, 255, 0.06);
+	}
+
+	.manage-account__delete-button:disabled,
+	.manage-account__name-save:disabled,
+	.manage-account__country-button:disabled,
+	.manage-account__passkey-button:disabled {
+		background: var(--manage-dark-panel-softer);
+		color: rgba(245, 245, 247, 0.46);
+		box-shadow: none;
+		opacity: 1;
+	}
+
+	body.manage-account-page .manage-account__modal-layer {
+		background:
+			linear-gradient(rgba(14, 16, 20, 0.38), rgba(14, 16, 20, 0.38)),
+			rgba(14, 16, 20, 0.38) !important;
+		backdrop-filter: blur(18px) saturate(0.9) brightness(0.8) !important;
+		-webkit-backdrop-filter: blur(18px) saturate(0.9) brightness(0.8) !important;
+	}
+
+	body.manage-account-page .manage-account__name-modal,
+	body.manage-account-page .manage-account__delete-modal,
+	body.manage-account-page .manage-account__dob-modal,
+	body.manage-account-page .manage-account__email-modal,
+	body.manage-account-page .manage-account__photo-modal,
+	body.manage-account-page .manage-account__country-modal,
+	body.manage-account-page .manage-account__crop-modal,
+	body.manage-account-page .manage-account__setup-modal,
+	body.manage-account-page .manage-account__info-modal,
+	body.iclora-performance-lite.manage-account-page .manage-account__name-modal,
+	body.iclora-performance-lite.manage-account-page .manage-account__crop-modal,
+	body.iclora-android-device.manage-account-page .manage-account__name-modal,
+	body.iclora-android-device.manage-account-page .manage-account__crop-modal {
+		background: #1f1f21 !important;
+		background-image: none !important;
+		border: 1px solid rgba(255, 255, 255, 0.1) !important;
+		opacity: 1 !important;
+		filter: none !important;
+		box-shadow: none !important;
+	}
+
+	body.manage-account-page .manage-account__modal-close {
+		width: 38px !important;
+		height: 38px !important;
+		border: 1px solid rgba(255, 255, 255, 0.12) !important;
+		background: #303033 !important;
+		color: #ffffff !important;
+		box-shadow: none !important;
+	}
+
+	body.manage-account-page .manage-account__modal-close:hover {
+		background: #3a3a3d !important;
+	}
+
+	body.manage-account-page .manage-account__modal-close svg {
+		width: 22px;
+		height: 22px;
+		color: inherit !important;
+		stroke: currentColor !important;
+	}
+
+	body.manage-account-page .manage-account__modal-icon,
+	body.manage-account-page .manage-account__delete-icon,
+	body.manage-account-page .manage-account__modal-icon--danger,
+	body.manage-account-page .manage-account__passkey-item-icon {
+		background: transparent !important;
+		color: #2997ff !important;
+		box-shadow: none !important;
+	}
+
+	body.manage-account-page .manage-account__modal-icon svg,
+	body.manage-account-page .manage-account__delete-icon svg,
+	body.manage-account-page .manage-account__modal-icon--danger svg {
+		color: inherit !important;
+		stroke: currentColor !important;
+	}
+
+	body.manage-account-page .manage-account__delete-icon img,
+	body.manage-account-page .manage-account__modal-icon img,
+	body.manage-account-page .manage-account__setup-button img,
+	body.manage-account-page .manage-account__logout-icon-image {
+		filter: brightness(0) saturate(100%) invert(55%) sepia(88%) saturate(2401%) hue-rotate(188deg) brightness(103%) contrast(103%) !important;
+	}
+
+	body.manage-account-page .manage-account__name-modal h2,
+	body.manage-account-page .manage-account__delete-modal h2,
+	body.manage-account-page .manage-account__info-modal h2,
+	body.manage-account-page .manage-account__setup-modal h2,
+	body.manage-account-page .manage-account__crop-modal h2,
+	body.manage-account-page .manage-account__crop-zoom-row,
+	body.manage-account-page .manage-account__crop-zoom-row span {
+		color: #f5f5f7 !important;
+	}
+
+	body.manage-account-page .manage-account__delete-copy,
+	body.manage-account-page .manage-account__dob-copy,
+	body.manage-account-page .manage-account__email-copy,
+	body.manage-account-page .manage-account__photo-copy,
+	body.manage-account-page .manage-account__photo-drop-copy,
+	body.manage-account-page .manage-account__country-copy,
+	body.manage-account-page .manage-account__crop-head p {
+		background: transparent !important;
+		color: #b4b4bb !important;
+	}
+
+	body.manage-account-page .manage-account__info-row,
+	body.manage-account-page .manage-account__photo-preview-shell,
+	body.manage-account-page .manage-account__name-field,
+	body.manage-account-page .manage-account__dob-field,
+	body.manage-account-page .manage-account__setup-field,
+	body.manage-account-page .manage-account__delete-reason-select,
+	body.manage-account-page .manage-account__delete-feedback,
+	body.manage-account-page .manage-account__delete-feedback-note textarea {
+		background: #303033 !important;
+		background-image: none !important;
+		border-color: rgba(255, 255, 255, 0.14) !important;
+		box-shadow: none !important;
+	}
+
+	body.manage-account-page .manage-account__info-row span,
+	body.manage-account-page .manage-account__name-field span,
+	body.manage-account-page .manage-account__dob-field span,
+	body.manage-account-page .manage-account__setup-field span,
+	body.manage-account-page .manage-account__delete-reason-select span,
+	body.manage-account-page .manage-account__delete-feedback-note span {
+		color: #a8a8b0 !important;
+	}
+
+	body.manage-account-page .manage-account__info-row strong,
+	body.manage-account-page .manage-account__name-field input,
+	body.manage-account-page .manage-account__dob-field select,
+	body.manage-account-page .manage-account__setup-field input,
+	body.manage-account-page .manage-account__delete-reason-select select,
+	body.manage-account-page .manage-account__delete-feedback-note textarea {
+		color: #f5f5f7 !important;
+	}
+
+	body.manage-account-page .manage-account__delete-button--cancel,
+	body.manage-account-page .manage-account__country-button--cancel,
+	body.manage-account-page .manage-account__crop-button-secondary {
+		background: #3a3a3d !important;
+		color: #f5f5f7 !important;
+		box-shadow: none !important;
+	}
+
+	body.manage-account-page .manage-account__delete-button--cancel:hover,
+	body.manage-account-page .manage-account__country-button--cancel:hover,
+	body.manage-account-page .manage-account__crop-button-secondary:hover {
+		background: #46464a !important;
+	}
+
+	body.manage-account-page .manage-account__name-save,
+	body.manage-account-page .manage-account__setup-button,
+	body.manage-account-page .manage-account__country-button--continue,
+	body.manage-account-page .manage-account__crop-button-primary,
+	body.manage-account-page .manage-account__delete-button--logout,
+	body.manage-account-page .manage-account__passkey-button {
+		background: #f5f5f7 !important;
+		color: #111113 !important;
+		box-shadow: none !important;
+	}
+
+	body.manage-account-page .manage-account__name-save:hover,
+	body.manage-account-page .manage-account__setup-button:hover,
+	body.manage-account-page .manage-account__country-button--continue:hover,
+	body.manage-account-page .manage-account__crop-button-primary:hover,
+	body.manage-account-page .manage-account__delete-button--logout:hover,
+	body.manage-account-page .manage-account__passkey-button:hover {
+		background: #ffffff !important;
+	}
+
+	body.manage-account-page .manage-account__delete-button--danger:not(.manage-account__delete-button--logout) {
+		background: #ff453a !important;
+		color: #ffffff !important;
+	}
+
+	body.manage-account-page .manage-account__delete-button:disabled,
+	body.manage-account-page .manage-account__name-save:disabled,
+	body.manage-account-page .manage-account__country-button:disabled,
+	body.manage-account-page .manage-account__passkey-button:disabled {
+		background: #3a3a3d !important;
+		color: rgba(245, 245, 247, 0.46) !important;
+		box-shadow: none !important;
+		opacity: 1 !important;
+	}
+
+	body.manage-account-page .manage-account__card,
+	body.manage-account-page .manage-account__card:hover,
+	body.manage-account-page .manage-account__card--read-only:hover,
+	body.manage-account-page .manage-account__devices-summary div,
+	body.manage-account-page .manage-account__device-group,
+	body.manage-account-page .manage-account__device-item,
+	body.manage-account-page .manage-account__devices-empty,
+	body.manage-account-page .manage-account__privacy-overview,
+	body.manage-account-page .manage-account__privacy-note,
+	body.manage-account-page .manage-account__privacy-danger,
+	body.manage-account-page .manage-account__passkey-panel,
+	body.manage-account-page .manage-account__passkey-item,
+	body.manage-account-page .manage-account__passkey-meta,
+	body.manage-account-page .manage-account__delete-feedback,
+	body.manage-account-page .manage-account__delete-verify,
+	body.manage-account-page .manage-account__delete-verify:hover,
+	body.manage-account-page .manage-account__delete-button,
+	body.manage-account-page .manage-account__delete-button:hover,
+	body.manage-account-page .manage-account__device-clear,
+	body.manage-account-page .manage-account__device-clear:hover,
+	body.manage-account-page .manage-account__privacy-danger-button,
+	body.manage-account-page .manage-account__delete-success-icon,
+	body.manage-account-page .manage-account__photo-preview,
+	body.manage-account-page .manage-account__crop-modal,
+	body.manage-account-page .manage-account__crop-button-secondary,
+	body.manage-account-page .manage-account__crop-button-primary {
+		box-shadow: none !important;
+	}
+
+	body.manage-account-page .manage-account__privacy-danger-button {
+		background: #f5f5f7 !important;
+		color: #111113 !important;
+	}
+
+	body.manage-account-page .manage-account__privacy-danger-button:hover {
+		background: #e8e8ed !important;
+		color: #111113 !important;
+	}
+
+	body.manage-account-page .manage-account__delete-verify {
+		background: #303033 !important;
+		border-color: rgba(255, 255, 255, 0.14) !important;
+		color: #ffffff !important;
+	}
+
+	body.manage-account-page .manage-account__delete-verify:hover {
+		background: #3a3a3d !important;
+		border-color: rgba(255, 255, 255, 0.2) !important;
+	}
+
+	body.manage-account-page .manage-account__delete-verify.is-active {
+		border-color: rgba(41, 151, 255, 0.7) !important;
+		background: rgba(41, 151, 255, 0.18) !important;
+		color: #8ecbff !important;
+	}
+	body.manage-account-page .manage-account__delete-feedback-head strong,
+	body.manage-account-page .manage-account__delete-feedback-head span,
+	body.manage-account-page .manage-account__delete-reason-select span,
+	body.manage-account-page .manage-account__delete-reason-select select,
+	body.manage-account-page .manage-account__delete-reason-select select option,
+	body.manage-account-page .manage-account__delete-reason-hint,
+	body.manage-account-page .manage-account__delete-feedback-note span,
+	body.manage-account-page .manage-account__delete-feedback-note textarea {
+		color: #ffffff !important;
+	}
+
+	body.manage-account-page .manage-account__delete-feedback-note textarea::placeholder {
+		color: rgba(255, 255, 255, 0.5) !important;
+	}
+
+	body.manage-account-page .manage-account__delete-button--account,
+	body.manage-account-page .manage-account__delete-button--danger.manage-account__delete-button--account,
+	body.manage-account-page .manage-account__delete-button--account.manage-account__delete-button--verified {
+		background: #ffffff !important;
+		color: #111113 !important;
+		box-shadow: none !important;
+	}
+
+	body.manage-account-page .manage-account__delete-button--account:hover,
+	body.manage-account-page .manage-account__delete-button--danger.manage-account__delete-button--account:hover,
+	body.manage-account-page .manage-account__delete-button--account.manage-account__delete-button--verified:hover {
+		background: #ffffff !important;
+		color: #111113 !important;
+	}
+
+	body.manage-account-page .manage-account__delete-button--account:disabled,
+	body.manage-account-page .manage-account__delete-button--danger.manage-account__delete-button--account:disabled,
+	body.manage-account-page .manage-account__delete-button--account.manage-account__delete-button--verified:disabled {
+		opacity: 0.6 !important;
+		cursor: default !important;
+	}
+
+	body.manage-account-page .manage-account__delete-button--account .manage-account__button-spinner,
+	body.manage-account-page .manage-account__delete-button--danger.manage-account__delete-button--account .manage-account__button-spinner,
+	body.manage-account-page .manage-account__delete-button--account.manage-account__delete-button--verified .manage-account__button-spinner {
+		border-color: rgba(17, 17, 19, 0.2) !important;
+		border-top-color: #111113 !important;
+	}
+}

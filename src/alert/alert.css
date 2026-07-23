@@ -1,0 +1,189 @@
+.iclora-alert-root {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50000;
+  display: flex;
+  justify-content: center;
+  padding: 0 12px calc(14px + env(safe-area-inset-bottom));
+  pointer-events: none;
+}
+
+.iclora-alert-card {
+  width: min(560px, 100%);
+  pointer-events: auto;
+  border-radius: 18px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(210, 210, 215, 0.55);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  transform: translate3d(0, 54px, 0) scale(0.975);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.iclora-alert-card--idle {
+  transform: translate3d(0, 0, 0) scale(1);
+  opacity: 1;
+}
+
+.iclora-alert-card--enter {
+  animation: icloraAlertSlideUp 520ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.iclora-alert-card--exit {
+  animation: icloraAlertSlideDown 520ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.iclora-alert-card__inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+}
+
+.iclora-alert-card__title {
+  margin: 0 0 2px;
+  font-size: 14px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #111;
+}
+
+.iclora-alert-card__message {
+  margin: 0;
+  color: #333;
+  font-size: 13px;
+  line-height: 1.38;
+}
+
+.iclora-alert-card__close {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.6);
+  color: rgba(17, 17, 17, 0.8);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 30px;
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease, color 180ms ease;
+}
+
+.iclora-alert-card__close:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.16);
+  color: rgba(17, 17, 17, 0.95);
+}
+
+.iclora-alert-card__close:active {
+  transform: scale(0.94);
+}
+
+.iclora-alert-card__close svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.iclora-alert-card--success .iclora-alert-card__title {
+  color: #0f7a3e;
+}
+
+.iclora-alert-card--error .iclora-alert-card__title {
+  color: #b42318;
+}
+
+.iclora-alert-card--info .iclora-alert-card__title {
+  color: #1259c3;
+}
+
+@media (max-width: 560px) {
+  .iclora-alert-root {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .iclora-alert-card {
+    border-radius: 16px;
+  }
+
+  .iclora-alert-card__inner {
+    padding: 13px 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iclora-alert-card {
+    animation-duration: 1ms !important;
+  }
+}
+
+@keyframes icloraAlertSlideUp {
+  from {
+    transform: translate3d(0, 54px, 0) scale(0.975);
+    opacity: 0;
+  }
+  to {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes icloraAlertSlideDown {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translate3d(0, 54px, 0) scale(0.975);
+    opacity: 0;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .iclora-alert-card {
+    background-color: rgba(28, 28, 30, 0.7);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .iclora-alert-card__title {
+    color: #ffffff;
+  }
+
+  .iclora-alert-card__message {
+    color: #f5f5f7;
+  }
+
+  .iclora-alert-card__close {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.08);
+    color: #a1a1a6;
+  }
+
+  .iclora-alert-card__close:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.18);
+    color: #f5f5f7;
+  }
+
+  .iclora-alert-card--success .iclora-alert-card__title {
+    color: #32d74b;
+  }
+
+  .iclora-alert-card--error .iclora-alert-card__title {
+    color: #ff453a;
+  }
+
+  .iclora-alert-card--info .iclora-alert-card__title {
+    color: #0a84ff;
+  }
+}

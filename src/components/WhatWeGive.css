@@ -1,0 +1,139 @@
+.iclora-what-we-give {
+  width: 100%;
+  padding: clamp(18px, 4vh, 44px) 24px clamp(56px, 7vh, 88px);
+  background: #fff;
+  content-visibility: auto;
+  contain-intrinsic-size: 900px;
+}
+
+.iclora-what-we-give__inner {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 3vw, 34px);
+}
+
+.iclora-feature-card {
+  background: #fff;
+  border-radius: 28px;
+  padding: clamp(28px, 3vw, 38px);
+  box-shadow: none;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  contain: layout paint;
+
+  opacity: 0;
+  transform: translate3d(0, 36px, 0) scale(1.032);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform, opacity;
+  transition:
+    opacity 720ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 720ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.iclora-feature-card.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  will-change: auto;
+}
+
+.iclora-feature-card:nth-child(2) {
+  transition-delay: 80ms;
+}
+
+.iclora-feature-card__media {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: clamp(8px, 1.5vh, 16px) 0 clamp(18px, 2.4vh, 24px);
+}
+
+.iclora-feature-card__media img {
+  width: min(360px, 100%);
+  height: auto;
+  display: block;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+  filter: none;
+}
+
+.iclora-feature-card__media--first img {
+  margin-bottom: 8px;
+}
+
+.iclora-feature-card__title {
+  margin: 0;
+  color: #1d1d1f;
+  font-size: clamp(2.1rem, 2.5vw, 2.75rem);
+  line-height: 1.08;
+  font-weight: 780;
+  letter-spacing: -0.01em;
+}
+
+.iclora-feature-card__body {
+  margin: 18px 0 0;
+  color: #6e6e73;
+  font-size: clamp(1.05rem, 1.25vw, 1.2rem);
+  line-height: 1.55;
+  max-width: 54ch;
+}
+
+.iclora-feature-card__highlight {
+  display: block;
+  margin-top: 14px;
+  color: #b8860b;
+  font-weight: 750;
+}
+
+@media (max-width: 900px) {
+  .iclora-what-we-give {
+    padding-top: 18px;
+  }
+
+  .iclora-what-we-give__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .iclora-feature-card__media img {
+    width: min(320px, 100%);
+  }
+
+  .iclora-feature-card:nth-child(2) {
+    transition-delay: 120ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iclora-feature-card {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .iclora-what-we-give {
+    background:
+      linear-gradient(180deg, rgba(28, 28, 30, 0) 0%, rgba(28, 28, 30, 0.94) 10%, #1c1c1e 100%);
+  }
+
+  .iclora-feature-card {
+    background: linear-gradient(180deg, rgba(34, 34, 36, 0.98), rgba(28, 28, 30, 0.98));
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .iclora-feature-card__title {
+    color: #f5f5f7;
+  }
+
+  .iclora-feature-card__body {
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .iclora-feature-card__highlight {
+    color: #7ec3ff;
+  }
+}

@@ -1,0 +1,1366 @@
+.iclora-page {
+  --page-accent: #0071e3;
+  --page-accent-soft: rgba(0, 113, 227, 0.1);
+  --page-accent-line: rgba(0, 113, 227, 0.24);
+  width: 100%;
+  min-height: calc(var(--iclora-app-height) - 64px);
+  color: #1d1d1f;
+  background: #fff;
+  overflow-x: hidden;
+}
+
+.iclora-page--violet {
+  --page-accent: #6366f1;
+  --page-accent-soft: rgba(99, 102, 241, 0.1);
+  --page-accent-line: rgba(99, 102, 241, 0.24);
+}
+
+.iclora-page--green {
+  --page-accent: #19a463;
+  --page-accent-soft: rgba(25, 164, 99, 0.1);
+  --page-accent-line: rgba(25, 164, 99, 0.24);
+}
+
+.iclora-page--teal {
+  --page-accent: #079e8a;
+  --page-accent-soft: rgba(7, 158, 138, 0.1);
+  --page-accent-line: rgba(7, 158, 138, 0.24);
+}
+
+.iclora-page--amber {
+  --page-accent: #b8860b;
+  --page-accent-soft: rgba(184, 134, 11, 0.12);
+  --page-accent-line: rgba(184, 134, 11, 0.26);
+}
+
+.iclora-page-hero {
+  width: min(1080px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: clamp(34px, 6vh, 72px) 0 clamp(28px, 5vh, 54px);
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(240px, 0.7fr);
+  align-items: center;
+  gap: clamp(26px, 5vw, 64px);
+}
+
+.iclora-page--no-media .iclora-page-hero {
+  width: min(980px, calc(100% - 48px));
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+
+.iclora-page-hero__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.iclora-page-eyebrow {
+  margin: 0 0 12px;
+  color: var(--page-accent);
+  font-size: 0.78rem;
+  font-weight: 760;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.iclora-page-hero h1 {
+  max-width: 11ch;
+  margin: 0;
+  color: #1d1d1f;
+  font-size: 4.35rem;
+  font-weight: 790;
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+
+.iclora-page-intro {
+  max-width: 58ch;
+  margin: 18px 0 0;
+  color: #6e6e73;
+  font-size: 1.08rem;
+  font-weight: 520;
+  line-height: 1.58;
+}
+
+.iclora-page-cta {
+  margin-top: 24px;
+  min-height: 42px;
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 999px;
+  color: #000;
+  background: #FFD700;
+  font-size: 0.96rem;
+  font-weight: 720;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: background-color 140ms ease, transform 140ms ease;
+}
+
+.iclora-page-cta svg {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+}
+
+.iclora-page-cta:hover {
+  background: #FFC700;
+  transform: scale(1.05);
+}
+
+.iclora-page-hero__media {
+  justify-self: center;
+  width: min(320px, 100%);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+}
+
+.iclora-page-hero__media img {
+  width: 100%;
+  height: auto;
+  display: block;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+}
+
+.iclora-page-body {
+  width: min(1080px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 0 0 clamp(56px, 8vh, 90px);
+}
+
+.iclora-page-section {
+  padding: clamp(28px, 5vh, 56px) 0;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.iclora-page-section:first-child {
+  border-top: 0;
+}
+
+.iclora-page-section__head {
+  max-width: 690px;
+  margin-bottom: 22px;
+}
+
+.iclora-page-section h2 {
+  margin: 0;
+  color: #1d1d1f;
+  font-size: 2rem;
+  font-weight: 780;
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+
+.iclora-page-section__head p,
+.iclora-page-copy {
+  margin: 12px 0 0;
+  color: #6e6e73;
+  font-size: 1.04rem;
+  line-height: 1.62;
+}
+
+.iclora-page-inline-link {
+  color: #0b57d0;
+  text-decoration: none;
+  font-weight: 680;
+}
+
+.iclora-page-inline-link:hover {
+  color: #1a73e8;
+  text-decoration: underline;
+}
+
+.iclora-page-inline-link--ext {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.iclora-page-inline-link--ext svg {
+  width: 15px;
+  height: 15px;
+  opacity: 0.92;
+  flex: 0 0 15px;
+}
+
+.iclora-developer-links li {
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: start;
+}
+
+.iclora-developer-links li::before {
+  display: none;
+}
+
+.iclora-developer-links__icon {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  color: var(--page-accent);
+  display: inline-grid;
+  place-items: center;
+}
+
+.iclora-developer-links__icon svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.iclora-page-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.iclora-page-grid--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.iclora-page-card {
+  min-height: 100%;
+  padding: 20px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 8px;
+  background: #fff;
+  contain: layout paint style;
+}
+
+.iclora-page-card__icon {
+  width: 36px;
+  height: 36px;
+  margin-bottom: 18px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  color: var(--page-accent);
+  background: var(--page-accent-soft);
+}
+
+.iclora-page-card__icon::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: currentColor;
+  box-shadow: 0 0 0 7px var(--page-accent-soft);
+}
+
+.iclora-page-card h3 {
+  margin: 0;
+  color: #1d1d1f;
+  font-size: 1.05rem;
+  font-weight: 760;
+  line-height: 1.22;
+}
+
+.iclora-page-card p {
+  margin: 9px 0 0;
+  color: #6e6e73;
+  font-size: 0.96rem;
+  line-height: 1.55;
+}
+
+.iclora-page-list {
+  display: grid;
+  gap: 10px;
+  list-style: none;
+}
+
+.iclora-page-list li {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  color: #424245;
+  font-size: 0.98rem;
+  line-height: 1.52;
+}
+
+.iclora-page-list li::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  margin-top: 8px;
+  border-radius: 999px;
+  background: var(--page-accent);
+  box-shadow: 0 0 0 6px var(--page-accent-soft);
+}
+
+.iclora-page-faq {
+  display: grid;
+  gap: 14px;
+}
+
+.iclora-page-faq details {
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 14px;
+  background: #fff;
+  contain: layout paint style;
+}
+
+.iclora-page-faq summary {
+  min-height: 62px;
+  padding: 18px 20px;
+  color: #1d1d1f;
+  font-size: 1rem;
+  font-weight: 740;
+  line-height: 1.28;
+  cursor: pointer;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+}
+
+.iclora-page-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.iclora-page-faq__caret {
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 180ms ease;
+}
+
+.iclora-page-faq details[open] .iclora-page-faq__caret {
+  transform: rotate(135deg);
+}
+
+.iclora-page-faq__content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 220ms ease;
+}
+
+.iclora-page-faq details[open] .iclora-page-faq__content {
+  grid-template-rows: 1fr;
+}
+
+.iclora-page-faq__content p {
+  overflow: hidden;
+  margin: 0;
+  padding: 0 20px 20px;
+  color: #6e6e73;
+  font-size: 0.96rem;
+  line-height: 1.58;
+}
+
+.iclora-page-band {
+  padding: 22px;
+  border: 1px solid var(--page-accent-line);
+  border-radius: 8px;
+  background: var(--page-accent-soft);
+}
+
+.iclora-page-band h2 {
+  font-size: 1.78rem;
+}
+
+.iclora-features-page .iclora-page-hero {
+  margin-top: calc(-64px - env(safe-area-inset-top, 0px));
+  padding-top: calc(64px + env(safe-area-inset-top, 0px));
+  padding-bottom: clamp(20px, 3.4vh, 38px);
+  animation: iclora-page-focus 820ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.iclora-about-page .iclora-page-hero {
+  margin-top: calc(-64px - env(safe-area-inset-top, 0px));
+  padding-top: calc(64px + env(safe-area-inset-top, 0px));
+  padding-bottom: clamp(20px, 3.4vh, 38px);
+}
+
+.iclora-features-page .iclora-page-hero__copy,
+.iclora-features-page .iclora-page-hero__media,
+.iclora-features-page .iclora-page-section {
+  opacity: 0;
+  transform: translate3d(0, 26px, 0) scale(1.025);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform, opacity;
+  animation: iclora-rise-in 780ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.iclora-features-page .iclora-page-hero__media {
+  animation-delay: 70ms;
+}
+
+.iclora-features-page .iclora-page-section {
+  animation-delay: 160ms;
+}
+
+.iclora-features-page .iclora-page-section:nth-child(2) {
+  animation-delay: 240ms;
+}
+
+.iclora-faq-page .iclora-page-hero__copy,
+.iclora-faq-page .iclora-page-section__head,
+.iclora-faq-page .iclora-page-faq__item {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  animation: iclora-faq-in 560ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.iclora-faq-page .iclora-page-hero__copy {
+  animation-delay: 40ms;
+}
+
+.iclora-faq-page .iclora-page-section__head {
+  animation-delay: 130ms;
+}
+
+.iclora-faq-page .iclora-page-faq__item:nth-child(1) {
+  animation-delay: 180ms;
+}
+
+.iclora-faq-page .iclora-page-faq__item:nth-child(2) {
+  animation-delay: 230ms;
+}
+
+.iclora-faq-page .iclora-page-faq__item:nth-child(3) {
+  animation-delay: 280ms;
+}
+
+.iclora-faq-page .iclora-page-faq__item:nth-child(4) {
+  animation-delay: 330ms;
+}
+
+.iclora-faq-page .iclora-page-faq__item:nth-child(5) {
+  animation-delay: 380ms;
+}
+
+.iclora-faq-page .iclora-page-faq__item:nth-child(6) {
+  animation-delay: 430ms;
+}
+
+.iclora-about-page .iclora-page-hero__copy,
+.iclora-about-page .iclora-page-hero__media,
+.iclora-about-page .iclora-page-section {
+  opacity: 0;
+  transform: translate3d(0, 26px, 0) scale(1.025);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform, opacity;
+  animation: iclora-rise-in 780ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.iclora-about-page .iclora-page-hero__copy {
+  animation-delay: 40ms;
+}
+
+.iclora-about-page .iclora-page-hero__media {
+  animation-delay: 70ms;
+}
+
+.iclora-about-page .iclora-page-section {
+  animation-delay: 160ms;
+}
+
+.iclora-about-page .iclora-page-section:nth-child(2) {
+  animation-delay: 240ms;
+}
+
+.iclora-support-page .iclora-page-hero__copy,
+.iclora-support-page .iclora-page-section {
+  opacity: 0;
+  transform: translate3d(0, 26px, 0) scale(1.025);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform, opacity;
+  animation: iclora-rise-in 780ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.iclora-support-page .iclora-page-hero__copy {
+  animation-delay: 40ms;
+}
+
+.iclora-support-page .iclora-page-section {
+  animation-delay: 160ms;
+}
+
+.iclora-support-page .iclora-page-section:nth-child(2) {
+  animation-delay: 240ms;
+}
+
+.iclora-support-page .iclora-page-section:nth-child(3) {
+  animation-delay: 320ms;
+}
+
+.iclora-policy-page .iclora-page-hero__copy,
+.iclora-policy-page .iclora-page-section {
+  opacity: 0;
+  transform: translate3d(0, 26px, 0) scale(1.025);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform, opacity;
+  animation: iclora-rise-in 780ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.iclora-policy-page .iclora-page-hero__copy {
+  animation-delay: 40ms;
+}
+
+.iclora-policy-page .iclora-page-section {
+  animation-delay: 160ms;
+}
+
+.iclora-policy-page .iclora-page-section:nth-child(2) {
+  animation-delay: 240ms;
+}
+
+.iclora-policy-page .iclora-page-section:nth-child(3) {
+  animation-delay: 320ms;
+}
+
+.iclora-developer-page .iclora-page-hero__copy,
+.iclora-developer-page .iclora-page-section {
+  opacity: 0;
+  transform: translate3d(0, 26px, 0) scale(1.025);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform, opacity;
+  animation: iclora-rise-in 780ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.iclora-developer-page .iclora-page-hero__copy {
+  animation-delay: 40ms;
+}
+
+.iclora-developer-page .iclora-page-section {
+  animation-delay: 160ms;
+}
+
+.iclora-developer-page .iclora-page-section:nth-child(2) {
+  animation-delay: 240ms;
+}
+
+.iclora-developer-page .iclora-page-section:nth-child(3) {
+  animation-delay: 320ms;
+}
+
+.iclora-support-mail {
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 14px;
+  background: #fff;
+  padding: 22px;
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+  contain: layout paint style;
+}
+
+.iclora-support-mail__icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  background: #f7f8fb;
+  display: grid;
+  place-items: center;
+}
+
+.iclora-support-mail__icon img {
+  width: 34px;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.iclora-support-mail__copy h2 {
+  margin: 0;
+  color: #1d1d1f;
+  font-size: 1.52rem;
+  font-weight: 780;
+  line-height: 1.1;
+}
+
+.iclora-support-mail__copy p {
+  margin: 8px 0 0;
+  max-width: 58ch;
+  color: #6e6e73;
+  font-size: 1rem;
+  line-height: 1.56;
+}
+
+.iclora-support-mail__copy a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #0b57d0;
+  font-size: 1.04rem;
+  font-weight: 720;
+  line-height: 1.2;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.iclora-support-mail__copy a:hover {
+  color: #1a73e8;
+  text-decoration: underline;
+}
+
+.iclora-application-page .iclora-page-hero {
+  margin-top: calc(-64px - env(safe-area-inset-top, 0px));
+  padding-top: calc(86px + env(safe-area-inset-top, 0px));
+  padding-bottom: clamp(14px, 2.4vh, 26px);
+}
+
+.iclora-application-page.iclora-page--no-media .iclora-page-hero {
+  width: min(900px, calc(100% - 56px));
+}
+
+.iclora-application-page .iclora-page-hero h1 {
+  font-size: 3.42rem;
+}
+
+.iclora-application-page .iclora-page-intro {
+  max-width: 52ch;
+  font-size: 0.98rem;
+}
+
+.iclora-application-page .iclora-page-hero__copy,
+.iclora-application-page .iclora-page-hero__media,
+.iclora-application-page .iclora-page-section {
+  opacity: 0;
+  transform: translate3d(0, 26px, 0) scale(1.025);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform, opacity;
+  animation: iclora-rise-in 780ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.iclora-application-page .iclora-page-hero__copy {
+  animation-delay: 40ms;
+}
+
+.iclora-application-page .iclora-page-hero__media {
+  animation-delay: 70ms;
+}
+
+.iclora-application-page .iclora-page-hero__media img {
+  border-radius: 24px;
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.12);
+}
+
+.iclora-application-page .iclora-page-section {
+  animation-delay: 160ms;
+}
+
+.iclora-application-page .iclora-page-section:nth-child(2) {
+  animation-delay: 240ms;
+}
+
+.iclora-application-page .iclora-page-section:nth-child(3) {
+  animation-delay: 320ms;
+}
+
+.iclora-app-download-panel {
+  padding: 22px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff, #f7fbff);
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+  contain: layout paint style;
+}
+
+.iclora-app-download-panel__icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 0;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.iclora-app-download-panel__icon img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  display: block;
+}
+
+.iclora-app-download-panel__copy h2 {
+  margin: 0;
+  color: #1d1d1f;
+  font-size: 1.48rem;
+  font-weight: 790;
+  line-height: 1.08;
+}
+
+.iclora-app-download-panel__copy .iclora-page-eyebrow {
+  margin-bottom: 9px;
+}
+
+.iclora-app-download-panel__copy p:not(.iclora-page-eyebrow) {
+  max-width: 62ch;
+  margin: 9px 0 0;
+  color: #6e6e73;
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.iclora-app-download-panel__button {
+  min-height: 44px;
+  padding: 11px 17px;
+  border-radius: 999px;
+  color: #000;
+  background: #FFD700;
+  text-decoration: none;
+  font-size: 0.94rem;
+  font-weight: 760;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  white-space: nowrap;
+  transition: background-color 140ms ease, transform 140ms ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.iclora-app-download-panel__button svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+}
+
+.iclora-app-download-panel__button:hover {
+  background: #FFC700;
+  transform: scale(1.04);
+}
+
+.iclora-app-feature-card .iclora-page-card__icon::before {
+  display: none;
+}
+
+.iclora-app-feature-card__icon svg {
+  width: 19px;
+  height: 19px;
+  stroke-width: 2.3;
+}
+
+.iclora-app-web-band {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.iclora-app-web-band h2 {
+  margin: 0;
+}
+
+.iclora-app-web-band .iclora-page-inline-link {
+  flex: 0 0 auto;
+}
+
+@keyframes iclora-faq-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes iclora-page-focus {
+  0% {
+    opacity: 0.001;
+    transform: translate3d(0, 18px, 0) scale(1.04);
+  }
+
+  60% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes iclora-rise-in {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 26px, 0) scale(1.025);
+  }
+
+  55% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@media (max-width: 900px) {
+  .iclora-page {
+    min-height: calc(var(--iclora-app-height) - 56px);
+  }
+
+  .iclora-page-hero,
+  .iclora-page-body {
+    width: min(100% - 32px, 720px);
+  }
+
+  .iclora-page--no-media .iclora-page-hero {
+    width: min(100% - 32px, 720px);
+  }
+
+  .iclora-page-hero {
+    padding: 28px 0 22px;
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .iclora-page-hero__copy {
+    align-items: center;
+    text-align: center;
+  }
+
+  .iclora-page-hero h1 {
+    max-width: 12ch;
+    font-size: 3rem;
+  }
+
+  .iclora-page-intro {
+    max-width: 42ch;
+    font-size: 1rem;
+  }
+
+  .iclora-page-hero__media {
+    width: min(220px, 58vw);
+    order: -1;
+  }
+
+  .iclora-features-page .iclora-page-hero {
+    padding-top: calc(56px + env(safe-area-inset-top, 0px));
+    padding-bottom: 12px;
+    margin-top: calc(-56px - env(safe-area-inset-top, 0px));
+  }
+
+  .iclora-features-page .iclora-page-hero,
+  .iclora-features-page .iclora-page-body,
+  .iclora-support-page .iclora-page-hero,
+  .iclora-support-page .iclora-page-body {
+    width: min(100% - 44px, 680px);
+  }
+
+  .iclora-features-page .iclora-page-hero h1,
+  .iclora-support-page .iclora-page-hero h1 {
+    font-size: 2.58rem;
+  }
+
+  .iclora-features-page .iclora-page-intro,
+  .iclora-support-page .iclora-page-intro {
+    max-width: 36ch;
+    margin-top: 14px;
+    font-size: 0.94rem;
+    line-height: 1.52;
+  }
+
+  .iclora-features-page .iclora-page-hero__media {
+    width: min(176px, 46vw);
+  }
+
+  .iclora-about-page .iclora-page-hero {
+    padding-top: calc(56px + env(safe-area-inset-top, 0px));
+    padding-bottom: 12px;
+    margin-top: calc(-56px - env(safe-area-inset-top, 0px));
+    gap: 8px;
+  }
+
+  .iclora-about-page .iclora-page-hero,
+  .iclora-about-page .iclora-page-body {
+    width: min(100% - 44px, 680px);
+  }
+
+  .iclora-about-page .iclora-page-hero h1 {
+    font-size: 2.58rem;
+  }
+
+  .iclora-about-page .iclora-page-intro {
+    max-width: 36ch;
+    margin-top: 14px;
+    font-size: 0.94rem;
+    line-height: 1.52;
+  }
+
+  .iclora-application-page .iclora-page-hero {
+    padding-top: calc(78px + env(safe-area-inset-top, 0px));
+    padding-bottom: 12px;
+    margin-top: calc(-56px - env(safe-area-inset-top, 0px));
+    gap: 12px;
+  }
+
+  .iclora-application-page.iclora-page--no-media .iclora-page-hero {
+    width: min(100% - 32px, 680px);
+  }
+
+  .iclora-application-page .iclora-page-hero h1 {
+    font-size: 2.54rem;
+  }
+
+  .iclora-application-page .iclora-page-intro {
+    max-width: 38ch;
+    margin-top: 14px;
+    font-size: 0.94rem;
+    line-height: 1.52;
+  }
+
+  .iclora-support-page .iclora-page-section {
+    padding-top: 18px;
+  }
+
+  .iclora-policy-page .iclora-page-section {
+    padding-top: 20px;
+  }
+
+  .iclora-developer-page .iclora-page-section {
+    padding-top: 20px;
+  }
+
+  .iclora-application-page .iclora-page-section {
+    padding-top: 20px;
+  }
+
+  .iclora-about-page .iclora-page-hero__media {
+    width: min(150px, 42vw);
+    margin-bottom: -2px;
+  }
+
+  .iclora-application-page .iclora-page-hero__media {
+    width: min(190px, 50vw);
+    margin-bottom: -2px;
+  }
+
+  .iclora-page-grid,
+  .iclora-page-grid--two {
+    grid-template-columns: 1fr;
+  }
+
+  .iclora-page-card {
+    padding: 18px;
+  }
+
+  .iclora-features-page .iclora-page-card,
+  .iclora-support-page .iclora-page-card {
+    padding: 16px;
+  }
+
+  .iclora-about-page .iclora-page-card {
+    padding: 16px;
+  }
+
+  .iclora-app-download-panel {
+    grid-template-columns: 58px minmax(0, 1fr);
+    align-items: start;
+    padding: 16px;
+    gap: 14px;
+  }
+
+  .iclora-app-download-panel__icon {
+    width: 58px;
+    height: 58px;
+  }
+
+  .iclora-app-download-panel__icon img {
+    width: 58px;
+    height: 58px;
+  }
+
+  .iclora-app-download-panel__button {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-height: 42px;
+  }
+
+  .iclora-app-web-band {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 440px) {
+  .iclora-page-hero,
+  .iclora-page-body {
+    width: min(100% - 24px, 420px);
+  }
+
+  .iclora-about-page .iclora-page-hero,
+  .iclora-about-page .iclora-page-body {
+    width: min(100% - 36px, 420px);
+  }
+
+  .iclora-features-page .iclora-page-hero,
+  .iclora-features-page .iclora-page-body,
+  .iclora-support-page .iclora-page-hero,
+  .iclora-support-page .iclora-page-body {
+    width: min(100% - 36px, 420px);
+  }
+
+  .iclora-page-section {
+    padding: 28px 0;
+  }
+
+  .iclora-features-page .iclora-page-section {
+    padding-top: 18px;
+  }
+
+  .iclora-about-page .iclora-page-section {
+    padding-top: 18px;
+  }
+
+  .iclora-support-page .iclora-page-section {
+    padding-top: 18px;
+  }
+
+  .iclora-page-hero h1 {
+    font-size: 2.48rem;
+  }
+
+  .iclora-about-page .iclora-page-hero h1 {
+    font-size: 2.18rem;
+  }
+
+  .iclora-features-page .iclora-page-hero h1,
+  .iclora-support-page .iclora-page-hero h1 {
+    font-size: 2.18rem;
+  }
+
+  .iclora-about-page .iclora-page-intro {
+    font-size: 0.9rem;
+  }
+
+  .iclora-features-page .iclora-page-intro,
+  .iclora-support-page .iclora-page-intro {
+    font-size: 0.9rem;
+  }
+
+  .iclora-about-page .iclora-page-section h2 {
+    font-size: 1.42rem;
+  }
+
+  .iclora-features-page .iclora-page-section h2,
+  .iclora-support-page .iclora-page-section h2 {
+    font-size: 1.42rem;
+  }
+
+  .iclora-about-page .iclora-page-card h3 {
+    font-size: 0.98rem;
+  }
+
+  .iclora-features-page .iclora-page-card h3,
+  .iclora-support-page .iclora-page-card h3 {
+    font-size: 0.98rem;
+  }
+
+  .iclora-about-page .iclora-page-card p,
+  .iclora-about-page .iclora-page-list li,
+  .iclora-about-page .iclora-page-section__head p {
+    font-size: 0.9rem;
+  }
+
+  .iclora-features-page .iclora-page-card p,
+  .iclora-features-page .iclora-page-copy,
+  .iclora-features-page .iclora-page-section__head p,
+  .iclora-support-page .iclora-page-card p,
+  .iclora-support-page .iclora-page-section__head p,
+  .iclora-support-mail__copy p {
+    font-size: 0.9rem;
+  }
+
+  .iclora-support-mail {
+    border-radius: 12px;
+  }
+
+  .iclora-application-page .iclora-page-hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .iclora-application-page .iclora-page-intro {
+    font-size: 0.9rem;
+  }
+
+  .iclora-page-section h2 {
+    font-size: 1.62rem;
+  }
+
+  .iclora-page-band h2 {
+    font-size: 1.42rem;
+  }
+
+  .iclora-page-faq summary {
+    padding: 16px;
+    min-height: 56px;
+  }
+
+  .iclora-page-faq__content p {
+    padding: 0 16px 16px;
+  }
+
+  .iclora-support-mail {
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 12px;
+    padding: 16px;
+    align-items: start;
+  }
+
+  .iclora-support-mail__icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+  }
+
+  .iclora-support-mail__icon img {
+    width: 28px;
+    height: auto;
+  }
+
+  .iclora-support-mail__copy h2 {
+    font-size: 1.32rem;
+  }
+
+  .iclora-support-mail__copy p {
+    font-size: 0.95rem;
+  }
+
+  .iclora-support-mail__copy a {
+    font-size: 0.98rem;
+  }
+
+  .iclora-app-download-panel {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+
+  .iclora-app-download-panel__copy h2 {
+    font-size: 1.24rem;
+  }
+
+  .iclora-app-download-panel__copy p:not(.iclora-page-eyebrow) {
+    font-size: 0.9rem;
+  }
+}
+
+@media (pointer: coarse) {
+  .iclora-page-cta:hover {
+    background: #FFD700;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    transform: none;
+  }
+
+  .iclora-page-cta:active {
+    background: #FFBF00;
+    transform: scale(0.97);
+  }
+
+  .iclora-app-download-panel__button:hover {
+    background: #FFD700;
+    transform: none;
+  }
+
+  .iclora-app-download-panel__button:active {
+    background: #FFBF00;
+    transform: scale(0.97);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iclora-features-page .iclora-page-hero,
+  .iclora-features-page .iclora-page-hero__copy,
+  .iclora-features-page .iclora-page-hero__media,
+  .iclora-features-page .iclora-page-section {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    will-change: auto !important;
+  }
+
+  .iclora-faq-page .iclora-page-hero__copy,
+  .iclora-faq-page .iclora-page-section__head,
+  .iclora-faq-page .iclora-page-faq__item {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .iclora-about-page .iclora-page-hero__copy,
+  .iclora-about-page .iclora-page-hero__media,
+  .iclora-about-page .iclora-page-section {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    will-change: auto !important;
+  }
+
+  .iclora-support-page .iclora-page-hero__copy,
+  .iclora-support-page .iclora-page-section {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    will-change: auto !important;
+  }
+
+  .iclora-policy-page .iclora-page-hero__copy,
+  .iclora-policy-page .iclora-page-section {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    will-change: auto !important;
+  }
+
+  .iclora-developer-page .iclora-page-hero__copy,
+  .iclora-developer-page .iclora-page-section {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    will-change: auto !important;
+  }
+
+  .iclora-application-page .iclora-page-hero__copy,
+  .iclora-application-page .iclora-page-hero__media,
+  .iclora-application-page .iclora-page-section {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    will-change: auto !important;
+  }
+
+  .iclora-page-faq__content {
+    transition: none !important;
+  }
+
+  .iclora-page-faq__caret {
+    transition: none !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .iclora-page {
+    color: #f5f5f7;
+    background: #1c1c1e;
+  }
+
+  .iclora-page-hero h1,
+  .iclora-page-section h2,
+  .iclora-page-card h3,
+  .iclora-page-faq summary {
+    color: #f5f5f7;
+  }
+
+  .iclora-page-intro,
+  .iclora-page-section__head p,
+  .iclora-page-copy,
+  .iclora-page-card p,
+  .iclora-page-faq p {
+    color: rgba(255, 255, 255, 0.74);
+  }
+
+  .iclora-page-section {
+    border-top-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .iclora-page-card,
+  .iclora-page-faq details {
+    background: #222224;
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .iclora-faq-page .iclora-page-faq details {
+    background: linear-gradient(180deg, rgba(34, 34, 36, 0.92), rgba(30, 30, 33, 0.92));
+  }
+
+  .iclora-about-page .iclora-page-card {
+    background: linear-gradient(180deg, rgba(34, 34, 36, 0.92), rgba(30, 30, 33, 0.92));
+  }
+
+  .iclora-support-mail {
+    background: linear-gradient(180deg, rgba(34, 34, 36, 0.92), rgba(30, 30, 33, 0.92));
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .iclora-support-mail__icon {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .iclora-support-mail__copy h2 {
+    color: #f5f5f7;
+  }
+
+  .iclora-support-mail__copy p {
+    color: rgba(255, 255, 255, 0.74);
+  }
+
+  .iclora-support-mail__copy a {
+    color: #8ab4f8;
+  }
+
+  .iclora-support-mail__copy a:hover {
+    color: #aecbfa;
+  }
+
+  .iclora-page-inline-link {
+    color: #8ab4f8;
+  }
+
+  .iclora-page-inline-link:hover {
+    color: #aecbfa;
+  }
+
+  .iclora-page-list li {
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .iclora-application-page .iclora-page-hero__media img {
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+  }
+
+  .iclora-app-download-panel {
+    background: linear-gradient(180deg, rgba(34, 34, 36, 0.92), rgba(30, 30, 33, 0.92));
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .iclora-app-download-panel__icon {
+    background: transparent;
+  }
+
+  .iclora-app-download-panel__copy h2 {
+    color: #f5f5f7;
+  }
+
+  .iclora-app-download-panel__copy p:not(.iclora-page-eyebrow) {
+    color: rgba(255, 255, 255, 0.74);
+  }
+
+  .iclora-app-feature-card {
+    background: linear-gradient(180deg, rgba(34, 34, 36, 0.92), rgba(30, 30, 33, 0.92));
+  }
+}
