@@ -600,6 +600,9 @@
   font-weight: 520;
 }
 
+
+
+/* ── AI Search Page ─────────────────────────────── */
 .iclora-photos__ai-search-page {
   display: flex;
   flex-direction: column;
@@ -621,6 +624,7 @@
   justify-content: flex-start;
 }
 
+/* Hero — uses transform only (GPU composited, fast on low-end) */
 .iclora-photos__ai-search-hero {
   display: flex;
   flex-direction: column;
@@ -636,6 +640,7 @@
   margin-bottom: 20px;
 }
 
+/* Logo button */
 .iclora-photos__ai-search-logo-btn {
   border: 0;
   background: transparent;
@@ -650,6 +655,7 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Spark particles — hidden by default */
 .iclora-photos__ai-spark {
   position: absolute;
   top: 50%;
@@ -659,10 +665,11 @@
   border-radius: 50%;
   pointer-events: none;
   opacity: 0;
-
+  /* 8 directions evenly spaced */
   transform: translate(-50%, -50%) rotate(calc(var(--spark-i, 0) * 45deg)) translateY(0px) scale(0);
 }
 
+/* Each spark gets its own rainbow color */
 .iclora-photos__ai-spark:nth-child(1) { background: #ff3b30; }
 .iclora-photos__ai-spark:nth-child(2) { background: #ff9500; }
 .iclora-photos__ai-spark:nth-child(3) { background: #ffcc00; }
@@ -676,6 +683,7 @@
   transform: scale(0.93);
 }
 
+/* Tooltip */
 .iclora-photos__ai-logo-tip {
   position: absolute;
   left: calc(100% + 6px);
@@ -692,7 +700,7 @@
   opacity: 0;
   text-shadow: 0 1px 3px rgba(0,0,0,0.18);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
-
+  /* Arrow shape cut into left side — gradient flows through naturally */
   clip-path: polygon(10px 0%, 100% 0%, 100% 100%, 10px 100%, 0% 50%);
   transition: opacity 160ms ease, transform 160ms ease;
   z-index: 10;
@@ -709,11 +717,13 @@
   }
 }
 
+/* Desktop only: spin + sparks on hover */
 @media (pointer: fine) {
   .iclora-photos__ai-search-logo-btn:hover .iclora-photos__ai-search-logo {
     animation: logoSpinAccel 1.6s cubic-bezier(0.18, 0, 0.72, 1) forwards;
   }
 
+  /* Sparks fire when spin is accelerating (~40% through) */
   .iclora-photos__ai-search-logo-btn:hover .iclora-photos__ai-spark {
     animation: sparkFly 0.55s ease-out calc(0.55s + var(--spark-i, 0) * 40ms) both;
   }
@@ -721,10 +731,10 @@
 
 @keyframes logoSpinAccel {
   0%   { transform: rotate(0deg); }
-  15%  { transform: rotate(40deg); }
-  35%  { transform: rotate(160deg); }
-  60%  { transform: rotate(480deg); }
-  100% { transform: rotate(720deg); }
+  15%  { transform: rotate(40deg); }   /* very slow */
+  35%  { transform: rotate(160deg); }  /* picking up */
+  60%  { transform: rotate(480deg); }  /* fast */
+  100% { transform: rotate(720deg); }  /* full 2 rotations */
 }
 
 @keyframes sparkFly {
@@ -752,6 +762,7 @@
   height: 30px;
 }
 
+/* Search bar shell */
 .iclora-photos__ai-search-shell {
   width: min(540px, 100%);
   height: 46px;
@@ -804,6 +815,7 @@
   display: none;
 }
 
+/* Clear and Submit buttons */
 .iclora-photos__ai-search-clear {
   width: 28px;
   height: 28px;
@@ -858,6 +870,7 @@
   transform: scale(0.92);
 }
 
+/* Result count */
 .iclora-photos__ai-search-count {
   margin: 0;
   color: #8e8e93;
@@ -872,6 +885,7 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* Suggestion chips (shown when idle, no query) */
 .iclora-photos__ai-suggestions {
   display: flex;
   flex-wrap: wrap;
@@ -915,6 +929,7 @@
   transform: scale(0.96);
 }
 
+/* Results grid */
 .iclora-photos__ai-results {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
@@ -923,6 +938,7 @@
   contain: layout;
 }
 
+/* Individual photo tile — staggered entry animation */
 .iclora-photos__ai-photo {
   position: relative;
   aspect-ratio: 1;
@@ -936,6 +952,7 @@
   will-change: transform, opacity;
 }
 
+/* Stagger each tile (up to 24 tiles) */
 .iclora-photos__ai-photo:nth-child(1)  { animation-delay:  0ms; }
 .iclora-photos__ai-photo:nth-child(2)  { animation-delay: 20ms; }
 .iclora-photos__ai-photo:nth-child(3)  { animation-delay: 40ms; }
@@ -967,11 +984,13 @@
   opacity: 0;
 }
 
+/* Skeleton loader */
 .iclora-photos__ai-photo.is-skeleton {
   pointer-events: none;
   background: #ececf0;
 }
 
+/* Empty state */
 .iclora-photos__ai-empty {
   display: flex;
   flex-direction: column;
@@ -994,6 +1013,7 @@
   font-weight: 500;
 }
 
+/* Respect reduced-motion preferences (low-end / accessibility) */
 @media (prefers-reduced-motion: reduce) {
   .iclora-photos__ai-search-logo,
   .iclora-photos__ai-search-hero,
@@ -2831,11 +2851,12 @@
 }
 
 @media (min-width: 901px) {
-
+  /* Desktop already has DashboardNavbar; hide the extra in-page app bar. */
   .iclora-photos__appbar {
     display: none;
   }
 
+  /* Make Photos content feel less "zoomed" on desktop (more density). */
   .iclora-photos__shell {
     grid-template-columns: 292px minmax(0, 1fr);
     font-size: 0.84rem;
@@ -3076,6 +3097,7 @@
   }
 }
 
+/* ── Recently Deleted Page ─────────────────────────────── */
 .iclora-photos__recently-deleted {
   padding: 16px 0 40px;
   display: flex;
@@ -3243,6 +3265,8 @@
   font-size: 0.95rem;
   max-width: 320px;
 }
+
+
 
 .iclora-photos__setup,
 .iclora-photos__links-panel {
@@ -4126,41 +4150,41 @@
     padding: 34px 22px 24px;
     gap: 12px;
   }
-
+  
   .iclora-photos__modal h2 {
     font-size: 1.4rem;
   }
-
+  
   .manage-account__delete-copy {
     font-size: 0.88rem;
     margin-top: -4px;
   }
-
+  
   .iclora-photos__upload-drop {
     min-height: 82px;
     margin: 10px 0 6px;
   }
-
+  
   .iclora-photos__upload-drop span {
     font-size: 0.9rem;
   }
-
+  
   .iclora-photos__upload-card,
   .iclora-photos__upload-add {
     min-width: 82px;
     width: 82px;
     height: 108px;
   }
-
+  
   .iclora-photos__upload-card {
     grid-template-rows: 82px auto;
   }
-
+  
   .iclora-photos__upload-filename {
     font-size: 0.72rem;
     padding: 4px 6px;
   }
-
+  
   .iclora-photos__upload-selected {
     margin: 8px 0 4px;
     gap: 10px;

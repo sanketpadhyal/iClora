@@ -82,7 +82,7 @@ export function writeUserProfileCache(profile) {
       }),
     );
   } catch {
-
+    // ignore
   }
 }
 
@@ -91,6 +91,6 @@ export function clearUserProfileCache() {
   try {
     window.localStorage.removeItem(STORAGE_KEY);
   } catch {
-
+    // ignore
   }
 }

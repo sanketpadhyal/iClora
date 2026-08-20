@@ -390,6 +390,7 @@
   text-overflow: ellipsis;
 }
 
+/* Keep folder titles neutral; use accent only on folder icons. */
 .iclora-notes__folder span {
   color: #2c2c2e;
 }

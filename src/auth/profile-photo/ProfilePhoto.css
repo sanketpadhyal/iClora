@@ -68,6 +68,7 @@
   transform: none;
 }
 
+/* Gate-loading state: apply subtle blur while the gate checks auth/redirects */
 .iclora-profile-photo.is-loading .iclora-profile-photo__card {
   filter: blur(6px) saturate(0.98) contrast(0.98);
   opacity: 0.98;

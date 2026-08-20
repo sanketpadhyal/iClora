@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { FiEdit3, FiKey, FiX } from 'react-icons/fi';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -151,7 +151,7 @@ function writeDashboardNotesPreviewCache(notes) {
       cachedAt: Date.now(),
     }));
   } catch {
-
+    // Cache should never block dashboard rendering.
   }
 }
 
@@ -200,7 +200,7 @@ function writeDashboardContactsPreviewCache(contacts) {
       cachedAt: Date.now(),
     }));
   } catch {
-
+    // Cache should never block dashboard rendering.
   }
 }
 
@@ -311,9 +311,6 @@ export default function CloudDashboard() {
   const [dashboardContactsLoading, setDashboardContactsLoading] = useState(!initialContactsPreview.length);
   const [dashboardPhotos, setDashboardPhotos] = useState(initialPhotosPreview);
   const [dashboardPhotosLoading, setDashboardPhotosLoading] = useState(false);
-  const dashboardPhotosLengthRef = useRef(dashboardPhotos.length);
-  const dashboardNotesLengthRef = useRef(dashboardNotes.length);
-  const dashboardContactsLengthRef = useRef(dashboardContacts.length);
   const [isCustomizing, setIsCustomizing] = useState(false);
   const [colorPickerOpen, setColorPickerOpen] = useState(false);
   const [setupApp, setSetupApp] = useState('');
@@ -544,11 +541,11 @@ export default function CloudDashboard() {
           }
         },
         () => {
-
+          // Keep last known state when realtime stream is unavailable.
         }
       );
     } catch {
-
+      // Firestore client may be unavailable in some environments.
     }
 
     return () => {
@@ -565,7 +562,7 @@ export default function CloudDashboard() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
     }).catch(() => {
-
+      // The dashboard can still work even if background cleanup is temporarily unavailable.
     });
 
     return undefined;
@@ -650,9 +647,6 @@ export default function CloudDashboard() {
   const notesStatusSyncing = notesActive && dashboardNotesLoading;
   const contactsStatusSyncing = contactsActive && dashboardContactsLoading;
   const photosStatusSyncing = photosActive && dashboardPhotosLoading;
-  dashboardPhotosLengthRef.current = dashboardPhotos.length;
-  dashboardNotesLengthRef.current = dashboardNotes.length;
-  dashboardContactsLengthRef.current = dashboardContacts.length;
 
   useEffect(() => {
     if (status !== 'ready') return undefined;
@@ -672,7 +666,7 @@ export default function CloudDashboard() {
     }
 
     async function loadPhotosPreview() {
-      setDashboardPhotosLoading((current) => (dashboardPhotosLengthRef.current ? current : true));
+      setDashboardPhotosLoading((current) => (dashboardPhotos.length ? current : true));
       try {
         const response = await apiFetch('/photos', { cache: 'no-store' });
         const json = await response.json().catch(() => ({}));
@@ -702,7 +696,7 @@ export default function CloudDashboard() {
       window.removeEventListener('iclora:photos-preview-updated', syncFromLocalCache);
       window.removeEventListener('storage', syncFromLocalCache);
     };
-  }, [status, photosActive]);
+  }, [status, photosActive]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (status !== 'ready') return undefined;
@@ -726,7 +720,7 @@ export default function CloudDashboard() {
 
     async function loadPreview() {
       const requestStartedAt = Date.now();
-      setDashboardNotesLoading((current) => (dashboardNotesLengthRef.current ? current : true));
+      setDashboardNotesLoading((current) => (dashboardNotes.length ? current : true));
       try {
         const response = await apiFetch(`/notes/preview?limit=${DASHBOARD_NOTES_PREVIEW_LIMIT}`);
         const json = await response.json().catch(() => ({}));
@@ -771,7 +765,7 @@ export default function CloudDashboard() {
       if (refreshTimer) clearTimeout(refreshTimer);
       if (typeof unsub === 'function') unsub();
     };
-  }, [status, user?.uid, notesActive]);
+  }, [status, user?.uid, notesActive]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (status !== 'ready') return undefined;
@@ -811,7 +805,7 @@ export default function CloudDashboard() {
 
     async function loadContactsPreview() {
       const requestStartedAt = Date.now();
-      setDashboardContactsLoading((current) => (dashboardContactsLengthRef.current ? current : true));
+      setDashboardContactsLoading((current) => (dashboardContacts.length ? current : true));
       try {
         const contacts = await requestContactsPreview();
         if (cancelled) return;
@@ -846,7 +840,7 @@ export default function CloudDashboard() {
       window.removeEventListener('iclora:contacts-preview-updated', syncFromLocalCache);
       window.removeEventListener('storage', syncFromLocalCache);
     };
-  }, [status, contactsActive]);
+  }, [status, contactsActive]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (status !== 'ready') return undefined;
@@ -954,13 +948,14 @@ export default function CloudDashboard() {
   const finishCustomizing = () => {
     setColorPickerOpen(false);
     setIsCustomizing(false);
-
+    
+    // Save color to backend only when Done is tapped
     apiFetch('/dashboard-tweaks/me', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ dashboardAccentColor: backgroundColor }),
     }).catch(() => {
-
+      // Cache already holds the user's choice; backend sync can recover later.
     });
   };
   const setupConfig = {
@@ -1047,7 +1042,7 @@ export default function CloudDashboard() {
           setUser(nextUser);
         }
       } catch {
-
+        // The card also refreshes on the next dashboard/profile load.
       }
       if (appKey === 'notes') {
         navigate('/cloud/apps/notes/u');

@@ -268,7 +268,7 @@
 .dashboard-navbar--white .dashboard-navbar__icon-button:hover,
 .dashboard-navbar--white .dashboard-navbar__icon-button.is-active,
 .dashboard-navbar--white .dashboard-navbar__avatar-button:hover {
-  background: rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.08); /* Use a dark hover shade instead of white */
 }
 
 .dashboard-navbar__alert-button {
@@ -942,7 +942,7 @@
 }
 
 @media (max-width: 700px) {
-
+  /* Mobile: keep menus opaque */
   .dashboard-navbar__menu,
   .dashboard-navbar__menu--apps {
     background: #ffffff;
@@ -1159,6 +1159,7 @@
   }
 }
 
+/* Mobile scroll optimization - keep navbar visible and stable */
 @media (max-width: 768px) {
   .dashboard-navbar {
     will-change: auto;

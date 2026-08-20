@@ -1497,7 +1497,7 @@
 	--cloud-orb: color-mix(in srgb, var(--cloud-accent), #ffffff 86%);
 	position: absolute;
 	border-radius: 999px;
-
+	/* iCloud-like depth: soft highlight + soft shadow over a tinted base */
 	background:
 		radial-gradient(circle at 32% 30%, rgba(255, 255, 255, 0.58) 0 38%, rgba(255, 255, 255, 0) 64%),
 		radial-gradient(circle at 64% 72%, rgba(0, 0, 0, 0.14) 0 34%, rgba(0, 0, 0, 0) 64%),
@@ -2344,6 +2344,7 @@
 	}
 }
 
+/* Match dashboard navbar panel bounce */
 @keyframes iclora-panel-spring {
 	0% {
 		opacity: 0;
@@ -3599,6 +3600,7 @@
 	}
 }
 
+/* Final mobile/tablet override: keep color panel below top bar on every touch layout */
 @media (max-width: 1100px) {
 	.cloud-customize-bar .cloud-customize-color {
 		position: static !important;
@@ -3836,6 +3838,7 @@
 	}
 }
 
+/* Mobile Performance Optimizations */
 @media (max-width: 768px) {
 	html, body {
 		-webkit-touch-callout: none;

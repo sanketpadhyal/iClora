@@ -710,7 +710,7 @@ export default function ManageAccount() {
         setPasskeyInfo(nextPasskeyInfo);
       })
       .catch(() => {
-
+        // Passkey status is helpful but should not block account management.
       });
     return () => {
       cancelled = true;
@@ -814,7 +814,7 @@ export default function ManageAccount() {
         }
       );
     } catch {
-
+      // The API response above still provides the Devices view if realtime is unavailable.
     }
 
     return () => {
@@ -1047,7 +1047,7 @@ export default function ManageAccount() {
     try {
       event.currentTarget.releasePointerCapture(event.pointerId);
     } catch {
-
+      // ignore
     }
   }
 

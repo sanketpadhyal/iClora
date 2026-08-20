@@ -101,7 +101,7 @@ function writeContactsCache(payload) {
     }));
     window.dispatchEvent(new CustomEvent('iclora:contacts-preview-updated'));
   } catch {
-
+    // Cache should never block contacts usage.
   }
 }
 
@@ -430,8 +430,6 @@ export default function Contacts() {
   const syncJobsRef = useRef(0);
   const deletedContactIdsRef = useRef(new Set());
   const hardRefreshTimerRef = useRef(null);
-  const loadContactsRef = useRef(null);
-  const initialContactsCacheRef = useRef(cached);
 
   useEffect(() => {
     if (!readSessionToken()) navigate('/auth', { replace: true });
@@ -500,7 +498,7 @@ export default function Contacts() {
     return () => {
       cancelled = true;
     };
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate]);
 
   useEffect(() => () => {
@@ -671,8 +669,6 @@ export default function Contacts() {
     }
   }
 
-  loadContactsRef.current = loadContacts;
-
   async function hardRefreshContacts() {
     if (hardRefreshing || hardRefreshLocked || setupRequired) return;
     setHardRefreshing(true);
@@ -748,8 +744,8 @@ export default function Contacts() {
   }
 
   useEffect(() => {
-    loadContactsRef.current?.({ silent: Boolean(initialContactsCacheRef.current) });
-
+    loadContacts({ silent: Boolean(cached) });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function selectContact(contact) {
@@ -1004,7 +1000,7 @@ export default function Contacts() {
     try {
       event.currentTarget.releasePointerCapture(event.pointerId);
     } catch {
-
+      // Pointer capture can already be released by the browser.
     }
   }
 
@@ -1799,7 +1795,7 @@ function ContactEditor({ draft, photoPreviewUrl, saving, countryCode, onChange, 
 }
 
 function BirthdayPicker({ value, onChange }) {
-  const selectedDate = useMemo(() => birthdayDateFromValue(value), [value]);
+  const selectedDate = birthdayDateFromValue(value);
   const today = new Date();
   const currentYear = today.getFullYear();
   const years = useMemo(() => {
@@ -1813,7 +1809,7 @@ function BirthdayPicker({ value, onChange }) {
 
   useEffect(() => {
     if (selectedDate) setViewDate(selectedDate);
-  }, [selectedDate]);
+  }, [value]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (!open) return undefined;

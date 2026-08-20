@@ -22,6 +22,7 @@
   border: 1px solid rgba(15, 23, 42, 0.06);
   contain: layout paint;
 
+  /* Entry animation start state — GPU composited only */
   opacity: 0;
   transform: translate3d(0, 36px, 0) scale(1.032);
   backface-visibility: hidden;
@@ -38,6 +39,7 @@
   will-change: auto;
 }
 
+/* Stagger second card slightly */
 .iclora-feature-card:nth-child(2) {
   transition-delay: 80ms;
 }
@@ -100,6 +102,7 @@
     width: min(320px, 100%);
   }
 
+  /* On single-column mobile, stagger vertically */
   .iclora-feature-card:nth-child(2) {
     transition-delay: 120ms;
   }

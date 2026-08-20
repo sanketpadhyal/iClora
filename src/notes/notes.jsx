@@ -123,7 +123,7 @@ function writeNotesUiState(next) {
       updatedAt: Date.now(),
     }));
   } catch {
-
+    // UI restore should never block notes usage.
   }
 }
 
@@ -137,7 +137,7 @@ function writeNotesCache(next) {
       cachedAt: Date.now(),
     }));
   } catch {
-
+    // ignore
   }
 }
 
@@ -175,7 +175,7 @@ function writeDashboardNotesPreviewCache(notes) {
     window.localStorage.setItem(DASHBOARD_NOTES_CACHE_KEY, JSON.stringify(payload));
     window.dispatchEvent(new CustomEvent('iclora:notes-preview-updated', { detail: payload }));
   } catch {
-
+    // Dashboard preview cache should never block notes editing.
   }
 }
 
@@ -625,16 +625,6 @@ export default function Notes() {
   const mutationRevisionRef = useRef(0);
   const loadedFromServerRef = useRef(false);
   const editorScrolledDuringGestureRef = useRef(false);
-  const applyNotesRef = useRef(null);
-  const applyFoldersRef = useRef(null);
-  const placeEditorSelectionRef = useRef(null);
-  const flushPendingSaveRef = useRef(null);
-  const cacheIsStaleRef = useRef(cacheIsStale);
-  cacheIsStaleRef.current = cacheIsStale;
-  applyNotesRef.current = applyNotes;
-  applyFoldersRef.current = applyFolders;
-  placeEditorSelectionRef.current = placeEditorSelection;
-  flushPendingSaveRef.current = flushPendingSave;
 
   const selectedNote = useMemo(
     () => (noteId ? notes.find((note) => note.id === noteId) || null : null),
@@ -717,10 +707,10 @@ export default function Notes() {
         const next = normalizePayload(json);
         const liveNotes = next.notes.filter((note) => !deletedNoteIdsRef.current.has(note.id));
         loadedFromServerRef.current = true;
-        applyFoldersRef.current?.(next.folders, { notes: liveNotes, cache: true, immediate: true });
-        applyNotesRef.current?.(liveNotes, { folders: next.folders, cache: true, immediate: true });
+        applyFolders(next.folders, { notes: liveNotes, cache: true, immediate: true });
+        applyNotes(liveNotes, { folders: next.folders, cache: true, immediate: true });
     } catch (error) {
-        if (!cached || cacheIsStaleRef.current) {
+        if (!cached || cacheIsStale) {
           showAlert({ title: 'Notes unavailable', message: error?.message || 'Could not load notes.', type: 'error' });
         }
       } finally {
@@ -732,11 +722,11 @@ export default function Notes() {
     return () => {
       cancelled = true;
     };
-  }, [cached, navigate, showAlert]);
+  }, [cached, navigate, showAlert]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    setMobilePane((currentMobilePane) => (noteId ? 'editor' : currentMobilePane === 'editor' ? 'list' : currentMobilePane));
-  }, [noteId]);
+    setMobilePane(noteId ? 'editor' : mobilePane === 'editor' ? 'list' : mobilePane);
+  }, [noteId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     writeNotesUiState({ activeFolderId, mobilePane });
@@ -777,14 +767,14 @@ export default function Notes() {
       const pendingRange = pendingMobileEditorRangeRef.current;
       pendingMobileEditorRangeRef.current = null;
       if (pendingRange) {
-        placeEditorSelectionRef.current?.(pendingRange);
+        placeEditorSelection(pendingRange);
         return;
       }
       bodyInputRef.current?.focus({ preventScroll: true });
     });
 
     return () => window.cancelAnimationFrame(frame);
-  }, [mobileEditorEditing]);
+  }, [mobileEditorEditing]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (!loadedFromServerRef.current) return;
@@ -803,12 +793,12 @@ export default function Notes() {
     setContentDraft(selectedNoteContent || '');
     setSaveState('saved');
     setActiveFormats({ bold: false, italic: false, underline: false, strike: false });
-  }, [selectedNoteId, selectedNoteContent]);
+  }, [selectedNoteId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (!bodyInputRef.current) return;
     bodyInputRef.current.innerHTML = toEditorHtml(selectedNoteContent || '');
-  }, [selectedNoteId, selectedNoteContent]);
+  }, [selectedNoteId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     function onSelectionChange() {
@@ -816,7 +806,7 @@ export default function Notes() {
     }
     document.addEventListener('selectionchange', onSelectionChange);
     return () => document.removeEventListener('selectionchange', onSelectionChange);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (!noteMenu) return undefined;
@@ -847,27 +837,27 @@ export default function Notes() {
   }, [folderMenu.id]);
 
   useEffect(() => () => {
-    flushPendingSaveRef.current?.({ silent: true });
-  }, [selectedNoteId]);
+    flushPendingSave({ silent: true });
+  }, [selectedNoteId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     function flushOnPageExit() {
-      flushPendingSaveRef.current?.({ keepalive: true, silent: true });
+      flushPendingSave({ keepalive: true, silent: true });
       writeNotesCache({ ...latestCacheRef.current, meta: {} });
       writeDashboardNotesPreviewCache(latestCacheRef.current.notes);
     }
     window.addEventListener('pagehide', flushOnPageExit);
     return () => window.removeEventListener('pagehide', flushOnPageExit);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => () => {
-    flushPendingSaveRef.current?.({ keepalive: true, silent: true });
+    flushPendingSave({ keepalive: true, silent: true });
     if (cacheTimerRef.current) clearTimeout(cacheTimerRef.current);
     if (hardRefreshTimerRef.current) clearTimeout(hardRefreshTimerRef.current);
     if (longPressTimerRef.current) clearTimeout(longPressTimerRef.current);
     writeNotesCache({ ...latestCacheRef.current, meta: {} });
     writeDashboardNotesPreviewCache(latestCacheRef.current.notes);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function hardRefreshNotesCloud(options = {}) {
     if (hardRefreshing || hardRefreshLocked) return;
@@ -913,7 +903,7 @@ export default function Notes() {
     const icon = event?.currentTarget?.querySelector?.('svg');
     if (!icon) return;
     icon.classList.remove('is-tap-spinning');
-
+    // Restart quick tap animation on every click.
     void icon.offsetWidth;
     icon.classList.add('is-tap-spinning');
     window.setTimeout(() => {

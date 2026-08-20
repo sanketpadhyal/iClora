@@ -40,6 +40,6 @@ export function writeDeviceActivityCache(uid, activity) {
       })
     );
   } catch {
-
+    // Cache is a speed boost only; ignore storage quota/private-mode failures.
   }
 }

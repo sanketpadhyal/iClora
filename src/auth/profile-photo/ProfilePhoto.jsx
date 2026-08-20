@@ -179,6 +179,8 @@ function ProfilePhoto({ gateLoading = false }) {
       const viewportSize = Math.min(rect.width, rect.height);
       if (!viewportSize) return;
 
+      // Start from a "show the full photo" fit so the modal opens with the
+      // image visible as-is before the user begins cropping.
       const baseScale = Math.min(viewportSize / image.naturalWidth, viewportSize / image.naturalHeight);
       const nextMetrics = { viewportSize, baseScale };
       setCropMetrics(nextMetrics);
@@ -310,7 +312,7 @@ function ProfilePhoto({ gateLoading = false }) {
     try {
       event.currentTarget.releasePointerCapture(event.pointerId);
     } catch {
-
+      // ignore
     }
   };
 

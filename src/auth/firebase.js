@@ -3,12 +3,12 @@ import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY || '',
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN || '',
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID || '',
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET || '',
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID || '',
-  appId: process.env.REACT_APP_FIREBASE_APP_ID || '',
+  apiKey: "AIzaSyDMWxB4GoE7DbvodZNLMVw8ml1s86SmFd0",
+  authDomain: "icloracloud.firebaseapp.com",
+  projectId: "icloracloud",
+  storageBucket: "icloracloud.firebasestorage.app",
+  messagingSenderId: "361341042059",
+  appId: "1:361341042059:web:ab9aea3127f067230f038e"
 };
 
 function getMissingFirebaseKeys() {

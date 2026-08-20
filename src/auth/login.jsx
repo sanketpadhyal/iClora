@@ -243,11 +243,13 @@ function Login({ onBack }) {
             resetFirebaseAuth,
           );
         } catch (firstError) {
-
+          // If the user deliberately closed the popup, don't retry.
           if (isUserCancelledAuth(firstError) || firstError?.code === 'auth/operation-timeout') {
             throw firstError;
           }
-
+          // Firebase SDK may be in a bad state (stale IndexedDB, corrupt
+          // installation cache, etc.).  Reset the cached instance and retry
+          // once with a fresh Auth object before surfacing the error.
           resetFirebaseAuth();
           const retryDeps = getGoogleAuthDependencies();
           popupResult = await withTimeout(
@@ -266,7 +268,7 @@ function Login({ onBack }) {
         });
       } catch (error) {
         if (isUserCancelledAuth(error)) {
-
+          // User closed the popup — no error alert needed.
         } else {
           showAlert({
             title: 'Sign-in Failed',

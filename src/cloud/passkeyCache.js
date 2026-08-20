@@ -34,6 +34,6 @@ export function writePasskeyCache(info) {
       })
     );
   } catch {
-
+    // Cache is only for instant UI hydration.
   }
 }

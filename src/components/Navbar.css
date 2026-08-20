@@ -403,10 +403,10 @@
   background: rgba(15, 23, 42, 0.12);
   opacity: 0;
   pointer-events: none;
-
+  /* GPU-composited: opacity only, no repaint */
   will-change: opacity;
   backface-visibility: hidden;
-
+  /* Close: fast fade-out */
   transition:
     opacity 140ms linear,
     visibility 0s linear 140ms;

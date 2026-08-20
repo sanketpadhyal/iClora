@@ -12,7 +12,7 @@ const APP_STORAGE_BREAKDOWN = [
   { key: 'notes', label: 'Notes', color: '#f5c542' },
   { key: 'contacts', label: 'Contacts', color: '#2f7be6' },
 ];
-const ICLORA_APP_DOWNLOAD_URL = process.env.REACT_APP_ICLORA_APP_DOWNLOAD_URL || '#';
+const ICLORA_APP_DOWNLOAD_URL = 'https://github.com/sanketpadhyal/iClora-Photos-App/releases/download/v2.0.0/iclora-v2.apk';
 
 function normalizeStorageBreakdown(value) {
   const input = Array.isArray(value) ? value : [];
