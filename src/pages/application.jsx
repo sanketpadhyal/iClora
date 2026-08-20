@@ -13,7 +13,7 @@ import {
 } from 'react-icons/fi';
 import PageShell from './PageShell';
 
-const APP_DOWNLOAD_URL = process.env.REACT_APP_ICLORA_APP_DOWNLOAD_URL || '#';
+const APP_DOWNLOAD_URL = 'https://github.com/sanketpadhyal/iClora-Photos-App/releases/download/v2.0.0/iclora-v2.apk';
 
 const appHighlights = [
   {

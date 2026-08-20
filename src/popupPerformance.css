@@ -1,4 +1,4 @@
-
+/* Shared popup tuning for iOS, Android, and low-end devices. */
 :root {
   --iclora-popup-safe-gap: max(12px, env(safe-area-inset-bottom, 0px));
   --iclora-popup-surface: rgba(255, 255, 255, 0.98);

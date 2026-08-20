@@ -160,6 +160,9 @@
   -webkit-backface-visibility: hidden;
 }
 
+/* GPU-only keyframes — only opacity + transform, zero filter/repaint cost.
+   Works at 60 fps even on 1 GB RAM devices because these properties are
+   handled entirely on the compositor thread. */
 @keyframes iclora-page-focus {
   0%   { opacity: 0.001; transform: translate3d(0, 20px, 0) scale(1.055); }
   60%  { opacity: 1; }

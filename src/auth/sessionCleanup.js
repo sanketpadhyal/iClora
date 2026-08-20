@@ -44,6 +44,9 @@ export async function clearDataBeforeFreshLogin() {
   await Promise.race([signOutTask, wait(650)]);
   void signOutTask;
 
+  // Reset the cached Firebase Auth instance so the next login starts with
+  // a clean SDK state.  Without this, the stale in-memory instance can
+  // cause signInWithPopup to hang or fail silently.
   resetFirebaseAuth();
 
   clearLoginData({ markSignOut: false });

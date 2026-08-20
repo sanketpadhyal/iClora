@@ -11,7 +11,7 @@ const navItems = [
 ];
 
 const preventTouchPopup = (e) => {
-
+  // Prevent long-press context menu and selection popups on mobile
   if (e && typeof e.preventDefault === 'function') e.preventDefault();
 };
 
@@ -29,6 +29,7 @@ function Navbar({ hidden = false }) {
   useEffect(() => {
     const previousOverflow = document.body.style.overflow || '';
 
+    // Lock scroll while mobile panel is open
     if (menuOpen && !hidden) {
       document.body.style.overflow = 'hidden';
     } else {

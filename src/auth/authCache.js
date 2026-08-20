@@ -50,7 +50,7 @@ function markRecentSignOut() {
   try {
     window.localStorage.setItem(RECENT_SIGN_OUT_KEY, String(Date.now()));
   } catch {
-
+    // ignore
   }
 }
 
@@ -59,7 +59,7 @@ function clearRecentSignOut() {
   try {
     window.localStorage.removeItem(RECENT_SIGN_OUT_KEY);
   } catch {
-
+    // ignore
   }
 }
 
@@ -91,7 +91,7 @@ async function clearIndexedDbCaches() {
       });
     }
   } catch {
-
+    // Some browsers do not allow listing IndexedDB databases.
   }
   await Promise.all(Array.from(names).map((name) => deleteIndexedDb(name)));
 }
@@ -120,10 +120,10 @@ export function writeAuthCache(next) {
       const expiresAt = Number.isFinite(Number(next?.sessionExpiresAt))
         ? Number(next.sessionExpiresAt)
         : Date.now() + DEFAULT_SESSION_TTL_MS;
-
+      // Persist session across browser restarts (important on mobile/PWA).
       window.localStorage.setItem(SESSION_TOKEN_KEY, next.sessionToken);
       window.localStorage.setItem(SESSION_EXPIRES_KEY, String(expiresAt));
-
+      // Remove old session-scoped copies if present from previous versions.
       window.sessionStorage.removeItem(SESSION_TOKEN_KEY);
       window.sessionStorage.removeItem(SESSION_EXPIRES_KEY);
     } else if (next?.ok && isRecentSignOutActive()) {
@@ -138,7 +138,7 @@ export function writeAuthCache(next) {
       }),
     );
   } catch {
-
+    // ignore
   }
 }
 
@@ -188,7 +188,7 @@ export function clearAuthCache() {
     window.sessionStorage.removeItem(SESSION_TOKEN_KEY);
     window.sessionStorage.removeItem(SESSION_EXPIRES_KEY);
   } catch {
-
+    // ignore
   }
 }
 
@@ -197,7 +197,7 @@ export function markProfilePhotoCompleted() {
   try {
     window.sessionStorage.setItem(PROFILE_COMPLETED_KEY, String(Date.now()));
   } catch {
-
+    // ignore
   }
 }
 
@@ -219,7 +219,7 @@ export function clearProfilePhotoCompletion() {
   try {
     window.sessionStorage.removeItem(PROFILE_COMPLETED_KEY);
   } catch {
-
+    // ignore
   }
 }
 
@@ -237,7 +237,7 @@ export function clearLoginData({ markSignOut = true } = {}) {
       clearRecentSignOut();
     }
   } catch {
-
+    // ignore
   }
 }
 
@@ -251,7 +251,7 @@ export async function clearRuntimeCaches() {
         const keys = await window.caches.keys();
         await Promise.all(keys.map((key) => window.caches.delete(key)));
       } catch {
-
+        // ignore
       }
     })(),
     clearIndexedDbCaches(),

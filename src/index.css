@@ -95,12 +95,12 @@ body::-webkit-scrollbar {
   padding: 0;
   box-sizing: border-box;
   min-width: 0;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Legacy Edge */
 }
 
 *::-webkit-scrollbar {
-  display: none;
+  display: none; /* Chrome/Safari */
 }
 
 button {

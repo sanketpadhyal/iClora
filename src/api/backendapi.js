@@ -1,9 +1,14 @@
 import { readSessionToken } from '../auth/authCache';
 
-const RAW_BACKEND_URL = process.env.REACT_APP_BACKEND_API_URL || '/api';
+const RAW_BACKEND_URL = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+  ? 'http://localhost:8080'
+  : 'https://lumia-backend-production-6428.up.railway.app';
 const RESPONSE_SESSION_TOKEN_KEY = '__icloraRequestSessionToken';
 
-export const BACKEND_API_URL = RAW_BACKEND_URL.replace(/\/+$/, '');
+const normalizedBackendUrl = RAW_BACKEND_URL.trim().replace(/\/+$/, '');
+export const BACKEND_API_URL = /^https?:\/\//i.test(normalizedBackendUrl) || normalizedBackendUrl.startsWith('/')
+  ? normalizedBackendUrl
+  : `https://${normalizedBackendUrl}`;
 
 export function apiUrl(path) {
   if (!path) return BACKEND_API_URL;
@@ -22,6 +27,7 @@ function tagResponseSession(response, token) {
       enumerable: false,
     });
   } catch {
+    // Response objects should be extensible, but do not let metadata fail a request.
   }
   return response;
 }

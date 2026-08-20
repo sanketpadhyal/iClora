@@ -78,6 +78,10 @@ function ProfilePhotoGate() {
     };
   }, [location.pathname, navigate]);
 
+  // Render the profile photo UI immediately. The gate will still redirect
+  // if the user is unauthorized or does not need a profile photo, but we
+  // avoid showing a skeleton placeholder and instead let the page render
+  // with a subtle gate-loading state handled by `ProfilePhoto`.
   return <ProfilePhoto gateLoading={!ready} />;
 }
 
@@ -176,7 +180,7 @@ function App() {
   const hasSessionToken = isAuthRoute ? Boolean(readSessionToken()) : false;
 
   useEffect(() => {
-
+    // Initialize global image protection
     initGlobalImageProtection();
     initBrowserInteractionFixes();
 

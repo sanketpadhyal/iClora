@@ -66,7 +66,7 @@ import {
 import '../cloud/manage_account/manage.css';
 import './photos.css';
 
-const ICLORA_PHOTOS_APP_DOWNLOAD_URL = process.env.REACT_APP_ICLORA_APP_DOWNLOAD_URL || '#';
+const ICLORA_PHOTOS_APP_DOWNLOAD_URL = 'https://github.com/sanketpadhyal/iClora-Photos-App/releases/download/v2.0.0/iclora-v2.apk';
 
 const SIDEBAR_SECTIONS = [
   {
@@ -175,6 +175,21 @@ function aiSearchFilterTokens(value = '') {
   const tokens = searchTokens(value);
   const meaningful = tokens.filter((t) => !AI_SEARCH_STOP_WORDS.has(t));
   return meaningful.length > 0 ? meaningful : tokens;
+}
+
+function searchMatchLabel(photo = {}, tokens = []) {
+  const tagText = Array.isArray(photo.visionTags) ? photo.visionTags.join(' ') : '';
+  const candidates = [
+    photo.visionLabel,
+    tagText,
+    photo.visionCaption,
+    photo.title,
+    photo.originalFilename,
+  ].filter(Boolean);
+  return candidates.find((value) => {
+    const text = String(value).toLowerCase();
+    return tokens.some((token) => text.includes(token));
+  }) || 'Keyword match';
 }
 
 function photoTimeDesc(a = {}, b = {}) {
@@ -555,7 +570,7 @@ export default function Photos() {
   const [linkDeleting, setLinkDeleting] = useState(false);
   const [secureLinks, setSecureLinks] = useState(() => readPhotoLinks());
   const [activeView, setActiveView] = useState('library');
-  const query = '';
+  const [query, setQuery] = useState('');
   const [aiSearchQuery, setAiSearchQuery] = useState('');
   const [aiSubmittedQuery, setAiSubmittedQuery] = useState('');
   const [aiSearchFocused, setAiSearchFocused] = useState(false);
@@ -599,34 +614,21 @@ export default function Photos() {
   const photosPageLoadingRef = useRef(false);
   const deletingPhotoIdsRef = useRef(new Set(readPendingPhotoActions().deletes));
   const hiddenAccessTokenRef = useRef('');
-  const loadRecentlyDeletedRef = useRef(null);
-  const restoreQueuedUploadEntriesRef = useRef(null);
-  const processPhotoUploadQueueRef = useRef(null);
-  const loadPhotosRef = useRef(null);
-  const syncPendingPhotoActionsRef = useRef(null);
-  const loadMorePhotosRef = useRef(null);
-  const recentlyDeletedLoadedRef = useRef(Boolean(cachedRecentlyDeleted));
   const accentColor = readAccentColorCache() || '#2f7be6';
-
+  // Recently Deleted
   const [recentlyDeletedPhotos, setRecentlyDeletedPhotos] = useState(() => cachedRecentlyDeleted?.photos || []);
   const [recentlyDeletedLoading, setRecentlyDeletedLoading] = useState(false);
   const [recentlyDeletedLoaded, setRecentlyDeletedLoaded] = useState(Boolean(cachedRecentlyDeleted));
-  loadRecentlyDeletedRef.current = loadRecentlyDeleted;
-  restoreQueuedUploadEntriesRef.current = restoreQueuedUploadEntries;
-  processPhotoUploadQueueRef.current = processPhotoUploadQueue;
-  loadPhotosRef.current = loadPhotos;
-  syncPendingPhotoActionsRef.current = syncPendingPhotoActions;
-  loadMorePhotosRef.current = loadMorePhotos;
-  recentlyDeletedLoadedRef.current = recentlyDeletedLoaded;
 
   useEffect(() => {
     if (location.state?.initialView !== 'deleted') return;
     setActiveView('deleted');
     if (!recentlyDeletedLoaded) {
-      loadRecentlyDeletedRef.current?.({ silent: false });
+      loadRecentlyDeleted({ silent: false });
     }
     navigate(location.pathname, { replace: true, state: {} });
-  }, [location.pathname, location.state, navigate, recentlyDeletedLoaded]);
+  }, [location.pathname, location.state, navigate, recentlyDeletedLoaded]); // eslint-disable-line react-hooks/exhaustive-deps
+
 
   function revokeUploadPreviewUrls() {
     const map = uploadPreviewUrlsRef.current;
@@ -681,12 +683,12 @@ export default function Photos() {
     if (!aiSearchTokens.length) return [];
     const meaningfulTokens = aiSearchFilterTokens(aiSubmittedQuery);
     if (!meaningfulTokens.length) return [];
-
+    // Helper: check if a token matches text (handles plurals/stems)
     const tokenMatches = (token, text) => {
       if (text.includes(token)) return true;
-
+      // strip trailing 's' for basic plural handling: "hairs" -> "hair"
       if (token.endsWith('s') && token.length > 3 && text.includes(token.slice(0, -1))) return true;
-
+      // check if token is prefix of a word in text: "long" matches "longer"
       if (text.split(/\s+/).some((word) => word.startsWith(token) || token.startsWith(word))) return true;
       return false;
     };
@@ -694,10 +696,10 @@ export default function Photos() {
       .map((photo) => {
         const text = searchableText(photo);
         const matchedTokens = meaningfulTokens.filter((token) => tokenMatches(token, text));
-
+        // Require at least ONE token to match (OR logic)
         if (matchedTokens.length === 0) return null;
         const exactBoost = String(photo.visionLabel || photo.title || '').toLowerCase().includes(aiSubmittedQuery.trim().toLowerCase()) ? 2 : 0;
-
+        // Score: matched tokens + bonus for matching all tokens + exact boost
         const allMatchBonus = matchedTokens.length === meaningfulTokens.length ? 1 : 0;
         return {
           photo,
@@ -831,8 +833,8 @@ export default function Photos() {
           return;
         }
 
-        restoreQueuedUploadEntriesRef.current?.(queuedEntries);
-        processPhotoUploadQueueRef.current?.(queuedEntries);
+        restoreQueuedUploadEntries(queuedEntries);
+        processPhotoUploadQueue(queuedEntries);
       } catch {
         const cached = readPhotosCache();
         if (cached?.photos?.some((photo) => photo?.localOnly)) {
@@ -853,15 +855,15 @@ export default function Photos() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     async function resumeQueuedUploads() {
       if (backgroundUploadRef.current) return;
       const queuedEntries = await readQueuedPhotoUploads().catch(() => []);
       if (!queuedEntries.length) return;
-      restoreQueuedUploadEntriesRef.current?.(queuedEntries);
-      processPhotoUploadQueueRef.current?.(queuedEntries);
+      restoreQueuedUploadEntries(queuedEntries);
+      processPhotoUploadQueue(queuedEntries);
     }
 
     function onResume() {
@@ -875,7 +877,7 @@ export default function Photos() {
       window.removeEventListener('focus', onResume);
       document.removeEventListener('visibilitychange', onResume);
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function loadPhotos(options = {}) {
     if (!readSessionToken()) return false;
@@ -1103,6 +1105,7 @@ export default function Photos() {
     }
   }
 
+
   useEffect(() => {
     if (typeof window === 'undefined') return undefined;
 
@@ -1159,15 +1162,15 @@ export default function Photos() {
   }, [navigate]);
 
   useEffect(() => {
-    loadPhotosRef.current?.();
-    syncPendingPhotoActionsRef.current?.();
-  }, []);
+    loadPhotos();
+    syncPendingPhotoActions();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (activeView === 'deleted') {
-      loadRecentlyDeletedRef.current?.({ silent: recentlyDeletedLoadedRef.current });
+      loadRecentlyDeleted({ silent: recentlyDeletedLoaded });
     }
-  }, [activeView]);
+  }, [activeView]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const sentinel = photoPageSentinelRef.current;
@@ -1175,20 +1178,20 @@ export default function Photos() {
     if (typeof IntersectionObserver === 'undefined') return undefined;
     const observer = new IntersectionObserver((entries) => {
       if (entries.some((entry) => entry.isIntersecting)) {
-        loadMorePhotosRef.current?.();
+        loadMorePhotos();
       }
     }, { rootMargin: '700px 0px' });
     observer.observe(sentinel);
     return () => observer.disconnect();
-  }, [canLoadMorePhotos, photosPageLoading, photosPagination.cursor, activeView]);
+  }, [canLoadMorePhotos, photosPageLoading, photosPagination.cursor, activeView]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (setupRequired || !photos.some(isVisionCyclePending)) return undefined;
     const timer = window.setInterval(() => {
-      loadPhotosRef.current?.({ silent: true });
+      loadPhotos({ silent: true });
     }, 15000);
     return () => window.clearInterval(timer);
-  }, [photos, setupRequired]);
+  }, [photos, setupRequired]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (viewerPhase === 'closed' || !viewerDisplaySrc) {
@@ -1456,7 +1459,7 @@ export default function Photos() {
     setHiddenViewUnlocked(false);
     hiddenAccessTokenRef.current = '';
     if (activeView === 'hidden') closeHiddenAuthModal();
-
+    // Reset AI search when leaving the search view
     if (activeView === AI_SEARCH_VIEW && id !== AI_SEARCH_VIEW) {
       setAiSearchQuery('');
       setAiSubmittedQuery('');
@@ -2371,14 +2374,15 @@ export default function Photos() {
     if (!viewerPhotos.length) return;
     const nextIndex = (index + viewerPhotos.length) % viewerPhotos.length;
     const nextPhoto = viewerPhotos[nextIndex];
-
+    
+    // Update transition rect so the viewer resizes to the new photo's aspect ratio
     const targetElement = typeof document !== 'undefined' ? document.querySelector(`.iclora-photos__tile[data-photo-id="${nextPhoto.id}"]`) : null;
     let nextRect = targetElement ? getElementRect(targetElement) : { ...transitionRect };
     if (nextRect && nextPhoto.width > 0 && nextPhoto.height > 0) {
       nextRect.naturalWidth = nextPhoto.width;
       nextRect.naturalHeight = nextPhoto.height;
     } else if (!targetElement && nextRect && nextPhoto.width > 0) {
-
+      // Fallback if not on screen, at least fix the ratio
       nextRect.naturalWidth = nextPhoto.width;
       nextRect.naturalHeight = nextPhoto.height;
     }
@@ -2473,7 +2477,7 @@ export default function Photos() {
     } else {
       preferredTop = openAbove ? rect.top - menuHeight + 10 : rect.top + 36;
       preferredLeft = rect.right - menuWidth + 8;
-
+      
       if (preferredLeft < rect.left) {
         preferredLeft = rect.left;
         transformOriginX = '32px';
@@ -2485,7 +2489,7 @@ export default function Photos() {
     const left = Math.min(Math.max(margin, preferredLeft), viewportWidth - menuWidth - margin);
     const maxTop = Math.max(topBoundary, viewportHeight - menuHeight - bottomBoundary);
     const top = Math.min(Math.max(topBoundary, preferredTop), maxTop);
-
+    
     if (mode !== 'touch') setSelectedId(photo.id);
     setTileMenu({
       photoId: photo.id,
@@ -3400,7 +3404,7 @@ export default function Photos() {
             <FiCheck />
             <span>Select</span>
           </button>
-
+          
           {activeView === 'deleted' ? (
             <>
               <button type="button" role="menuitem" style={{ color: 'var(--photos-blue)' }} onClick={() => runTileMenuAction(() => openPhotoRestoreConfirm([menuPhoto.id]))}>

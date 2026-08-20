@@ -24,7 +24,7 @@ export function writeAccentColorCache(color) {
   try {
     window.localStorage.setItem(STORAGE_KEY, normalized);
   } catch {
-
+    // ignore
   }
 }
 
